@@ -4,6 +4,13 @@
 
 ---
 
+## Installation
+
+```sh
+npm install
+```
+
+---
 ### You need to create config.json file
 
 - config.json
