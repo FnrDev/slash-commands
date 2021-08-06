@@ -1,10 +1,10 @@
 # slash-command by Fnr#0017
 
-# simple slash command handler to make your bot support slash commands features
+## simple slash command handler to make your bot support slash commands features
 
 ---
 
-## You need to create config.json file
+### You need to create config.json file
 
 - config.json
 ```js
