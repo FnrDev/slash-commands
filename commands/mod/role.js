@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
     name: "role",
@@ -23,6 +23,21 @@ module.exports = {
         const role = interaction.options.getRole('role'); // access to role obj <https://discord.js.org/#/docs/main/stable/class/Role>
         if (!interaction.member.permissions.has('MANAGE_ROLES')) {
             return interaction.reply({ content: "You dont have permission to do this command", ephemeral: true })
+        }
+        const botRole = interaction.guild.me.roles.highest.position;
+        const roleToGet = user.roles.highest.position;
+        const authorRole = interaction.member.roles.highest.position;
+        if (authorRole <= roleToGet) {
+            const embed = new MessageEmbed()
+            .setTitle("I can't role this member because that member has role position is higher than my role or same as you!")
+            .setColor('#ff0000')
+            return interaction.reply({ embeds: [embed] })
+        }
+        if (botRole <= roleToGet) {
+            const embed = new MessageEmbed()
+            .setTitle("I can't role this member because that member has role position is higher than my role or same as you!")
+            .setColor('#ff0000')
+            return interaction.reply({ embeds: [embed] })
         }
         let addRoles;
         if (user._roles.includes(role.id)) {
