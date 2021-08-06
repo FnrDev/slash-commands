@@ -13,7 +13,7 @@ npm install
 ```
 
 ---
-### [Slash Commands Guide](https://discordjs.guide/interactions/registering-slash-commands.html)
+### Make sure to check [Slash Commands Guide](https://discordjs.guide/interactions/registering-slash-commands.html)
 ---
 ### You need to create config.json file
 
