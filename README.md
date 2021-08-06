@@ -13,3 +13,4 @@
     "serverID": "YOUR_SERVER_ID"
 }
 ```
+# If you need to create more commands just create new file in commands file with following example in other commands
