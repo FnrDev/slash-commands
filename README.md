@@ -23,3 +23,5 @@ npm install
 ### If you need to create more commands just create new file in commands file with following example in other commands.
 
 ### If you need help you can contact me in discord `Fnr#0017`
+
+### Note: Node.js 14 newer is required.
