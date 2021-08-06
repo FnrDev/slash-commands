@@ -13,6 +13,8 @@ npm install
 ```
 
 ---
+### [Slash Commands Guide](https://discordjs.guide/interactions/registering-slash-commands.html)
+---
 ### You need to create config.json file
 
 - config.json
@@ -23,7 +25,5 @@ npm install
 }
 ```
 ### If you need to create more commands just create new file in commands file with following example in other commands.
-
-### Check [Slash Commands Guide](https://discordjs.guide/interactions/registering-slash-commands.html)
 
 ### If you need help you can contact me in discord `Fnr#0017`
