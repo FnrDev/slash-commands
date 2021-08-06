@@ -6,7 +6,6 @@ module.exports = async(client, interaction) => {
     if (!interaction.isCommand()) return;
 	if (!client.commands.has(interaction.commandName)) return;
 	const command = client.commands.get(interaction.commandName)
-	if (!interaction.isGuild()) return;
 		try {
 			if (command.timeout) {
 				if (Timeout.has(`${interaction.user.id}${command.name}`)) {
