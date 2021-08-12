@@ -21,7 +21,8 @@ npm install
 ```js
 {
     "token": "YOUR_BOT_TOKEN",
-    "serverID": "YOUR_SERVER_ID"
+    "serverID": "YOUR_SERVER_ID",
+    "botID": "YOUR_BOT_ID"
 }
 ```
 ### If you need to create more commands just create new file in commands file with following example in other commands.
