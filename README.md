@@ -3,7 +3,7 @@
 ## simple slash command handler to make your bot support slash commands features
 
 ---
-### Note: Node.js 14 newer is required.
+### Note: Node.js 16.6.0 or newer is required.
 ---
 
 ## Installation
