@@ -7,13 +7,13 @@ module.exports = {
     options: [
         {
             name: "user",
-            type: "USER",
+            type: 6, // type has been changed check <https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type>
             description: "user to give a role",
             required: true
         },
         {
             name: "role",
-            type: "ROLE",
+            type: 8, // type has been changed check <https://discord.com/developers/docs/interactions/application-commands#application-command-object-application-command-option-type>
             description: "role to give to user",
             required: true
         }

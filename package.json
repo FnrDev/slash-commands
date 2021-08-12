@@ -10,8 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/rest": "^0.1.0-canary.0",
     "colors": "^1.4.0",
-    "discord.js": "^13.0.0",
+    "discord.js": "^13.0.1",
     "fs": "^0.0.1-security",
     "humanize-duration": "^3.27.0",
     "ms": "^2.1.3"

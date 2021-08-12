@@ -7,7 +7,32 @@ const token = config.token;
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.categories = fs.readdirSync("./commands/");
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+const { readdirSync } = require('fs')
+const path = require('path')
+require('colors')
 
+const commands = []
+readdirSync("./commands/").map(async dir => {
+	readdirSync(`./commands/${dir}/`).map(async (cmd) => {
+	commands.push(require(path.join(__dirname, `./commands/${dir}/${cmd}`)))
+    })
+})
+const rest = new REST({ version: "9" }).setToken(token);
+
+(async () => {
+	try {
+		console.log('Started refreshing application (/) commands.'.yellow);
+		await rest.put(
+			Routes.applicationGuildCommands('741200325616205854', '668770802812059657'),
+			{ body: commands },
+		);
+		console.log('Successfully reloaded application (/) commands.'.green);
+	} catch (error) {
+		console.error(error);
+	}
+})();
 
 ["handlers", "events"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
