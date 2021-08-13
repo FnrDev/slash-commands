@@ -49,12 +49,12 @@ module.exports = {
                     reason: "Setup muted role for muted command"
                 })
             }
-            interaction.guild.channels.cache.forEach((channel) => {
-                channel.permissionOverwrites.edit(this.createMutedRole.id, { SEND_MESSAGES: false, ADD_REACTIONS: false })
-            })
             if (user.roles.cache.has(this.createMutedRole.id)) {
                 return interaction.reply({ content: ":x: This user is already muted" })
             }
+            interaction.guild.channels.cache.forEach((channel) => {
+                channel.permissionOverwrites.edit(this.createMutedRole.id, { SEND_MESSAGES: false, ADD_REACTIONS: false })
+            })
             user.roles.add(this.createMutedRole, `By: ${interaction.user.tag}`)
             interaction.reply({ content: `✅ **@${user.user.username} has been muted!**` })
         } catch (e) {
