@@ -14,16 +14,15 @@ module.exports = async(client, interaction) => {
 					.setDescription(`You need to wait **${humanizeDuration(command.timeout, { round: true })}** to use command again`)
 					.setColor('#ff0000')
 					return interaction.reply({ embeds: [embed], content: `<@${interaction.user.id}>`, ephemeral: true })
-				} else {
-					command.run(interaction, client);
-					Timeout.add(`${interaction.user.id}${command.name}`)
-					setTimeout(() => {
-						Timeout.delete(`${interaction.user.id}${command.name}`)
-					}, command.timeout);
 				}
 			}
-	} catch (error) {
-		console.error(error);
-		await interaction.reply({ content: ':x: There was an error while executing this command!', ephemeral: true });
-	}
+			command.run(interaction, client);
+				Timeout.add(`${interaction.user.id}${command.name}`)
+				setTimeout(() => {
+					Timeout.delete(`${interaction.user.id}${command.name}`)
+				}, command.timeout);
+		} catch (error) {
+			console.error(error);
+			await interaction.reply({ content: ':x: There was an error while executing this command!', ephemeral: true });
+		}
 } 
