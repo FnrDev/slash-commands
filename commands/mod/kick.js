@@ -1,5 +1,3 @@
-const Discord = require('discord.js');
-
 module.exports = {
     name: "kick",
     description: "kicks a member.",
@@ -23,10 +21,10 @@ module.exports = {
         }
         const user = interaction.options.getMember('user');
         const reason = interaction.options.getString('reason') || '';
-        if (user.id == interaction.user.id) {
+        if (user.id === interaction.user.id) {
             return interaction.reply({ content: `:x: You can\'t kick yourself!` })
         }
-        if (user.id == client.user.id) {
+        if (user.id === client.user.id) {
             return interaction.reply({ content: `:x: You can\'t kick me!` })
         }
         const botRole = interaction.guild.me.roles.highest.position;

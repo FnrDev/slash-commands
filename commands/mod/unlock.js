@@ -1,5 +1,3 @@
-const Discord = require('discord.js');
-
 module.exports = {
     name: "unlock",
     description: "🔒 Remove denied sending messages from @everyone in specific channel",
@@ -16,7 +14,7 @@ module.exports = {
             return interaction.reply({ content: "You dont have permission to do this command!", ephemeral: true })
         }
         const channel = interaction.options.getChannel('channel') || interaction.channel;
-        channel.permissionOverwrites.edit(interaction.guild.id, { SEND_MESSAGES: null });
+        await channel.permissionOverwrites.edit(interaction.guild.id, { SEND_MESSAGES: null });
         interaction.reply({ content: `**🔓 ${channel} has been unlock.**` })
     }
 }
