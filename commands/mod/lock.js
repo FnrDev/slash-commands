@@ -1,5 +1,3 @@
-const Discord = require('discord.js');
-
 module.exports = {
     name: "lock",
     description: "🔒 Disables @everyone from sending messages in specific channel",
@@ -11,12 +9,12 @@ module.exports = {
         }
     ],
     timeout: 3000,
-    run: async(interaction, client) => {
+    run: async(interaction) => {
         if (!interaction.member.permissions.has('MANAGE_CHANNELS')) {
             return interaction.reply({ content: "You dont have permission to do this command!", ephemeral: true })
         }
         const channel = interaction.options.getChannel('channel') || interaction.channel;
-        channel.permissionOverwrites.edit(interaction.guild.id, { SEND_MESSAGES: false });
+        await channel.permissionOverwrites.edit(interaction.guild.id, { SEND_MESSAGES: false });
         interaction.reply({ content: `**🔒 ${channel} has been locked.**` })
     }
 }
