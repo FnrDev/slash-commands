@@ -1,5 +1,3 @@
-const Discord = require('discord.js');
-
 module.exports = {
     name: "ban",
     description: "Ban a member",
@@ -22,10 +20,10 @@ module.exports = {
             return interaction.reply({ content: "You dont have permission to do this command!", ephemeral: true })
         }
         const user = interaction.options.getMember('user');
-        if (user.id == interaction.user.id) {
+        if (user.id === interaction.user.id) {
             return interaction.reply({ content: ":x: You can\'t ban yourself!" })
         }
-        if (user.id == client.user.id) {
+        if (user.id === client.user.id) {
             return interaction.reply({ content: ":x: You can\'t ban me!" })
         }
         const botRole = interaction.guild.me.roles.highest.position;
