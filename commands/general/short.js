@@ -14,7 +14,7 @@ module.exports = {
     timeout: 5000,
     run: async(interaction) => {
         const url = interaction.options.getString('url');
-        const apiToken = 'qEAVjX9WYOTWDrwhXrQb'; // Get your api key from <https://i8.ae/user/tools#api>
+        const apiToken = ''; // Get your api key from <https://i8.ae/user/tools#api>
         const req = await axios({
             url: "https://i8.ae/api/url/add",
             method: "POST",
