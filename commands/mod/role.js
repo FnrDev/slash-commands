@@ -51,6 +51,35 @@ module.exports = {
                     required: true
                 }
             ],
+        },
+        {
+            name: "all",
+            description: "Role all members",
+            type: 1,
+            options: [
+                {
+                    name: "type",
+                    description: "Pick a type",
+                    type: 3,
+                    required: true,
+                    choices: [
+                        {
+                            name: "Give",
+                            value: "give"
+                        },
+                        {
+                            name: "Remove",
+                            value: "remove"
+                        }
+                    ],
+                },
+                {
+                    name: "role",
+                    description: "role to give",
+                    type: 8,
+                    required: true
+                },
+            ]
         }
     ],
     timeout: 3000,
@@ -104,6 +133,23 @@ module.exports = {
                 })
                 const totalBots = interaction.guild.members.cache.filter(r => r.user.bot).size
                 return interaction.reply({ content: `✅ Changed role for **${totalBots}** bots, **-${role.name}**` })
+            }
+        }
+        // role all sub command
+        if (interaction.options.getSubcommand() === 'all') {
+            if (interaction.options._hoistedOptions.find(r => r.value === 'give')) {
+                interaction.guild.members.cache.forEach(member => {
+                    member.roles.add(role, `By: ${interaction.user.tag}`)
+                })
+                const memberSize = interaction.guild.members.cache.size
+                return interaction.reply({ content: `✅ Changed role for ${memberSize} members, **+${role.name}**` })
+            }
+            if (interaction.options._hoistedOptions.find(r => r.value === 'remove')) {
+                interaction.guild.members.cache.forEach(member => {
+                    member.roles.remove(role, `By: ${interaction.user.tag}`)
+                })
+                const memberSize = interaction.guild.members.cache.size
+                return interaction.reply({ content: `✅ Changed role for **${memberSize}** members, **-${role.name}**` })
             }
         }
     }
