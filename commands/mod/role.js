@@ -124,7 +124,6 @@ module.exports = {
                     bot.roles.add(role, `By: ${interaction.user.tag}`)
                 })
                 const totalBots = interaction.guild.members.cache.filter(r => r.user.bot).size
-                console.log(totalBots)
                 return interaction.reply({ content: `✅ Changed role for **${totalBots}** bots, **+${role.name}**` })
             }
             if (interaction.options._hoistedOptions.find(r => r.value == 'remove')) {
