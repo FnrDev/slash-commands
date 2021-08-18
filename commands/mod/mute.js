@@ -19,7 +19,7 @@ module.exports = {
     timeout: 3000,
     run: async(interaction) => {
         if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-            return interaction.reply({ content: ":x: You dont have permission to do this command!", ephemeral: true })
+            return interaction.reply({ content: ":x: You dont have permission to do this command!", ephemeral: true });
         }
         const user = interaction.options.getMember('user');
         const reason = interaction.options.getString('reason') || '';
