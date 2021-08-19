@@ -18,7 +18,6 @@ module.exports = {
     ],
     timeout: 3000,
     run: async(interaction, client) => {
-        // check permission for user and hide command if no permission
         if (!interaction.member.permissions.has('BAN_MEMBERS')) {
             return interaction.reply({ content: "You dont have permission to do this command!", ephemeral: true })
         }
