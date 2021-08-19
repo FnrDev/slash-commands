@@ -85,6 +85,13 @@ module.exports = {
     timeout: 3000,
     run: async(interaction) => {
         if (!interaction.member.permissions.has('MANAGE_ROLES')) {
+            await interaction.guild.commands.permissions.add({ command: interaction.commandId, permissions: [
+                {
+                    id: interaction.user.id,
+                    type: "USER",
+                    permission: false
+                }
+            ] })
             return interaction.reply({ content: "You dont have permission to do this command", ephemeral: true })
         }
         const user = interaction.options.getMember('user'); // access to guild member obj <https://discord.js.org/#/docs/main/stable/class/GuildMember>
