@@ -1,5 +1,3 @@
-const config = require('../../config.json')
-
 module.exports = {
     name: "ban",
     description: "Ban a member",
