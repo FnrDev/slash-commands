@@ -17,13 +17,6 @@ module.exports = {
     ],
     run: async(interaction) => {
         if (!interaction.member.permissions.has('MANAGE_ROLES')) {
-            await interaction.guild.commands.permissions.add({ command: interaction.commandId, permissions: [
-                {
-                    id: interaction.user.id,
-                    type: "USER",
-                    permission: false
-                }
-            ] })
             return interaction.reply({ content: ":x: You dont have permission to do this command!", ephemeral: true })
         }
         const role = interaction.options.getRole('role');

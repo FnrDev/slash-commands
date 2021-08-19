@@ -14,13 +14,6 @@ module.exports = {
     timeout: 5000,
     run: async(interaction, client) => {
         if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-            await interaction.guild.commands.permissions.add({ command: interaction.commandId, permissions: [
-                {
-                    id: interaction.user.id,
-                    type: "USER",
-                    permission: false
-                }
-            ] })
             return interaction.reply({ content: ":x: You dont have permission to do this command!", ephemeral: true })
         }
         let deleteAmount = interaction.options.getString('number_of_messages');
