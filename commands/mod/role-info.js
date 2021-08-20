@@ -20,7 +20,7 @@ module.exports = {
         const distece = Date.now() - role.createdTimestamp
         const embed = new MessageEmbed()
         .setColor(role.hexColor)
-        .setFooter(interaction.guild.name, interaction.guild.displayAvatarURL({ dynamic: true }))
+        .setFooter(interaction.guild.name, interaction.guild.iconURL({ dynamic: true }))
         .addFields(
             {
                 name: "Role Name:",
@@ -41,6 +41,10 @@ module.exports = {
             {
                 name: "Role Position:",
                 value: role.position.toString(),        
+            },
+            {
+                name: "Role Managed?",
+                value: role.managed.toString()
             },
             {
                 name: "Role Created At:",
