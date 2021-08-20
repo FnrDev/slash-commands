@@ -10,7 +10,7 @@ module.exports = {
             type: 6,
         }
     ],
-    run: async(interaction, client) => {
+    run: async(interaction) => {
         const user = interaction.options.getUser('user') || interaction.user;
         const embed = new Discord.MessageEmbed()
         .setAuthor(user.tag, user.displayAvatarURL({ dynamic: true }))
