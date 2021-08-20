@@ -5,7 +5,7 @@ module.exports = {
     name: "server",
     description: "Get info about server",
     timeout: 3000,
-    run: async(interaction, client) => {
+    run: async(interaction) => {
         const createdServer = Date.now() - interaction.guild.createdTimestamp;
         const embed = new Discord.MessageEmbed()
         .setAuthor(interaction.guild.name, interaction.guild.iconURL({ dynamic: true }))
