@@ -12,7 +12,7 @@ module.exports = {
             type: 6,
         }
     ],
-    run: async(interaction, client) => {
+    run: async(interaction) => {
         const user = interaction.options.getMember('user') || interaction.member;
         const userCreated = Date.now() - user.user.createdTimestamp;
         const joinedTime = Date.now() - user.joinedTimestamp

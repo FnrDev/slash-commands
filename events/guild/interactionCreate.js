@@ -1,5 +1,5 @@
 const Timeout = new Set()
-const { MessageEmbed, WebhookClient } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const humanizeDuration = require("humanize-duration");
 
 module.exports = async(client, interaction) => {
