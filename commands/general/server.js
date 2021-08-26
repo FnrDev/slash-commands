@@ -47,6 +47,40 @@ module.exports = {
                 value: `To see a list with all roles use **/roles**`
             }
         )
-        interaction.reply({ embeds: [embed] })
+        const row = new Discord.MessageActionRow()
+        .addComponents(
+            new Discord.MessageButton()
+            .setCustomId('roles')
+            .setStyle('PRIMARY')
+            .setLabel('Sever Roles')
+        )
+        .addComponents(
+            new Discord.MessageButton()
+            .setCustomId('channels')
+            .setStyle('SUCCESS')
+            .setLabel('Server Channels')
+        )
+        interaction.reply({ embeds: [embed], components: [row] })
+        try {
+            const filter = i => i.customId === 'roles' || 'channels' && i.user.id === interaction.user.id;
+            const collector = interaction.channel.createMessageComponentCollector({ filter: filter, time: 15000 });
+            collector.on('collect', async i => {
+                if (i.customId === 'roles') {
+                    await i.deferUpdate();
+                    const roles = interaction.guild.roles.cache.sort((a, b) => b.position - a.position).map(r => r.name).join("\n");
+                    return await i.editReply({ content: `\`\`\`\n${roles}\`\`\``, embeds: [], components: [] })
+                }
+                if (i.customId === 'channels') {
+                    await i.deferUpdate();
+                    const mapChannels = interaction.guild.channels.cache.sort((a, b) => a.position - b.position).map(r => r.name).join("\n");
+                    return await i.editReply({ content: `\`\`\`\n${mapChannels}\`\`\``, embeds: [], components: [] });
+                }
+            })
+            collector.on('end', collected => {
+                console.log(`Collected ${collected.size} items`)
+            })
+        } catch (e) {
+            console.error(e)
+        }
     }
 }
