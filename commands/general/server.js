@@ -34,7 +34,7 @@ module.exports = {
             },
             {
                 name: `:speech_balloon: Channels (${interaction.guild.channels.cache.size})`,
-                value: `**${interaction.guild.channels.cache.filter(r => r.type == 'GUILD_TEXT').size}** | **${interaction.guild.channels.cache.filter(r => r.type == 'GUILD_VOICE').size}**`,
+                value: `**${interaction.guild.channels.cache.filter(r => r.type == 'GUILD_TEXT').size} Text** | **${interaction.guild.channels.cache.filter(r => r.type == 'GUILD_VOICE').size} Voice**`,
                 inline: true
             },
             {
@@ -42,11 +42,43 @@ module.exports = {
                 value: `**Verification Level:** ${interaction.guild.verificationLevel}`,
                 inline: true
             },
-            {
-                name: `:closed_lock_with_key: Roles (${interaction.guild.roles.cache.size})`,
-                value: `To see a list with all roles use **/roles**`
-            }
         )
-        interaction.reply({ embeds: [embed] })
+        const row = new Discord.MessageActionRow()
+        .addComponents(
+            new Discord.MessageButton()
+            .setCustomId('roles')
+            .setStyle('PRIMARY')
+            .setEmoji('🔒')
+            .setLabel('Sever Roles')
+        )
+        .addComponents(
+            new Discord.MessageButton()
+            .setCustomId('channels')
+            .setEmoji('💬')
+            .setStyle('SUCCESS')
+            .setLabel('Server Channels')
+        )
+        interaction.reply({ embeds: [embed], components: [row] })
+        try {
+            const filter = i => i.customId === 'roles' || 'channels' && i.user.id === interaction.user.id;
+            const collector = interaction.channel.createMessageComponentCollector({ filter: filter });
+            collector.on('collect', async i => {
+                if (i.customId === 'roles') {
+                    await i.deferReply();
+                    const roles = interaction.guild.roles.cache.sort((a, b) => b.position - a.position).map(r => r.name).join("\n");
+                    return await i.editReply({ content: `**${interaction.guild.name} Roles:**\`\`\`\n${roles}\`\`\``, embeds: [], components: [] })
+                }
+                if (i.customId === 'channels') {
+                    await i.deferReply();
+                    const mapChannels = interaction.guild.channels.cache.sort((a, b) => a.position - b.position).map(r => r.name).join("\n");
+                    return await i.editReply({ content: `**${interaction.guild.name} Channels:**\`\`\`\n${mapChannels}\`\`\``, embeds: [], components: [] });
+                }
+            })
+            collector.on('end', collected => {
+                console.log(`Collected ${collected.size} items`)
+            })
+        } catch (e) {
+            console.error(e)
+        }
     }
 }
