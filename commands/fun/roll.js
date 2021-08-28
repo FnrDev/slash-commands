@@ -4,7 +4,7 @@ module.exports = {
     options: [
         {
             name: "dice",
-            description: "The dice",
+            description: "The dice default is 100",
             type: 3
         }
     ],
