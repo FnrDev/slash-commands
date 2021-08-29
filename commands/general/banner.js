@@ -23,7 +23,7 @@ module.exports = {
         } catch (e) {
             return interaction.reply({ content: ":x: i can\'t find this user" })
         }
-        const fetchUser = await client.users.fetch(user);
+        const fetchUser = await client.users.fetch(user, true);
         const req = await axios({
             url: `https://discord.com/api/v9/users/${fetchUser.id}`,
             method: "GET",
