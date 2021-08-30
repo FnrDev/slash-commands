@@ -14,7 +14,10 @@ module.exports = {
     timeout: 5000,
     run: async(interaction) => {
         const url = interaction.options.getString('url');
-        const apiToken = ''; // Get your api key from <https://i8.ae/user/tools#api>
+        const apiToken = 'qEAVjX9WYOTWDrwhXrQb'; // Get your api key from <https://i8.ae/user/tools#api>
+        if (!apiToken) {
+            return interaction.reply({ content: ":x: Missing api token" })
+        }
         try {
             const req = await axios({
                 url: "https://i8.ae/api/url/add",
@@ -27,7 +30,7 @@ module.exports = {
                 }
             })
             const data = req.data;
-            interaction.reply(data.short)
+            interaction.reply(`**[Short URL](${data.short})**`)
         } catch (e) {
             console.error(e);
             return interaction.reply({ content: `:x: ${e}` })
