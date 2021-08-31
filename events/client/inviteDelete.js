@@ -5,7 +5,7 @@ const humanizeDuration = require("humanize-duration");
 module.exports = async(client, invite) => {
     const logChannel = await client.channels.cache.get(config.log_channel_id);
     if (!logChannel) return;
-    const allLogs = await invite.guild.fetchAuditLogs({ type: "INVITE_CREATE" });
+    const allLogs = await invite.guild.fetchAuditLogs({ type: "INVITE_DELETE" });
     const fetchModerator = allLogs.entries.first();
     const embed = new Discord.MessageEmbed()
     .setAuthor(invite.guild.name, invite.guild.iconURL({ dynamic: true }))
