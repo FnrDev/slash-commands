@@ -6,7 +6,8 @@ const client = new Client({ intents: [
 	Intents.FLAGS.GUILD_MEMBERS,
 	Intents.FLAGS.GUILD_INVITES,
 	Intents.FLAGS.GUILD_BANS,
-	Intents.FLAGS.GUILD_INVITES
+	Intents.FLAGS.GUILD_INVITES,
+	Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS
 ]});
 const fs = require("fs");
 const config = require('./config.json');
