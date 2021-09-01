@@ -4,8 +4,6 @@ const Discord = require('discord.js');
 module.exports = async(client, emoji) => {
     const logChannel = client.channels.cache.get(config.log_channel_id);
     if (!logChannel) return;
-    const allLogs = await emoji.guild.fetchAuditLogs({ type: "MEMBER_BAN_ADD" });
-    const fetchModerator = allLogs.entries.first();
     const fetchEmojiAuthor = await emoji.fetchAuthor();
     const embed = new Discord.MessageEmbed()
     .setAuthor(emoji.guild.name, emoji.guild.iconURL({ dynamic: true }))
