@@ -1,6 +1,5 @@
 const config = require('../../config.json');
 const Discord = require('discord.js');
-const humanizeDuration = require("humanize-duration");
 
 module.exports = async(client, invite) => {
     const logChannel = await client.channels.cache.get(config.log_channel_id);
