@@ -8,7 +8,7 @@ module.exports = async(client, thread) => {
     const fetchModerator = allLogs.entries.first();
     const embed = new Discord.MessageEmbed()
     .setAuthor(thread.guild.name, thread.guild.iconURL({ dynamic: true }))
-    .setDescription(`**<@${fetchModerator.executor.id}> has deleted <#${thread.id}> thread.**`)
+    .setDescription(`**<@${fetchModerator.executor.id}> has deleted ${thread.name} thread.**`)
     .addField('Responsible Moderator:', `<@${fetchModerator.executor.id}>`)
     .setTimestamp()
     .setFooter(fetchModerator.executor.tag, fetchModerator.executor.displayAvatarURL({ dynamic: true }))
