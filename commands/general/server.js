@@ -70,7 +70,7 @@ module.exports = {
                 }
                 if (i.customId === 'channels') {
                     await i.deferReply();
-                    const mapChannels = interaction.guild.channels.cache.sort((a, b) => a.position - b.position).map(r => r.name).join("\n");
+                    const mapChannels = interaction.guild.channels.cache.sort((a, b) => a.position - b.position).filter(r => r.type === 'GUILD_TEXT').map(r => r.name).join("\n");
                     return await i.editReply({ content: `**${interaction.guild.name} Channels:**\`\`\`\n${mapChannels}\`\`\``, embeds: [], components: [] });
                 }
             })
