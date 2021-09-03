@@ -56,11 +56,18 @@ module.exports = {
             .setCustomId('channels')
             .setEmoji('💬')
             .setStyle('SUCCESS')
-            .setLabel('Server Channels')
+            .setLabel('Text Channels')
+        )
+        .addComponents(
+            new Discord.MessageButton()
+            .setCustomId('voice')
+            .setEmoji('🔊')
+            .setStyle('PRIMARY')
+            .setLabel('Voice Channels')
         )
         interaction.reply({ embeds: [embed], components: [row] })
         try {
-            const filter = i => i.customId === 'roles' || 'channels' && i.user.id === interaction.user.id;
+            const filter = i => i.customId === 'roles' || 'channels' || 'voice' && i.user.id === interaction.user.id;
             const collector = interaction.channel.createMessageComponentCollector({ filter: filter });
             collector.on('collect', async i => {
                 if (i.customId === 'roles') {
@@ -71,7 +78,12 @@ module.exports = {
                 if (i.customId === 'channels') {
                     await i.deferReply();
                     const mapChannels = interaction.guild.channels.cache.sort((a, b) => a.position - b.position).filter(r => r.type === 'GUILD_TEXT').map(r => r.name).join("\n");
-                    return await i.editReply({ content: `**${interaction.guild.name} Channels:**\`\`\`\n${mapChannels}\`\`\``, embeds: [], components: [] });
+                    return await i.editReply({ content: `**${interaction.guild.name} Text Channels:**\`\`\`\n${mapChannels}\`\`\``, embeds: [], components: [] });
+                }
+                if (i.customId === 'voice') {
+                    await i.deferReply();
+                    const mapVoiceChannels = interaction.guild.channels.cache.sort((a, b) => a.position - b.position).filter(r => r.type === 'GUILD_VOICE').map(r => r.name).join("\n");
+                    return await i.editReply({ content: `**${interaction.guild.name} Voice Channels**\`\`\`\n${mapVoiceChannels}\`\`\``, embeds: [], components: []  })
                 }
             })
             collector.on('end', collected => {
