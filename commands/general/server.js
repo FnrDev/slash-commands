@@ -62,7 +62,7 @@ module.exports = {
             new Discord.MessageButton()
             .setCustomId('voice')
             .setEmoji('🔊')
-            .setStyle('PRIMARY')
+            .setStyle('SECONDARY')
             .setLabel('Voice Channels')
         )
         interaction.reply({ embeds: [embed], components: [row] })
