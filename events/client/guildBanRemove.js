@@ -18,6 +18,11 @@ module.exports = async(client, ban) => {
             value: `<@${fetchModerator.executor.id}>`,
             inline: true
         },
+        {
+            name: "Unban Reason:",
+            value: fetchModerator.reason || '',
+            inline: true
+        }
     )
     logChannel.send({ embeds: [embed] })
 }
