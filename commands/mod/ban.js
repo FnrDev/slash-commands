@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports = {
     name: "ban",
     description: "Ban a member",
@@ -7,11 +9,6 @@ module.exports = {
             description: "User to ban",
             type: 6,
             required: true
-        },
-        {
-            name: "reason",
-            description: "Reason for ban",
-            type: 3,
         }
     ],
     timeout: 3000,
@@ -36,9 +33,33 @@ module.exports = {
             return interaction.reply("I can't ban this member because that member has role position is higher than my role or same as you!")
         }
         try {
-            let reason = interaction.options.getString('reason') || '';
-            await user.ban({ reason: `By: ${interaction.user.tag} | Reason: ${reason}` })
-            interaction.reply({ content: `✅ **${user} has been banned**` })
+            let reason;
+            const row = new Discord.MessageActionRow()
+                .addComponents(
+                    new Discord.MessageSelectMenu()
+                    .setCustomId('reason')
+                    .setPlaceholder('Select a reason')
+                    .addOptions([
+                        {
+                            label: 'Spaming',
+                            value: "spaming"
+                        },
+                        {
+                            label: "Adv",
+                            value: "adv"
+                        }
+                    ])
+                )
+                interaction.reply({ content: "**Select a reason:**", components: [row] });
+                const filter = i => i.customId === 'reason' && i.user.id === interaction.user.id;
+                const collector = interaction.channel.createMessageComponentCollector({ filter: filter })
+                collector.on('collect', async i => {
+                    if (i.customId === 'reason') {
+                        reason = i.values[0]
+                        await user.ban({ reason: `By: ${interaction.user.tag} | Reason: ${reason}` })
+                        return interaction.editReply({ content: `✅ **${user} has been banned**`, components: [] })
+                    }
+                })
         } catch (e) {
             return interaction.reply({ content: e })
         }
