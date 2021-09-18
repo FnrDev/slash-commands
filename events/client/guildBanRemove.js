@@ -20,7 +20,7 @@ module.exports = async(client, ban) => {
         },
         {
             name: "Unban Reason:",
-            value: fetchModerator.reason || '',
+            value: fetchModerator.reason || 'No reason',
             inline: true
         }
     )
