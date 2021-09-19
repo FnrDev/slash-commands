@@ -6,7 +6,7 @@ module.exports = async(client, oldMessgae, newMessage) => {
     if (!logChannel) return;
     if (oldMessgae.content === newMessage.content) return;
     if (oldMessgae.content.legnth === 0) return;
-    if (newMessage.content.legnth === 0) return; 
+    if (newMessage.content.legnth === 0) return;
     const embed = new Discord.MessageEmbed()
     .setAuthor(newMessage.author.tag, newMessage.author.displayAvatarURL({ dynamic: true }))
     .setTimestamp()
