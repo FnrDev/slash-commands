@@ -65,9 +65,16 @@ module.exports = {
             .setStyle('SECONDARY')
             .setLabel('Voice Channels')
         )
+        .addComponents(
+            new Discord.MessageButton()
+            .setCustomId('features')
+            .setEmoji('🎉')
+            .setStyle('SUCCESS')
+            .setLabel('Server Features')
+        )
         interaction.reply({ embeds: [embed], components: [row] })
         try {
-            const filter = i => i.customId === 'roles' || 'channels' || 'voice' && i.user.id === interaction.user.id;
+            const filter = i => i.customId === 'roles' || 'channels' || 'voice' || 'features' && i.user.id === interaction.user.id;
             const collector = interaction.channel.createMessageComponentCollector({ filter: filter });
             collector.on('collect', async i => {
                 if (i.customId === 'roles') {
@@ -84,6 +91,11 @@ module.exports = {
                     await i.deferReply();
                     const mapVoiceChannels = interaction.guild.channels.cache.sort((a, b) => a.position - b.position).filter(r => r.type === 'GUILD_VOICE').map(r => r.name).join("\n");
                     return await i.editReply({ content: `**${interaction.guild.name} Voice Channels**\`\`\`\n${mapVoiceChannels}\`\`\``, embeds: [], components: []  })
+                }
+                if (i.customId === 'features') {
+                    await i.deferReply();
+                    const features = interaction.guild.features.join("\n");
+                    return await i.editReply({ content: `**${interaction.guild.name} Features:**\n\`\`\`${features}\`\`\`` })
                 }
             })
             collector.on('end', collected => {
