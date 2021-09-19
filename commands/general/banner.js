@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 
 module.exports = {
     name: "banner",
@@ -44,8 +44,14 @@ module.exports = {
         const embed = new MessageEmbed()
         .setAuthor(fetchUser.tag, fetchUser.displayAvatarURL({ dynamic: true }))
         .setImage(`https://cdn.discordapp.com/banners/${fetchUser.id}/${data.banner}.${end}?size=2048`)
-        .setDescription(`[Banner Link](https://cdn.discordapp.com/banners/${fetchUser.id}/${data.banner}.${end}?size=2048)`)
         .setFooter(`Requested by ${interaction.user.tag}`, interaction.user.displayAvatarURL({ dynamic: true }))
-        interaction.reply({ embeds: [embed] })
+        const row = new MessageActionRow()
+        .addComponents(
+            new MessageButton()
+            .setStyle('LINK')
+            .setURL(`https://cdn.discordapp.com/banners/${fetchUser.id}/${data.banner}.${end}?size=2048`)
+            .setLabel('User Banner')
+        )
+        interaction.reply({ embeds: [embed], components: [row] })
     }
 }
