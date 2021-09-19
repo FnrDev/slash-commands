@@ -36,12 +36,15 @@ module.exports = {
             {
                 name: "is it a bot?",
                 value: user.user.bot.toString(),
-            },
-            {
-                name: "Avatar Link",
-                value: `[Avatar URL](${user.user.displayAvatarURL({ dynamic: true })})`,
             }
         )
-        interaction.reply({ embeds: [embed] })
+        const row = new Discord.MessageActionRow()
+        .addComponents(
+            new Discord.MessageButton()
+            .setStyle('LINK')
+            .setURL(user.user.displayAvatarURL({ dynamic: true }))
+            .setLabel('User Avatar')
+        )
+        interaction.reply({ embeds: [embed], components: [row] })
     }
 }
