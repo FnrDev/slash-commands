@@ -66,7 +66,7 @@ module.exports = {
             if (i.customId === 'perms') {
                 await i.deferReply();
                 const rolePerms = role.permissions.toArray().join("\n");
-                return await i.editReply({ content: `\`\`\`\n${rolePerms}\`\`\``, embeds: [], components: [] })
+                return await i.editReply({ content: `**${role.name} Role Permissions:**\`\`\`\n${rolePerms}\`\`\``, embeds: [], components: [] })
             }
         })
     }
