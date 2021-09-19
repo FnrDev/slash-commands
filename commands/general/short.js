@@ -1,4 +1,5 @@
 const { default: axios } = require("axios");
+const Discord = require('discord.js');
 
 module.exports = {
     name: "short",
@@ -37,7 +38,14 @@ module.exports = {
                 }
             })
             const data = req.data;
-            interaction.reply(`**[Short URL](${data.short})**\n**Password:** \`${pass}\``)
+            const row = new Discord.MessageActionRow()
+            .addComponents(
+                new Discord.MessageButton()
+                .setStyle('LINK')
+                .setURL(data.short)
+                .setLabel('Short URL')
+            )
+            interaction.reply({ content: "**Short URL:**", components: [row] })
         } catch (e) {
             console.error(e);
             return interaction.reply({ content: `:x: ${e}` })
