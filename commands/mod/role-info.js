@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 const humanizeDuration = require("humanize-duration");
 
 module.exports = {
@@ -50,11 +50,24 @@ module.exports = {
                 name: "Role Created At:",
                 value: `\`${role.createdAt.toLocaleString()}\`\n**${humanizeDuration(distece, { largest: 2 })} ago**`,
             },
-            {
-                name: "Role Permissions (5 Permissions Only)",
-                value: `\`${role.permissions.toArray().slice(0, 5).join(", ")}\``,
-            }
         )
-        interaction.reply({ embeds: [embed] })
+        const row = new MessageActionRow()
+        .addComponents(
+            new MessageButton()
+            .setCustomId('perms')
+            .setLabel('Role Permission')
+            .setEmoji('🔑')
+            .setStyle('PRIMARY')
+        )
+        interaction.reply({ embeds: [embed], components: [row] })
+        const filter = i => i.customId === 'perms' && i.user.id === interaction.user.id;
+        const collector = interaction.channel.createMessageComponentCollector({ filter });
+        collector.on('collect', async i => {
+            if (i.customId === 'perms') {
+                await i.deferReply();
+                const rolePerms = role.permissions.toArray().join("\n");
+                return await i.editReply({ content: `\`\`\`\n${rolePerms}\`\`\``, embeds: [], components: [] })
+            }
+        })
     }
 }
