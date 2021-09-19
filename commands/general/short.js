@@ -43,7 +43,7 @@ module.exports = {
                 new Discord.MessageButton()
                 .setStyle('LINK')
                 .setURL(data.short)
-                .setLabel('Short URL')
+                .setLabel('URL')
             )
             interaction.reply({ content: "**Short URL:**", components: [row] })
         } catch (e) {
