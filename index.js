@@ -14,18 +14,19 @@ const fs = require("fs");
 const config = require('./config.json');
 const token = config.token;
 client.commands = new Discord.Collection();
+client.slash = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.categories = fs.readdirSync("./commands/");
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { readdirSync } = require('fs')
 const path = require('path')
-require('colors')
+require('colors');
 
 const commands = []
-readdirSync("./commands/").map(async dir => {
-	readdirSync(`./commands/${dir}/`).map(async (cmd) => {
-	commands.push(require(path.join(__dirname, `./commands/${dir}/${cmd}`)))
+readdirSync("./slash/").map(async dir => {
+	readdirSync(`./slash/${dir}/`).map(async (cmd) => {
+	commands.push(require(path.join(__dirname, `./slash/${dir}/${cmd}`)))
     })
 })
 const rest = new REST({ version: "9" }).setToken(token);
@@ -44,7 +45,7 @@ const rest = new REST({ version: "9" }).setToken(token);
 	}
 })();
 
-["handlers", "events"].forEach(handler => {
+["handlers", "events", "slash"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
 
