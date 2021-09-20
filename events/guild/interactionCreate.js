@@ -4,9 +4,9 @@ const humanizeDuration = require("humanize-duration");
 
 module.exports = async(client, interaction) => {
     if (!interaction.isCommand()) return;
-	if (!client.commands.has(interaction.commandName)) return;
+	if (!client.slash.has(interaction.commandName)) return;
 	if (!interaction.guild) return;
-	const command = client.commands.get(interaction.commandName)
+	const command = client.slash.get(interaction.commandName)
 		try {
 			if (command.timeout) {
 				if (Timeout.has(`${interaction.user.id}${command.name}`)) {
