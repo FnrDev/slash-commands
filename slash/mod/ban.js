@@ -56,7 +56,7 @@ module.exports = {
                 collector.on('collect', async i => {
                     if (i.customId === 'reason') {
                         reason = i.values[0]
-                        await user.ban({ reason: `By: ${interaction.user.tag} | Reason: ${reason}` })
+                        await user.ban({ reason: `By: ${interaction.user.tag} | Reason: ${reason}`, days: 7 })
                         return interaction.editReply({ content: `✅ **${user} has been banned**`, components: [] })
                     }
                 })
