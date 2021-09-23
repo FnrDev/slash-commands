@@ -23,9 +23,14 @@ npm install
     "token": "YOUR_BOT_TOKEN",
     "serverID": "YOUR_SERVER_ID",
     "botID": "YOUR_BOT_ID",
-    "log_channel_id": "Channel-id"
+    "log_channel_id": "Channel-id",
+    "prefix": "YOUR_PREFIX"
 }
 ```
+- Note: Prefix is not required in `config.json` you just need it if you want to create commands with prefix.
+
 ### If you need to create more commands just create new file in commands file with following example in other commands.
+
+### If you need to create commands for prefix create file in commands file
 
 ### If you need help you can contact me in discord `Fnr#0017`
