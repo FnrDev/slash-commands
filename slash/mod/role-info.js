@@ -59,14 +59,26 @@ module.exports = {
             .setEmoji('🔑')
             .setStyle('PRIMARY')
         )
+        .addComponents(
+            new MessageButton()
+            .setCustomId('members')
+            .setLabel('Members With This Role')
+            .setEmoji('👨‍👩‍👦')
+            .setStyle('SECONDARY')
+        )
         interaction.reply({ embeds: [embed], components: [row] })
-        const filter = i => i.customId === 'perms' && i.user.id === interaction.user.id;
+        const filter = i => i.customId === 'perms' || 'members' && i.user.id === interaction.user.id;
         const collector = interaction.channel.createMessageComponentCollector({ filter });
         collector.on('collect', async i => {
             if (i.customId === 'perms') {
                 await i.deferReply();
                 const rolePerms = role.permissions.toArray().join("\n");
                 return await i.editReply({ content: `**${role.name} Role Permissions:**\`\`\`\n${rolePerms}\`\`\``, embeds: [], components: [] })
+            }
+            if (i.customId === 'members') {
+                await i.deferReply();
+                const roleMembers = role.members.map(r => r.user.tag).join("\n");
+                return await i.editReply({ content: `**${role.name} Members ( ${role.members.size} )** :\n\`\`\`${roleMembers}\`\`\``, embeds: [], components: [] })
             }
         })
     }
