@@ -27,10 +27,10 @@ module.exports = {
         const role = user.roles.highest.position;
         const authorRole = interaction.member.roles.highest.position;
         if (authorRole <= role) {
-            return interaction.reply("I can't ban this member because that member has role position is higher than my role or same as you!")
+            return interaction.reply(`🙄 **You can\'t ban @${user.user.username}**`)
         }
         if (botRole <= role) {
-            return interaction.reply("I can't ban this member because that member has role position is higher than my role or same as you!")
+            return interaction.reply(`🙄 **You can\'t ban @${user.user.username}**`)
         }
         try {
             let reason;
