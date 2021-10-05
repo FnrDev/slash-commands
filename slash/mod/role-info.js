@@ -51,6 +51,11 @@ module.exports = {
                 value: `\`${role.createdAt.toLocaleString()}\`\n**${humanizeDuration(distece, { largest: 2 })} ago**`,
             },
         )
+        if (role.icon) {
+            embed.addField('Role Icon:', `[Icon URL](${role.iconURL({ size: 4096, format: "png" })})`)
+            embed.setThumbnail(role.iconURL({ size: 4096, format: "png" }))
+            embed.setAuthor(role.name, role.iconURL({ size: 4096, format: "png" }))
+        }
         const row = new MessageActionRow()
         .addComponents(
             new MessageButton()
@@ -77,6 +82,9 @@ module.exports = {
             }
             if (i.customId === 'members') {
                 await i.deferReply();
+                if (role.members.size === 0) {
+                    return i.editReply({ content: "There are 0 members with this role", embeds: [], components: [] })
+                }
                 const roleMembers = role.members.map(r => r.user.tag).join("\n");
                 return await i.editReply({ content: `**${role.name} Members ( ${role.members.size} )** :\n\`\`\`${roleMembers}\`\`\``, embeds: [], components: [] })
             }
