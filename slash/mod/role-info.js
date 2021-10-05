@@ -53,7 +53,7 @@ module.exports = {
         )
         if (role.icon) {
             embed.addField('Role Icon:', `[Icon URL](${role.iconURL({ size: 4096, format: "png" })})`)
-            embed.setImage(role.iconURL({ size: 4096, format: "png" }))
+            embed.setThumbnail(role.iconURL({ size: 4096, format: "png" }))
             embed.setAuthor(role.name, role.iconURL({ size: 4096, format: "png" }))
         }
         const row = new MessageActionRow()
