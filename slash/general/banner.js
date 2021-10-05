@@ -24,32 +24,16 @@ module.exports = {
             return interaction.reply({ content: ":x: i can\'t find this user" })
         }
         const fetchUser = await client.users.fetch(user, true);
-        const req = await axios({
-            url: `https://discord.com/api/v9/users/${fetchUser.id}`,
-            method: "GET",
-            headers: {
-                Authorization: `Bot ${client.token}`
-            },
-        })
-        const data = req.data;
-        if (!data.banner) {
-            return interaction.reply({ content: ":x: i can\'t find banner in this user" })
-        }
-        let end;
-        if (data.banner.startsWith('a_')) {
-            end = 'gif'
-        } else {
-            end = 'png'
-        }
+        await fetchUser.fetch() // to get user banner you need to fetch user before getting banner
         const embed = new MessageEmbed()
         .setAuthor(fetchUser.tag, fetchUser.displayAvatarURL({ dynamic: true }))
-        .setImage(`https://cdn.discordapp.com/banners/${fetchUser.id}/${data.banner}.${end}?size=2048`)
+        .setImage(fetchUser.bannerURL({ dynamic: true, size: 4096, format: "png" }))
         .setFooter(`Requested by ${interaction.user.tag}`, interaction.user.displayAvatarURL({ dynamic: true }))
         const row = new MessageActionRow()
         .addComponents(
             new MessageButton()
             .setStyle('LINK')
-            .setURL(`https://cdn.discordapp.com/banners/${fetchUser.id}/${data.banner}.${end}?size=2048`)
+            .setURL(fetchUser.bannerURL({ dynamic: true, size: 4096, format: "png" }))
             .setLabel('User Banner')
         )
         interaction.reply({ embeds: [embed], components: [row] })
