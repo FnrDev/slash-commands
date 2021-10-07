@@ -56,93 +56,103 @@ module.exports = {
     run: async(interaction, client) => {
         const badges = interaction.options.getString('badge');
         if (badges === 'staff') {
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('DISCORD_EMPLOYEE')).size === 0) {
-                return interaction.reply({ content: ":x: No one in this server has \`Early Developer Badge\`" })
+            const staffBadges = interaction.guild.members.cache.filter(r => r.user.flags?.has('DISCORD_EMPLOYEE'))
+            if (staffBadges.size === 0) {
+                return interaction.reply({ content: ":x: No one in this server has \`Discord Staff\`" })
             }
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('DISCORD_EMPLOYEE'))) {
-                const filterBadges = interaction.guild.members.cache.filter(r => r.user.flags?.has('DISCORD_EMPLOYEE')).map(r => r.user).join("\n");
-                interaction.reply({ content: `There are **${interaction.guild.members.cache.filter(r => r.user.flags?.has('DISCORD_EMPLOYEE')).size}** members with this badge\n\n${filterBadges}` })
+            if (staffBadges) {
+                const filterBadges = staffBadges.map(r => r.user).join("\n");
+                interaction.reply({ content: `There are **${staffBadges.size}** members with this badge\n\n${filterBadges}` })
             }
         }
         if (badges === 'partnerd') {
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('PARTNERED_SERVER_OWNER')).size === 0) {
+            const partnerdBadge = interaction.guild.members.cache.filter(r => r.user.flags?.has('PARTNERED_SERVER_OWNER'))
+            if (partnerdBadge.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`Partnerd Badge\`" })
             }
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('PARTNERED_SERVER_OWNER'))) {
-                const filterBadges = interaction.guild.members.cache.filter(r => r.user.flags?.has('PARTNERED_SERVER_OWNER')).map(r => r.user).join("\n");
-                interaction.reply({ content: `There are **${interaction.guild.members.cache.filter(r => r.user.flags?.has('PARTNERED_SERVER_OWNER')).size}** members with this badge\n\n${filterBadges}` })
+            if (partnerdBadge) {
+                const filterBadges = partnerdBadge.map(r => r.user).join("\n");
+                interaction.reply({ content: `There are **${partnerdBadge.size}** members with this badge\n\n${filterBadges}` })
             }
         }
         if (badges === 'HYPESQUAD_EVENTS') {
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('HYPESQUAD_EVENTS')).size === 0) {
+            const hypeSquadBadge = interaction.guild.members.cache.filter(r => r.user.flags?.has('HYPESQUAD_EVENTS'))
+            if (hypeSquadBadge.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`HypeSquad Events\`" })
             }
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('HYPESQUAD_EVENTS'))) {
-                const filterBadges = interaction.guild.members.cache.filter(r => r.user.flags?.has('HYPESQUAD_EVENTS')).map(r => r.user).join("\n");
-                interaction.reply({ content: `There are **${interaction.guild.members.cache.filter(r => r.user.flags?.has('HYPESQUAD_EVENTS')).size}** members with this badge\n\n${filterBadges}` })
+            if (hypeSquadBadge) {
+                const filterBadges = hypeSquadBadge.map(r => r.user).join("\n");
+                interaction.reply({ content: `There are **${hypeSquadBadge.size}** members with this badge\n\n${filterBadges}` })
             }
         }
         if (badges === 'BUGHUNTER_LEVEL_1') {
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('BUGHUNTER_LEVEL_1')).size === 0) {
+            const bughunter1 = interaction.guild.members.cache.filter(r => r.user.flags?.has('BUGHUNTER_LEVEL_1'))
+            if (bughunter1.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`Bug Hunter Level 1\`" })
             }
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('BUGHUNTER_LEVEL_1'))) {
-                const filterBadges = interaction.guild.members.cache.filter(r => r.user.flags?.has('BUGHUNTER_LEVEL_1')).map(r => r.user).join("\n");
-                interaction.reply({ content: `There are **${interaction.guild.members.cache.filter(r => r.user.flags?.has('BUGHUNTER_LEVEL_1')).size}** members with this badge\n\n${filterBadges}` })
+            if (bughunter1) {
+                const filterBadges = bughunter1.map(r => r.user).join("\n");
+                interaction.reply({ content: `There are **${bughunter1.size}** members with this badge\n\n${filterBadges}` })
             }
         }
         if (badges === 'HOUSE_BRAVERY') {
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('HOUSE_BRAVERY')).size === 0) {
+            const houseBravery = interaction.guild.members.cache.filter(r => r.user.flags?.has('HOUSE_BRAVERY'))
+            if (houseBravery.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`House Bravery\`" })
             }
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('HOUSE_BRAVERY'))) {
-                const filterBadges = interaction.guild.members.cache.filter(r => r.user.flags?.has('HOUSE_BRAVERY')).map(r => r.user).join("\n");
-                interaction.reply({ content: `There are **${interaction.guild.members.cache.filter(r => r.user.flags?.has('HOUSE_BRAVERY')).size}** members with this badge\n\n${filterBadges}` })
+            if (houseBravery) {
+                const filterBadges = houseBravery.map(r => r.user).join("\n");
+                interaction.reply({ content: `There are **${hypeSquadBadge.size}** members with this badge\n\n${filterBadges}` })
             }
         }
         if (badges === 'EARLY_SUPPORTER') {
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('EARLY_SUPPORTER')).size === 0) {
+            const earlyBadge = interaction.guild.members.cache.filter(r => r.user.flags?.has('EARLY_SUPPORTER'))
+            if (earlyBadge.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`Early Supporter\`" })
             }
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('EARLY_SUPPORTER'))) {
-                const filterBadges = interaction.guild.members.cache.filter(r => r.user.flags?.has('EARLY_SUPPORTER')).map(r => r.user).join("\n");
-                interaction.reply({ content: `There are **${interaction.guild.members.cache.filter(r => r.user.flags?.has('EARLY_SUPPORTER')).size}** members with this badge\n\n${filterBadges}` })
+            if (earlyBadge) {
+                const filterBadges = earlyBadge.map(r => r.user).join("\n");
+                interaction.reply({ content: `There are **${earlyBadge.size}** members with this badge\n\n${filterBadges}` })
             }
         }
         if (badges === 'BUGHUNTER_LEVEL_2') {
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('BUGHUNTER_LEVEL_2')).size === 0) {
+            const bughunter2 = interaction.guild.members.cache.filter(r => r.user.flags?.has('BUGHUNTER_LEVEL_2'))
+            if (bughunter2.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`Bug Hunter Level 2\`" })
             }
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('BUGHUNTER_LEVEL_2'))) {
+            if (bughunter2) {
                 const filterBadges = interaction.guild.members.cache.filter(r => r.user.flags?.has('BUGHUNTER_LEVEL_2')).map(r => r.user).join("\n");
-                interaction.reply({ content: `There are **${interaction.guild.members.cache.filter(r => r.user.flags?.has('BUGHUNTER_LEVEL_2')).size}** members with this badge\n\n${filterBadges}` })
+                interaction.reply({ content: `There are **${bughunter2.size}** members with this badge\n\n${filterBadges}` })
             }
         }
         if (badges === 'VERIFIED_BOT') {
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('VERIFIED_BOT')).size === 0) {
+            const verifiedBotBadge = interaction.guild.members.cache.filter(r => r.user.flags?.has('VERIFIED_BOT'));
+            if (verifiedBotBadge.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`Verified Bot\`" })
             }
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('VERIFIED_BOT'))) {
-                const filterBadges = interaction.guild.members.cache.filter(r => r.user.flags?.has('VERIFIED_BOT')).map(r => r.user).join("\n");
-                interaction.reply({ content: `There are **${interaction.guild.members.cache.filter(r => r.user.flags?.has('VERIFIED_BOT')).size}** members with this badge\n\n${filterBadges}` })
+            if (verifiedBotBadge) {
+                const filterBadges = verifiedBotBadge.map(r => r.user).join("\n");
+                interaction.reply({ content: `There are **${verifiedBotBadge.size}** members with this badge\n\n${filterBadges}` })
             }
         }
         if (badges === 'EARLY_VERIFIED_BOT_DEVELOPER') {
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('EARLY_VERIFIED_BOT_DEVELOPER')).size === 0) {
+            const devsBadges = interaction.guild.members.cache.filter(r => r.user.flags?.has('EARLY_VERIFIED_BOT_DEVELOPER'));
+            if (devsBadges.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`Early Verified Bot Developer\`" })
             }
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('EARLY_VERIFIED_BOT_DEVELOPER'))) {
-                const filterBadges = interaction.guild.members.cache.filter(r => r.user.flags?.has('EARLY_VERIFIED_BOT_DEVELOPER')).map(r => r.user).join("\n");
-                interaction.reply({ content: `There are **${interaction.guild.members.cache.filter(r => r.user.flags?.has('EARLY_VERIFIED_BOT_DEVELOPER')).size}** members with this badge\n\n${filterBadges}` })
+            if (devsBadges) {
+                const filterBadges = devsBadges.map(r => r.user).join("\n");
+                interaction.reply({ content: `There are **${devsBadges.size}** members with this badge\n\n${filterBadges}` })
             }
         }
         if (badges === 'DISCORD_CERTIFIED_MODERATOR') {
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('DISCORD_CERTIFIED_MODERATOR')).size === 0) {
+            const moderatorBadge = interaction.guild.members.cache.filter(r => r.user.flags?.has('DISCORD_CERTIFIED_MODERATOR'));
+            if (moderatorBadge.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`Discord Certified Moderator\`" })
             }
-            if (interaction.guild.members.cache.filter(r => r.user.flags?.has('DISCORD_CERTIFIED_MODERATOR'))) {
-                const filterBadges = interaction.guild.members.cache.filter(r => r.user.flags?.has('DISCORD_CERTIFIED_MODERATOR')).map(r => r.user).join("\n");
-                interaction.reply({ content: `There are **${interaction.guild.members.cache.filter(r => r.user.flags?.has('DISCORD_CERTIFIED_MODERATOR')).size}** members with this badge\n\n${filterBadges}` })
+            if (moderatorBadge) {
+                const filterBadges = moderatorBadge.map(r => r.user).join("\n");
+                interaction.reply({ content: `There are **${moderatorBadge.size}** members with this badge\n\n${filterBadges}` })
             }
         }
     }
