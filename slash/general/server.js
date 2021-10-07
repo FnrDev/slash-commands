@@ -87,9 +87,12 @@ module.exports = {
                         .setDisabled(true)
                     )
                     row.spliceComponents(0, 1)
-                    const roles = interaction.guild.roles.cache.sort((a, b) => b.position - a.position).map(r => r.name).join("\n");
+                    let rolesLoop = '';
+                    interaction.guild.roles.cache.sort((a, b) => b.position - a.position).forEach(role => {
+                        rolesLoop += `${role.name}         ${role.members.size} members\n`
+                    })
                     interaction.editReply({ components: [editRow] })
-                    return await i.editReply({ content: `**${interaction.guild.name} Roles:**\`\`\`\n${roles}\`\`\``, embeds: [], components: [] })
+                    return await i.editReply({ content: `**${interaction.guild.name} Roles:**\`\`\`\n${rolesLoop}\`\`\``, embeds: [], components: [] })
                 }
                 if (i.customId === 'channels') {
                     await i.deferReply();
