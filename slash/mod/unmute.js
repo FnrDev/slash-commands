@@ -1,6 +1,7 @@
 module.exports = {
     name: "unmute",
     description: "Unmutes a member",
+    permissions: "MANAGE_MESSAGES",
     options: [
         {
             name: "user",
@@ -10,9 +11,6 @@ module.exports = {
         }
     ],
     run: async(interaction) => {
-        if (!interaction.member.permissions.has('MANAGE_MESSAGES')) {
-            return interaction.reply({ content: ":x: You dont have permission to do this command!", ephemeral: true })
-        }
         const user = interaction.options.getMember('user');
         const muteRole = interaction.guild.roles.cache.find(role => role.name == 'Muted');
         if (!user.roles.cache.has(muteRole.id)) {
