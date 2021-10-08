@@ -1,5 +1,6 @@
 module.exports = {
     name: "setcolor",
+    permissions: "MANAGE_ROLES",
     description: "Changes role colors by hex codes.",
     options: [
         {
@@ -16,9 +17,6 @@ module.exports = {
         }
     ],
     run: async(interaction) => {
-        if (!interaction.member.permissions.has('MANAGE_ROLES')) {
-            return interaction.reply({ content: ":x: You dont have permission to do this command!", ephemeral: true })
-        }
         const role = interaction.options.getRole('role');
         const hexColor = interaction.options.getString('hex_color');
         if (hexColor.length > 7) {
