@@ -1,5 +1,6 @@
 module.exports = {
     name: "vkick",
+    permissions: "MANAGE_CHANNELS",
     description: "Kick a member from voice channel.",
     options: [
         {
@@ -10,9 +11,6 @@ module.exports = {
         }
     ],
     run: async(interaction) => {
-        if (!interaction.member.permissions.has('MANAGE_CHANNELS')) {
-            return interaction.reply(":x: You dont have permission to do this command!")
-        }
         const user = interaction.options.getMember('user');
         if (!user.voice.channel) {
             return interaction.reply({ content: ":x: Member not in voice channel" })
