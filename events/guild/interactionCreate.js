@@ -17,6 +17,11 @@ module.exports = async(client, interaction) => {
 					return interaction.reply({ embeds: [embed], content: `<@${interaction.user.id}>`, ephemeral: true })
 				}
 			}
+			if (command.permissions) {
+				if (!interaction.member.permissions.has(command.permissions)) {
+					return interaction.reply({ content: `:x: You need \`${command.permissions}\` to use this command`, ephemeral: true })
+				}
+			}
 			command.run(interaction, client);
 				Timeout.add(`${interaction.user.id}${command.name}`)
 				setTimeout(() => {
