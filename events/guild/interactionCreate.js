@@ -1,6 +1,7 @@
 const Timeout = new Set()
 const { MessageEmbed } = require('discord.js');
 const humanizeDuration = require("humanize-duration");
+const config = require('../../config.json');
 
 module.exports = async(client, interaction) => {
     if (interaction.isCommand() || interaction.isContextMenu()) {
@@ -20,6 +21,11 @@ module.exports = async(client, interaction) => {
 			if (command.permissions) {
 				if (!interaction.member.permissions.has(command.permissions)) {
 					return interaction.reply({ content: `:x: You need \`${command.permissions}\` to use this command`, ephemeral: true })
+				}
+			}
+			if (command.devs) {
+				if (!config.ownersID.includes(interaction.user.id)) {
+					return interaction.reply({ content: ":x: Only devs can use this command", ephemeral: true });
 				}
 			}
 			command.run(interaction, client);
