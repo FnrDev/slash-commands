@@ -3,6 +3,7 @@ const humanizeDuration = require("humanize-duration");
 
 module.exports = {
     name: "role-info",
+    permissions: "MANAGE_ROLES",
     description: "Display info about role",
     options: [
         {
@@ -13,9 +14,6 @@ module.exports = {
         }
     ],
     run: async(interaction) => {
-        if (!interaction.member.permissions.has('MANAGE_ROLES')) {
-            return interaction.reply({ content: ":x: You dont have permission to do this command!", ephemeral: true })
-        }
         const role = interaction.options.getRole('role');
         const distece = Date.now() - role.createdTimestamp
         const embed = new MessageEmbed()

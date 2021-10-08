@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: "setnick",
     description: "Change nickname for user",
+    permissions: "MANAGE_NICKNAMES",
     options: [
         {
             name: "user",
@@ -18,9 +19,6 @@ module.exports = {
     ],
     timeout: 3000,
     run: async(interaction, client) => {
-        if (!interaction.member.permissions.has('MANAGE_NICKNAMES')) {
-            return interaction.reply({ content: "You dont have permission to do this command!", ephemeral: true })
-        }
         const user = interaction.options.getMember('user');
         const nickname = interaction.options.getString('nickname');
         if (!nickname) {

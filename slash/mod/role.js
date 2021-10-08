@@ -3,6 +3,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     name: "role",
     description: "role someone.",
+    permissions: "MANAGE_ROLES",
     options: [
         {
             name: "bots",
@@ -84,9 +85,6 @@ module.exports = {
     ],
     timeout: 3000,
     run: async(interaction) => {
-        if (!interaction.member.permissions.has('MANAGE_ROLES')) {
-            return interaction.reply({ content: "You dont have permission to do this command", ephemeral: true })
-        }
         const user = interaction.options.getMember('user'); // access to guild member obj <https://discord.js.org/#/docs/main/stable/class/GuildMember>
         const role = interaction.options.getRole('role'); // access to role obj <https://discord.js.org/#/docs/main/stable/class/Role>
         // User Sub Command

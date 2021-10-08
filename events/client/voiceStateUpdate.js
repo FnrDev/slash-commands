@@ -5,7 +5,6 @@ module.exports = async(client, oldState, newState) => {
     const logChannel = client.channels.cache.get(config.log_channel_id);
     if (!logChannel) return;
     const allLogs = await newState.guild.fetchAuditLogs();
-    console.log(allLogs.entries.first())
     if (allLogs.entries.first().action === 'MEMBER_MOVE') {
         const moveLogs = await newState.guild.fetchAuditLogs({ type: "MEMBER_MOVE" });
         const fetchModerator = moveLogs.entries.first();
