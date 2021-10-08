@@ -1,5 +1,6 @@
 module.exports = {
     name: "unlock",
+    permissions: "MANAGE_CHANNELS",
     description: "🔒 Remove denied sending messages from @everyone in specific channel",
     options: [
         {
@@ -10,9 +11,6 @@ module.exports = {
     ],
     timeout: 3000,
     run: async(interaction, client) => {
-        if (!interaction.member.permissions.has('MANAGE_CHANNELS')) {
-            return interaction.reply({ content: "You dont have permission to do this command!", ephemeral: true })
-        }
         const channel = interaction.options.getChannel('channel') || interaction.channel;
         await channel.permissionOverwrites.edit(interaction.guild.id, { SEND_MESSAGES: null });
         interaction.reply({ content: `**🔓 ${channel} has been unlock.**` })
