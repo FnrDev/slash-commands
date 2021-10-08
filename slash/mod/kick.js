@@ -1,6 +1,7 @@
 module.exports = {
     name: "kick",
     description: "kicks a member.",
+    permissions: "KICK_MEMBERS",
     options: [
         {
             name: "user",
@@ -16,9 +17,6 @@ module.exports = {
     ],
     timeout: 3000,
     run: async(interaction, client) => {
-        if (!interaction.member.permissions.has('KICK_MEMBERS')) {
-            return interaction.reply({ content: `:x: You dont have permission to do this command!`, ephemeral: true })
-        }
         const user = interaction.options.getMember('user');
         const reason = interaction.options.getString('reason') || '';
         if (user.id === interaction.user.id) {
