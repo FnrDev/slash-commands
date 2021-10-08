@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 
 module.exports = {
     name: "unban",
+    permissions: "BAN_MEMBERS",
     description: "Unban user from this server",
     options: [
         {
@@ -13,9 +14,6 @@ module.exports = {
     ],
     timeout: 3000,
     run: async(interaction, client) => {
-        if (!interaction.member.permissions.has('BAN_MEMBERS')) {
-            return interaction.reply({ content: "You dont have permission to do this command!", ephemeral: true })
-        }
         const user = interaction.options.getString('user');
         try {
             await interaction.guild.bans.remove(user);
