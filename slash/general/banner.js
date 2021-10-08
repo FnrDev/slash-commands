@@ -19,11 +19,11 @@ module.exports = {
             return interaction.reply(":x: user id must be a number")
         }
         try {
-            await client.users.fetch(user, true)
+            await client.users.fetch(user)
         } catch (e) {
             return interaction.reply({ content: ":x: i can\'t find this user" })
         }
-        const fetchUser = await client.users.fetch(user, true);
+        const fetchUser = await client.users.fetch(user);
         await fetchUser.fetch() // to get user banner you need to fetch user before getting banner
         const embed = new MessageEmbed()
         .setAuthor(fetchUser.tag, fetchUser.displayAvatarURL({ dynamic: true }))
