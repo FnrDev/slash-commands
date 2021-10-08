@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: "ban",
     description: "Ban a member",
+    permissions: "BAN_MEMBERS",
     options: [
         {
             name: "user",
@@ -13,9 +14,6 @@ module.exports = {
     ],
     timeout: 3000,
     run: async(interaction, client) => {
-        if (!interaction.member.permissions.has('BAN_MEMBERS')) {
-            return interaction.reply({ content: "You dont have permission to do this command!", ephemeral: true })
-        }
         const user = interaction.options.getMember('user');
         if (user.id === interaction.user.id) {
             return interaction.reply({ content: ":x: You can\'t ban yourself!" })
