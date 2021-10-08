@@ -24,7 +24,8 @@ npm install
     "serverID": "YOUR_SERVER_ID",
     "botID": "YOUR_BOT_ID",
     "log_channel_id": "Channel-id",
-    "prefix": "YOUR_PREFIX"
+    "prefix": "YOUR_PREFIX",
+    "ownersID": ["Id_1", "id_2"]
 }
 ```
 - Note: Prefix is not required in `config.json` you just need it if you want to create commands with prefix.
