@@ -29,10 +29,10 @@ module.exports = async(client, interaction) => {
 				}
 			}
 			command.run(interaction, client);
-				Timeout.add(`${interaction.user.id}${command.name}`)
-				setTimeout(() => {
-					Timeout.delete(`${interaction.user.id}${command.name}`)
-				}, command.timeout);
+			Timeout.add(`${interaction.user.id}${command.name}`)
+			setTimeout(() => {
+				Timeout.delete(`${interaction.user.id}${command.name}`)
+			}, command.timeout);
 		} catch (error) {
 			console.error(error);
 			await interaction.reply({ content: ':x: There was an error while executing this command!', ephemeral: true });
