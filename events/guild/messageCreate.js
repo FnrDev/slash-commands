@@ -20,12 +20,15 @@ module.exports = async (client , message) => {
                 .setDescription(`:x: You need to wait **${humanizeDuration(command.timeout, { round: true })}** to use command again`)
                 .setColor('#ff0000')
                 return message.channel.send({ embeds: [embed] })
-            }      
-            command.run(client, message, args);
-            Timeout.add(`${message.author.id}${command.name}`)
-            setTimeout(() => {
-                Timeout.delete(`${message.author.id}${command.name}`)
-            }, command.timeout);
+            } else {
+                command.run(client, message, args);
+                Timeout.add(`${message.author.id}${command.name}`)
+                setTimeout(() => {
+                    Timeout.delete(`${message.author.id}${command.name}`)
+                }, command.timeout);
+            }
+        } else {
+            command.run(client, message, args)
         }
     }
 }
