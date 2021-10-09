@@ -48,6 +48,8 @@ module.exports = {
             const embed = new MessageEmbed()
             .setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true }))
             .setTitle('Help Commands')
+            .setThumbnail(client.user.displayAvatarURL())
+            .setTimestamp()
             .setColor(interaction.guild.me.displayHexColor)
             .setDescription(loopAllCommads)
             .setFooter(`Need more info about command use /help command`)
