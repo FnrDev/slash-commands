@@ -17,7 +17,7 @@ module.exports = {
             const command = client.slash.get(helpCommand.toLowerCase());
             const embed = new MessageEmbed()
             .setColor(interaction.guild.me.displayHexColor)
-            if (!command || command.name === 'get-banner' || 'user-info') {
+            if (!command) {
                 const embed = new MessageEmbed()
                 .setTitle(`No command for ${helpCommand.toLowerCase()}`)
                 .setColor('#ff0000')
@@ -36,7 +36,7 @@ module.exports = {
                 embed.addField('Timeout:', humanizeDuration(command.timeout, { round: true }))
             }
             if (command.permissions) {
-                embed.addField('Require Permission', `\`${command.permissions}\``)
+                embed.addField('Require Permission:', `\`${command.permissions}\``)
             }
             return interaction.reply({ embeds: [embed] })
         } else {
