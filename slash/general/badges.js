@@ -196,7 +196,7 @@ module.exports = {
             }
         }
         if (badges === 'DISCORD_CERTIFIED_MODERATOR') {
-            const getMemberWithRole = role?.members.filter(r => r.user.flags?.has('EARLY_VERIFIED_BOT_DEVELOPER'));
+            const getMemberWithRole = role?.members.filter(r => r.user.flags?.has('DISCORD_CERTIFIED_MODERATOR'));
             const moderatorBadge = interaction.guild.members.cache.filter(r => r.user.flags?.has('DISCORD_CERTIFIED_MODERATOR'));
             if (moderatorBadge.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`Discord Certified Moderator\`" })
