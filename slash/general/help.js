@@ -32,6 +32,9 @@ module.exports = {
             if (command.usage) {
                 embed.addField('Usage:', command.usage)
             }
+            if (command.example) {
+                embed.addField('Examples:', command.example.replaceAll('<@>', `<@${interaction.user.id}>`))
+            }
             if (command.timeout) {
                 embed.addField('Timeout:', humanizeDuration(command.timeout, { round: true }))
             }

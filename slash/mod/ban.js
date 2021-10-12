@@ -4,6 +4,7 @@ module.exports = {
     name: "ban",
     description: "Ban a member",
     permissions: "BAN_MEMBERS",
+    example: `/ban <@>\n/ban <@> spamming`,
     options: [
         {
             name: "user",
