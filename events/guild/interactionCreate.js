@@ -15,12 +15,18 @@ module.exports = async(client, interaction) => {
 					.setTitle('You are in timeout!')
 					.setDescription(`You need to wait **${humanizeDuration(command.timeout, { round: true })}** to use command again`)
 					.setColor('#ff0000')
-					return interaction.reply({ embeds: [embed], content: `<@${interaction.user.id}>`, ephemeral: true })
+					return interaction.reply({ embeds: [embed], ephemeral: true })
 				}
 			}
 			if (command.permissions) {
 				if (!interaction.member.permissions.has(command.permissions)) {
-					return interaction.reply({ content: `:x: You need \`${command.permissions}\` to use this command`, ephemeral: true })
+					const embed = new MessageEmbed()
+					.setTitle('Missing Permission')
+					.setDescription(`:x: You need \`${command.permissions}\` to use this command`)
+					.setColor('#ff0000')
+					.setFooter(interaction.user.tag, interaction.user.displayAvatarURL({ dynamic: true }))
+					.setTimestamp()
+					return interaction.reply({ embeds: [embed], ephemeral: true })
 				}
 			}
 			if (command.devs) {
