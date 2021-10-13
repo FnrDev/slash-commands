@@ -54,7 +54,7 @@ module.exports = {
                 const collector = interaction.channel.createMessageComponentCollector({ filter: filter })
                 collector.on('collect', async i => {
                     if (i.customId === 'reason') {
-                        reason = i.values[0]
+                        reason = i.values[0] // Get first option from select menu
                         await user.ban({ reason: `By: ${interaction.user.tag} | Reason: ${reason}`, days: 7 })
                         return interaction.editReply({ content: `✅ **${user} has been banned**`, components: [] })
                     }
