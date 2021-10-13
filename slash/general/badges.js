@@ -1,5 +1,3 @@
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-
 module.exports = {
     name: "badges",
     description: "Get list of members with badges",
@@ -58,7 +56,7 @@ module.exports = {
             type: 8
         }
     ],
-    run: async(interaction, client) => {
+    run: async(interaction) => {
         const badges = interaction.options.getString('badge');
         const role = interaction.options.getRole('role');
         if (badges === 'staff') {
@@ -136,7 +134,6 @@ module.exports = {
             }
         }
         if (badges === 'EARLY_SUPPORTER') {
-            const houseBravery = interaction.guild.members.cache.filter(r => r.user.flags?.has('EARLY_SUPPORTER'))
             const earlyBadge = interaction.guild.members.cache.filter(r => r.user.flags?.has('EARLY_SUPPORTER'))
             if (earlyBadge.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`Early Supporter\`" })
@@ -151,7 +148,6 @@ module.exports = {
             }
         }
         if (badges === 'BUGHUNTER_LEVEL_2') {
-            const houseBravery = interaction.guild.members.cache.filter(r => r.user.flags?.has('BUGHUNTER_LEVEL_2'))
             const bughunter2 = interaction.guild.members.cache.filter(r => r.user.flags?.has('BUGHUNTER_LEVEL_2'))
             if (bughunter2.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`Bug Hunter Level 2\`" })
@@ -166,7 +162,6 @@ module.exports = {
             }
         }
         if (badges === 'VERIFIED_BOT') {
-            const houseBravery = interaction.guild.members.cache.filter(r => r.user.flags?.has('VERIFIED_BOT'))
             const verifiedBotBadge = interaction.guild.members.cache.filter(r => r.user.flags?.has('VERIFIED_BOT'));
             if (verifiedBotBadge.size === 0) {
                 return interaction.reply({ content: ":x: No one in this server has \`Verified Bot\`" })

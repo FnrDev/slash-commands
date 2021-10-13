@@ -4,6 +4,7 @@ module.exports = {
     name: "ban",
     description: "Ban a member",
     permissions: "BAN_MEMBERS",
+    example: `/ban <@>\n/ban <@> spamming`,
     options: [
         {
             name: "user",
@@ -14,21 +15,24 @@ module.exports = {
     ],
     timeout: 3000,
     run: async(interaction, client) => {
-        const user = interaction.options.getMember('user');
-        if (user.id === interaction.user.id) {
+        const member = interaction.options.getMember('user');
+        if (member.id === interaction.user.id) {
             return interaction.reply({ content: ":x: You can\'t ban yourself!" })
         }
-        if (user.id === client.user.id) {
+        if (member.id === client.user.id) {
             return interaction.reply({ content: ":x: You can\'t ban me!" })
         }
+        if (!member.banable) {
+            return interaction.reply({ contnet: "i can\'t ban this user" })
+        }
         const botRole = interaction.guild.me.roles.highest.position;
-        const role = user.roles.highest.position;
+        const role = member.roles.highest.position;
         const authorRole = interaction.member.roles.highest.position;
         if (authorRole <= role) {
-            return interaction.reply(`🙄 **You can\'t ban @${user.user.username}**`)
+            return interaction.reply(`🙄 **You can\'t ban @${member.user.username}**`)
         }
         if (botRole <= role) {
-            return interaction.reply(`🙄 **You can\'t ban @${user.user.username}**`)
+            return interaction.reply(`🙄 **You can\'t ban @${member.user.username}**`)
         }
         try {
             let reason;
@@ -53,9 +57,9 @@ module.exports = {
                 const collector = interaction.channel.createMessageComponentCollector({ filter: filter })
                 collector.on('collect', async i => {
                     if (i.customId === 'reason') {
-                        reason = i.values[0]
-                        await user.ban({ reason: `By: ${interaction.user.tag} | Reason: ${reason}`, days: 7 })
-                        return interaction.editReply({ content: `✅ **${user} has been banned**`, components: [] })
+                        reason = i.values[0] // Get first option from select menu
+                        await member.ban({ reason: `By: ${interaction.user.tag} | Reason: ${reason}`, days: 7 })
+                        return interaction.editReply({ content: `✅ **${member} has been banned**`, components: [] })
                     }
                 })
         } catch (e) {
