@@ -50,4 +50,4 @@ const rest = new REST({ version: "9" }).setToken(token);
 });
 
   
-client.login(token);
+client.login(config.token);
