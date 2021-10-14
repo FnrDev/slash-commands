@@ -51,4 +51,4 @@ const rest = new REST({ version: "9" }).setToken(token);
 });
 
   
-client.login(process.env.TOKEN);
+client.login(config.token);
