@@ -34,6 +34,12 @@ module.exports = async(client, interaction) => {
 					return interaction.reply({ content: ":x: Only devs can use this command", ephemeral: true });
 				}
 			}
+			if (command.ownerOnly) {
+				const fetchOwner = await interaction.guild.fetchOwner();
+				if (interaction.user.id !== fetchOwner.id) {
+					return interaction.reply({ content: "Only ownership of this server can use this command", ephemeral: true })
+				}
+			}
 			command.run(interaction, client);
 			Timeout.add(`${interaction.user.id}${command.name}`)
 			setTimeout(() => {
