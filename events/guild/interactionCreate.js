@@ -35,8 +35,7 @@ module.exports = async(client, interaction) => {
 				}
 			}
 			if (command.ownerOnly) {
-				const fetchOwner = await interaction.guild.fetchOwner();
-				if (interaction.user.id !== fetchOwner.id) {
+				if (interaction.user.id !== interaction.guild.ownerId) {
 					return interaction.reply({ content: "Only ownership of this server can use this command", ephemeral: true })
 				}
 			}
