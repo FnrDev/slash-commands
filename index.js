@@ -22,7 +22,6 @@ const { Routes } = require('discord-api-types/v9');
 const { readdirSync } = require('fs')
 const path = require('path')
 require('colors');
-require('dotenv').config();
 
 const commands = []
 readdirSync("./slash/").map(async dir => {
