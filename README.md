@@ -15,7 +15,7 @@ npm install
 ---
 ### Make sure to check [Slash Commands Guide](https://discordjs.guide/interactions/registering-slash-commands.html)
 ---
-### You need to create config.json file
+### You need to rename example_config.json file to `config.json` and fill the info.
 
 - config.json
 ```js
