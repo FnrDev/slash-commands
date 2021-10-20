@@ -19,9 +19,11 @@ client.aliases = new Discord.Collection();
 client.categories = fs.readdirSync("./commands/");
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { readdirSync } = require('fs')
-const path = require('path')
+const { readdirSync } = require('fs');
+const path = require('path');
 require('colors');
+
+// setup slash commands
 
 const commands = []
 readdirSync("./slash/").map(async dir => {
@@ -44,6 +46,8 @@ const rest = new REST({ version: "9" }).setToken(token);
 		console.error(error);
 	}
 })();
+
+// end of setup
 
 ["handlers", "events", "slash"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
