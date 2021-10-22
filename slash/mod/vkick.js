@@ -11,11 +11,11 @@ module.exports = {
         }
     ],
     run: async(interaction) => {
-        const user = interaction.options.getMember('user');
-        if (!user.voice.channel) {
+        const member = interaction.options.getMember('user');
+        if (!member.voice.channel) {
             return interaction.reply({ content: ":x: Member not in voice channel" })
         }
-        await user.voice.disconnect(`By: ${interaction.user.tag}`)
-        interaction.reply(`✅ **@${user.user.username} has been kicked from voice channel**`)
+        await member.voice.disconnect(`By: ${interaction.user.tag}`)
+        interaction.reply(`✅ **@${member.user.username} has been kicked from voice channel**`)
     }
 }
