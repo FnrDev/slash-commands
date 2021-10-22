@@ -15,15 +15,15 @@ module.exports = {
         .addFields(
             {
                 name: "User Created At:",
-                value: `\`${message.author.createdAt.toLocaleString()}\`\n**${humanizeDuration(userCreated, { largest: 1 })} ago**`,
+                value: `\`${message.author.createdAt.toLocaleString()}\`\n**${humanizeDuration(userCreated, { largest: 1 })} ago**`
             },
             {
                 name: "Joined Server",
-                value: `\`${message.member.joinedAt.toLocaleString()}\`\n**${humanizeDuration(joinedTime, { largest: 1 })} ago**`,
+                value: `\`${message.member.joinedAt.toLocaleString()}\`\n**${humanizeDuration(joinedTime, { largest: 1 })} ago**`
             },
             {
                 name: "User ID:",
-                value: message.author.id,
+                value: message.author.id
             },
             {
                 name: "is it a bot?",
