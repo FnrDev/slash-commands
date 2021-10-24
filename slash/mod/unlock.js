@@ -7,6 +7,7 @@ module.exports = {
             name: "channel",
             description: "Channel to unlock.",
             type: 7,
+            channel_types: [0]
         }
     ],
     timeout: 3000,
