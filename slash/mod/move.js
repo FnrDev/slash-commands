@@ -12,7 +12,8 @@ module.exports = {
         {
             name: "channel",
             description: "Channel to move the user to.",
-            type: 7
+            type: 7,
+            channel_types: [2]
         }
     ],
     run: async(interaction) => {
@@ -27,9 +28,6 @@ module.exports = {
         if (!channel) {
             await member.voice.setChannel(interaction.member.voice.channel, `By: ${interaction.user.tag}`);
             return interaction.reply({ content: `**✅ ${member.user.username} moved to ${interaction.member.voice.channel.name}**` })
-        }
-        if (channel.type !== 'GUILD_VOICE') {
-            return interaction.reply({ content: ":x: Channel must be a voice channel" })
         }
         await member.voice.setChannel(channel, `By: ${interaction.user.tag}`);
         interaction.reply({ content: `✅ **${member.user.username} moved to ${channel.name}**` })
