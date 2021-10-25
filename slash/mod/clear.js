@@ -8,16 +8,13 @@ module.exports = {
         {
             name: "number_of_messages",
             description: "number of messages to clean",
-            type: 3,
+            type: 10,
             required: true
         }
     ],
     timeout: 5000,
     run: async(interaction, client) => {
-        let deleteAmount = interaction.options.getString('number_of_messages');
-        if (isNaN(deleteAmount)) {
-            return interaction.reply({ content: "Delete amount must be a number" })
-        }
+        let deleteAmount = interaction.options.getNumber('number_of_messages');
         if (deleteAmount > 100) {
             deleteAmount = 100
         }
