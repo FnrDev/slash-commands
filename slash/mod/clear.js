@@ -10,15 +10,26 @@ module.exports = {
             description: "number of messages to clean",
             type: 10,
             required: true
+        },
+        {
+            name: "user",
+            description: "User to clear messsages for",
+            type: 6
         }
     ],
     timeout: 5000,
     run: async(interaction, client) => {
         let deleteAmount = interaction.options.getNumber('number_of_messages');
+        const user = interaction.options.getUser('user');
         if (deleteAmount > 100) {
             deleteAmount = 100
         }
-        await interaction.channel.bulkDelete(+deleteAmount, true);
-        interaction.reply({ content: `✅ Successfully deleted ${deleteAmount} messages` })
+        const fetchedMessage = await interaction.channel.messages.fetch({ limit: deleteAmount });
+        if (user) {
+            fetchedMessage.filter(r => r.author.id === user.id).forEach(msg => msg.delete());
+            return interaction.reply({ content: `✅ Successfully deleted ${fetchedMessage.size} messages` });
+        }
+        fetchedMessage.forEach(msg => msg.delete())
+        interaction.reply({ content: `✅ Successfully deleted ${fetchedMessage.size} messages` });
     }
 }
