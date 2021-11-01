@@ -5,7 +5,7 @@ module.exports = async(client, oldRole, newRole) => {
     const logChannel = client.channels.cache.get(config.log_channel_id);
     if (!logChannel) return;
     const allLogs = await newRole.guild.fetchAuditLogs({ type: "ROLE_UPDATE" });
-    const fetchModerator = allLogs.entries.first();
+    const fetchModerator = await allLogs.entries.first();
     const changes = fetchModerator.changes;
     if (changes.find(r => r.key === 'color')) {
         const embed = new Discord.MessageEmbed()
