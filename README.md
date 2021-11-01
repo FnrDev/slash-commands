@@ -25,6 +25,8 @@ npm install
     "botID": "YOUR_BOT_ID",
     "log_channel_id": "Channel-id",
     "prefix": "YOUR_PREFIX",
+    "autoRoleId": "ROLE ID",
+    "ownersID": ["Id_1", "id_2"],
     "ownersID": ["Id_1", "id_2"]
 }
 ```

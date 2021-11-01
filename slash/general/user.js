@@ -13,36 +13,42 @@ module.exports = {
         }
     ],
     run: async(interaction) => {
-        const user = interaction.options.getMember('user') || interaction.member;
-        const userCreated = Date.now() - user.user.createdTimestamp;
-        const joinedTime = Date.now() - user.joinedTimestamp
+        const member = interaction.options.getMember('user') || interaction.member;
+        const userCreated = Date.now() - member.user.createdTimestamp;
+        const joinedTime = Date.now() - member.joinedTimestamp;
+        const memberAvatar = member.avatarURL({ dynamic: true }) || member.user.displayAvatarURL({ dynamic: true });
         const embed = new Discord.MessageEmbed()
-        .setAuthor(user.user.tag, user.user.displayAvatarURL({ dynamic: true }))
-        .setThumbnail(user.user.displayAvatarURL({ dynamic: true }))
+        .setAuthor(member.user.tag, member.user.displayAvatarURL({ dynamic: true }))
+        .setThumbnail(memberAvatar)
+        .setFooter(member.id, member.displayAvatarURL({ dynamic: true }))
         .setColor('RANDOM')
         .addFields(
             {
                 name: "User Created At:",
-                value: `\`${user.user.createdAt.toLocaleString()}\`\n**${humanizeDuration(userCreated, { largest: 1 })} ago**`,
+                value: `\`${member.user.createdAt.toLocaleString()}\`\n**${humanizeDuration(userCreated, { largest: 1 })} ago**`,
             },
             {
                 name: "Joined Server",
-                value: `\`${user.joinedAt.toLocaleString()}\`\n**${humanizeDuration(joinedTime, { largest: 1 })} ago**`,
+                value: `\`${member.joinedAt.toLocaleString()}\`\n**${humanizeDuration(joinedTime, { largest: 1 })} ago**`,
             },
             {
-                name: "User ID:",
-                value: user.id,
+                name: "User Roles:",
+                value: member.roles.cache.filter(r => r.id !== interaction.guild.id).map(r => r.toString()).join(", ")
+            },
+            {
+                name: "User Nickname:",
+                value: member.nickname || 'None'
             },
             {
                 name: "is it a bot?",
-                value: user.user.bot.toString(),
+                value: member.user.bot ? "✅" : ":x:",
             }
         )
         const row = new Discord.MessageActionRow()
         .addComponents(
             new Discord.MessageButton()
             .setStyle('LINK')
-            .setURL(user.user.displayAvatarURL({ dynamic: true }))
+            .setURL(member.user.displayAvatarURL({ dynamic: true }))
             .setLabel('User Avatar')
         )
         interaction.reply({ embeds: [embed], components: [row] })
