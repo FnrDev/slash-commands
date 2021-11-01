@@ -27,6 +27,7 @@ npm install
     "prefix": "YOUR_PREFIX",
     "autoRoleId": "ROLE ID",
     "ownersID": ["Id_1", "id_2"],
+    "ownersID": ["Id_1", "id_2"]
 }
 ```
 - Note: Prefix is not required in `config.json` you just need it if you want to create commands with prefix.
