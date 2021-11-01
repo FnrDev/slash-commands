@@ -13,6 +13,10 @@ module.exports = {
     timeout: 3000,
     run: async(interaction) => {
         const channel = interaction.options.getChannel('channel') || interaction.channel;
+        const isLocked = channel.permissionOverwrites.cache.find(r => r.id === interaction.guild.id).deny.has('SEND_MESSAGES');
+        if (isLocked) {
+            return interaction.reply({ content: `**:x: #${channel.name} already locked.**` })
+        }
         await channel.permissionOverwrites.edit(interaction.guild.id, { SEND_MESSAGES: false });
         interaction.reply({ content: `**🔒 ${channel} has been locked.**` })
     }
