@@ -51,22 +51,4 @@ module.exports = async(client, oldRole, newRole) => {
         )
         return logChannel.send({ embeds: [embed] })
     }
-    if (changes.find(r => r.key === 'permissions')) {
-        const embed = new Discord.MessageEmbed()
-        .setAuthor(newRole.guild.name, newRole.guild.iconURL({ dynamic: true }))
-        .setDescription(`😛 **\`${newRole.name}\` has been updated.**`)
-        .setFooter(fetchModerator.executor.tag, fetchModerator.executor.displayAvatarURL({ dynamic: true }))
-        .setTimestamp()
-        .addFields(
-            {
-                name: "New permissions:",
-                value: newRole.permissions.toArray().join("\n")
-            },
-            {
-                name: "Responsible Moderator:",
-                value: `<@${fetchModerator.executor.id}>`
-            }
-        )
-        return logChannel.send({ embeds: [embed] })
-    }
 }
