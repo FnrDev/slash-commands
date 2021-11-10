@@ -6,7 +6,7 @@ module.exports = {
     description: "Unban user from this server",
     options: [
         {
-            name: "user",
+            name: "input",
             description: "user to unban",
             type: 3,
             required: true
@@ -14,11 +14,10 @@ module.exports = {
     ],
     timeout: 3000,
     run: async(interaction, client) => {
-        const user = interaction.options.getString('user');
+        const input = interaction.options.getString('input');
         try {
-            await interaction.guild.bans.remove(user);
-            const unbanUser = await client.users.fetch(user)
-            interaction.reply({ content: `✅ **@${unbanUser.username} has been unbanned**` })
+            const user = await interaction.guild.bans.remove(input, `By: ${interaction.user.tag}`);
+            interaction.reply({ content: `✅ **@${user.username} has been unbanned**` })
         } catch (e) {
             console.error(e)
             return interaction.reply({ content: `Error: ${e}` })
