@@ -1,7 +1,7 @@
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js')
 
 module.exports = {
-    name: "info",
+    name: "bot",
     description: "Get info about bot",
     timeout: 3000,
     run: async(interaction, client) => {
