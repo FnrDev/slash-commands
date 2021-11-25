@@ -19,13 +19,13 @@ module.exports = {
     ],
     timeout: 3000,
     run: async(interaction) => {
-        const user = interaction.options.getMember('user');
+        const member = interaction.options.getMember('user');
         const reason = interaction.options.getString('reason') || '';
-        if (interaction.user.id === user.id) {
+        if (interaction.user.id === member.id) {
             return interaction.reply({ content: ":x: You can't mute yourself" })
         }
         const botRole = interaction.guild.me.roles.highest.position;
-        const role = user.roles.highest.position;
+        const role = member.roles.highest.position;
         const authorRole = interaction.member.roles.highest.position;
         if (authorRole <= role) {
             const embed = new Discord.MessageEmbed()
@@ -47,14 +47,14 @@ module.exports = {
                     reason: "Setup muted role for muted command"
                 })
             }
-            if (user.roles.cache.has(this.createMutedRole.id)) {
+            if (member.roles.cache.has(this.createMutedRole.id)) {
                 return interaction.reply({ content: ":x: This user is already muted" })
             }
             interaction.guild.channels.cache.forEach((channel) => {
                 channel.permissionOverwrites.edit(this.createMutedRole.id, { SEND_MESSAGES: false, ADD_REACTIONS: false })
             })
-            await user.roles.add(this.createMutedRole, `By: ${interaction.user.tag} Reason: ${reason}`)
-            interaction.reply({ content: `✅ **@${user.user.username} has been muted!**` })
+            await member.roles.add(this.createMutedRole, `By: ${interaction.user.tag} Reason: ${reason}`)
+            interaction.reply({ content: `✅ **@${member.user.username} has been muted!**` })
         } catch (e) {
             console.error(e);
             return interaction.reply({ content: "**There was an error please check my permission and role position!**" })
