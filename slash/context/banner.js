@@ -5,7 +5,7 @@ module.exports = {
     type: 3,
     run: async(interaction, client) => {
         const message = interaction.options.getMessage('message');
-        const user = await client.users.fetch(message.author.id);
+        const user = await client.users.cache.get(message.author.id);
         await user.fetch()
         if (!user.banner) {
             return interaction.reply({ content: ":x: This user doesn't have a banner" })
