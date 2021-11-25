@@ -11,14 +11,14 @@ module.exports = {
         }
     ],
     run: async(interaction) => {
-        const user = interaction.options.getMember('user');
+        const member = interaction.options.getMember('user');
         const muteRole = interaction.guild.roles.cache.find(role => role.name == 'Muted');
-        if (!user.roles.cache.has(muteRole.id)) {
+        if (!member.roles.cache.has(muteRole.id)) {
             return interaction.reply({ content: ":x: This user is not muted" })
         }
         try {
-            user.roles.remove(muteRole, `By: ${interaction.user.tag}`)
-            interaction.reply({ content: `✅ ${user} has been unmuted` })
+            member.roles.remove(muteRole, `By: ${interaction.user.tag}`)
+            interaction.reply({ content: `✅ ${member} has been unmuted` })
         } catch (e) {
             return interaction.reply({ content: `:x: Error: **${e}**` })
         }

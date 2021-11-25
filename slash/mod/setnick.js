@@ -19,15 +19,15 @@ module.exports = {
     ],
     timeout: 3000,
     run: async(interaction, client) => {
-        const user = interaction.options.getMember('user');
+        const member = interaction.options.getMember('user');
         const nickname = interaction.options.getString('nickname');
         if (!nickname) {
-            await user.setNickname('', `By: ${interaction.user.tag}`)
-            return interaction.reply({ content: `✅ **${user.user.username} nick has been reset!**` })
+            await member.setNickname('', `By: ${interaction.user.tag}`)
+            return interaction.reply({ content: `✅ **${member.user.username} nick has been reset!**` })
         }
         try {
-            await user.setNickname(nickname, `By: ${interaction.user.tag}`)
-            interaction.reply({ content: `✅ **${user.user.username} nick has been changed to ${nickname}**` })
+            await member.setNickname(nickname, `By: ${interaction.user.tag}`)
+            interaction.reply({ content: `✅ **${member.user.username} nick has been changed to ${nickname}**` })
         } catch (e) {
             console.error(e)
             return interaction.reply({ content: `Error: ${e}` })
