@@ -8,7 +8,8 @@ module.exports = {
             name: "channel",
             description: "Channel to move to",
             type: 7,
-            required: true
+            required: true,
+            channel_types: [2]
         }
     ],
     timeout: 5000,
@@ -20,9 +21,6 @@ module.exports = {
         const channel = interaction.options.getChannel('channel');
         if (!interaction.member.voice.channel) {
             return interaction.reply({ content: ":x: You need to be in voice channel", ephemeral: true })
-        }
-        if (channel.type !== 'GUILD_VOICE') {
-            return interaction.reply({ content: ":x: Channel type must be a voice channel", ephemeral: true })
         }
         if (interaction.member.voice.channel.id === channel.id) {
             return interaction.reply({ content: `:x: You are already in ${channel.name} channel`, ephemeral: true })
