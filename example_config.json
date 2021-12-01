@@ -5,7 +5,5 @@
     "log_channel_id": "",
     "prefix": "+",
     "autoRoleId": "ROLE ID",
-    "ownersID": [""],
-    "tempChannel": "CHANNEL ID",
-    "tempCategory": "Category ID"
+    "ownersID": [""]
 }

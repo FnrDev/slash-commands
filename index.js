@@ -11,14 +11,6 @@ const client = new Client({ intents: [
 	Intents.FLAGS.GUILD_VOICE_STATES
 ]});
 const config = require('./config.json');
-const tempChannels = require('discord-temp-channels');
-const tempManager = new tempChannels(client);
-tempManager.registerChannel(config.tempChannel, {
-	childCategory: config.tempCategory,
-	childAutoDeleteIfEmpty: true,
-	childMaxUsers: 4,
-	childFormat: (member, count) => `#${count} | ${member.user.username} Channel`
-});
 client.commands = new Discord.Collection();
 client.slash = new Discord.Collection();
 client.aliases = new Discord.Collection();
