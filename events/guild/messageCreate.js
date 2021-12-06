@@ -6,8 +6,8 @@ const humanizeDuration = require("humanize-duration");
 module.exports = async (client , message) => {
     if (message.author.bot) return;
     if (!message.content.toLowerCase().startsWith(prefix)) return;
-    if(!message.member) message.member = await message.guild.members.fetch(message.member);
-    if(!message.guild) return;
+    if (!message.member) message.member = await message.guild.members.fetch(message.member.id);
+    if (!message.guild) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
     if (cmd.length === 0) return; 
