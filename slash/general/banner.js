@@ -8,13 +8,12 @@ module.exports = {
         {
             name: "user",
             description: "user to get banner for",
-            type: 3,
-            required: true
+            type: 3
         }
     ],
     timeout: 3000,
     run: async(interaction, client) => {
-        const user = interaction.options.getString('user');
+        const user = interaction.options.getString('user') || interaction.user;
         if (isNaN(user)) {
             return interaction.reply(":x: user id must be a number")
         }

@@ -1,18 +1,30 @@
 {
-  "name": "slash-command-handler",
+  "name": "slash-commands",
   "version": "1.0.0",
-  "description": "",
+  "description": "slash commands handler to make your bot support slash commands.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node slash.js",
+    "start": "node ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "bot",
+    "discord",
+    "discordjs",
+    "discord-bot",
+    "discord-api",
+    "context-menu",
+    "slash-commands",
+    "discord-js",
+    "discord-slash"
+  ],
+  "author": "FnrDev",
+  "license": "MIT",
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",
     "axios": "^0.21.1",
     "colors": "^1.4.0",
+    "discord-temp-channels": "^3.0.1",
     "discord.js": "^13.3.0",
     "fs": "^0.0.1-security",
     "humanize-duration": "^3.27.0"
