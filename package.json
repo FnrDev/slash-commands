@@ -4,7 +4,8 @@
   "description": "slash commands handler to make your bot support slash commands.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node slash.js",
+    "start": "node ."
   },
   "keywords": [
     "bot",
