@@ -4,6 +4,7 @@ module.exports = {
     name: "server",
     description: "Get info about server",
     timeout: 3000,
+    category: "general",
     run: async(interaction) => {
         const embed = new Discord.MessageEmbed()
         .setAuthor(interaction.guild.name, interaction.guild.iconURL({ dynamic: true }))

@@ -12,6 +12,7 @@ module.exports = {
         }
     ],
     timeout: 3000,
+    category: "general",
     run: async(interaction, client) => {
         const user = interaction.options.getString('user') || interaction.user;
         if (isNaN(user)) {

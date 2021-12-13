@@ -25,6 +25,7 @@ module.exports = {
             ]
         }
     ],
+    category: "general",
     run: async(interaction) => {
         const type = interaction.options.getString('type');
         if (type === 'text') {

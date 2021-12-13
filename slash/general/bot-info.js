@@ -4,6 +4,7 @@ module.exports = {
     name: "bot",
     description: "Get info about bot",
     timeout: 3000,
+    category: "general",
     run: async(interaction, client) => {
         const embed = new MessageEmbed()
         .setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true }))

@@ -4,6 +4,7 @@ module.exports = {
     name: "joke",
     description: "Get random joke",
     timeout: 5000,
+    category: "fun",
    run: async(interaction) => {
         await interaction.deferReply()
         const url = 'https://some-random-api.ml/joke';

@@ -11,6 +11,7 @@ module.exports = {
             required: true
         }
     ],
+    category: "general",
     /**
      * 
      * @param {*} interaction 

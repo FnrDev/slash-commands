@@ -12,6 +12,7 @@ module.exports = {
             type: 6,
         }
     ],
+    category: "general",
     run: async(interaction) => {
         const member = interaction.options.getMember('user') || interaction.member;
         const userCreated = Date.now() - member.user.createdTimestamp;

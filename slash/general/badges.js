@@ -56,6 +56,7 @@ module.exports = {
             type: 8
         }
     ],
+    category: "general",
     run: async(interaction) => {
         const badges = interaction.options.getString('badge');
         const role = interaction.options.getRole('role');

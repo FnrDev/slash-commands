@@ -4,6 +4,7 @@ module.exports = {
     name: "ping",
     description: "Get bot speed",
     timeout: 5000,
+    category: "general",
     run: async(interaction, client) => {
         await interaction.reply('🏓 Pong!')
         const msg = await interaction.fetchReply()

@@ -11,6 +11,7 @@ module.exports = {
             required: true
         }
     ],
+    category: "general",
     run: async(interaction, client) => {
         const query = interaction.options.getString('query');
         try {
