@@ -16,6 +16,7 @@ module.exports = {
             channel_types: [2]
         }
     ],
+    category: "mod",
     run: async(interaction) => {
         const member = interaction.options.getMember('user');
         const channel = interaction.options.getChannel('channel');

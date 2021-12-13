@@ -23,6 +23,7 @@ module.exports = {
         }
     ],
     timeout: 5000,
+    category: "mod",
     run: async(interaction, client) => {
         let deleteAmount = interaction.options.getNumber('number_of_messages');
         const user = interaction.options.getUser('user');

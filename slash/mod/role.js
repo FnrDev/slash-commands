@@ -84,6 +84,7 @@ module.exports = {
         }
     ],
     timeout: 3000,
+    category: "mod",
     run: async(interaction) => {
         const user = interaction.options.getMember('user'); // access to guild member obj <https://discord.js.org/#/docs/main/stable/class/GuildMember>
         const role = interaction.options.getRole('role'); // access to role obj <https://discord.js.org/#/docs/main/stable/class/Role>

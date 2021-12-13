@@ -16,6 +16,7 @@ module.exports = {
             required: true
         }
     ],
+    category: "mod",
     run: async(interaction) => {
         const role = interaction.options.getRole('role');
         const hexColor = interaction.options.getString('hex_color');

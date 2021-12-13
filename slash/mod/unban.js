@@ -11,6 +11,7 @@ module.exports = {
         }
     ],
     timeout: 3000,
+    category: "mod",
     run: async(interaction) => {
         const input = interaction.options.getString('input');
         if (input === 'all') {

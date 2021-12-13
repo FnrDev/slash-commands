@@ -10,6 +10,7 @@ module.exports = {
             required: true
         }
     ],
+    category: "mod",
     run: async(interaction) => {
         const member = interaction.options.getMember('user');
         const muteRole = interaction.guild.roles.cache.find(role => role.name == 'Muted');

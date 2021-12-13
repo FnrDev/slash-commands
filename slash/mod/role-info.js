@@ -13,6 +13,7 @@ module.exports = {
             required: true
         }
     ],
+    category: "mod",
     run: async(interaction) => {
         const role = interaction.options.getRole('role');
         const distece = Date.now() - role.createdTimestamp
