@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 module.exports = {
     name: "emojis",
     description: "Get a list of emojis",
+    category: "general",
     run: async(interaction) => {
         const emojis = interaction.guild.emojis.cache.map(r => r).join(" ");
         const embed = new Discord.MessageEmbed()

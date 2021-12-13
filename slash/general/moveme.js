@@ -13,6 +13,7 @@ module.exports = {
         }
     ],
     timeout: 5000,
+    category: "general",
     /**
      * 
      * @param { Discord.CommandInteraction } interaction 

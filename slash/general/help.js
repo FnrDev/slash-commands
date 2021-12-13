@@ -12,7 +12,7 @@ module.exports = {
         }
     ],
     usage: "/ping",
-    category: "info",
+    category: "general",
     run: async(interaction, client) => {
         try {
             const command = interaction.options.getString('command');

@@ -12,6 +12,7 @@ module.exports = {
             required: true
         }
     ],
+    category: "general",
     run: async(interaction) => {
         const name = interaction.options.getString('name');
         try {

@@ -18,6 +18,7 @@ module.exports = {
         }
     ],
     timeout: 5000,
+    category: "general",
     run: async(interaction) => {
         const url = interaction.options.getString('url');
         const pass = interaction.options.getString('pass') || ''

@@ -8,6 +8,7 @@ module.exports = {
             type: 3
         }
     ],
+    category: "fun",
     run: async(interaction) => {
         const number = interaction.options.getString('dice') || 100;
         if (isNaN(number)) {
