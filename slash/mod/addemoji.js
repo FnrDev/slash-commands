@@ -18,6 +18,7 @@ module.exports = {
     ],
     permissions: "MANAGE_EMOJIS",
     example: "/addemoji **emoji:**🙄",
+    category: "mod",
     run: async(interaction) => {
         const emoji = interaction.options.getString('emoji');
         const emojiName = interaction.options.getString('emoji_name');

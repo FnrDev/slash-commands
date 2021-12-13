@@ -11,6 +11,7 @@ module.exports = {
         }
     ],
     timeout: 3000,
+    category: "mod",
     run: async(interaction) => {
         const channel = interaction.options.getChannel('channel') || interaction.channel;
         const isLocked = channel.permissionOverwrites.cache.find(r => r.id === interaction.guild.id).deny.has('SEND_MESSAGES');

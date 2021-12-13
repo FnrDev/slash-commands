@@ -18,6 +18,7 @@ module.exports = {
         }
     ],
     timeout: 3000,
+    category: "mod",
     run: async(interaction, client) => {
         const member = interaction.options.getMember('user');
         const nickname = interaction.options.getString('nickname');
