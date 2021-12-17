@@ -11,7 +11,8 @@ const client = new Client({ intents: [
 	Intents.FLAGS.GUILD_VOICE_STATES
 ], partials: [
 	"MESSAGE",
-	"CHANNEL"
+	"CHANNEL",
+	"GUILD_MEMBER"
 ]});
 const config = require('./config.json');
 client.commands = new Discord.Collection();
