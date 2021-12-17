@@ -30,6 +30,6 @@ module.exports = {
                 value: message.author.bot.toString(),
             }
         )
-        interaction.reply({ embeds: [embed] })
+        interaction.reply({ embeds: [embed], ephemeral: true })
     }
 }
