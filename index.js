@@ -9,6 +9,9 @@ const client = new Client({ intents: [
 	Intents.FLAGS.GUILD_INVITES,
 	Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
 	Intents.FLAGS.GUILD_VOICE_STATES
+], partials: [
+	"MESSAGE",
+	"CHANNEL"
 ]});
 const config = require('./config.json');
 client.commands = new Discord.Collection();
