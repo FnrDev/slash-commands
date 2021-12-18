@@ -26,7 +26,6 @@ npm install
     "log_channel_id": "Channel-id",
     "prefix": "YOUR_PREFIX",
     "autoRoleId": "ROLE ID",
-    "ownersID": ["Id_1", "id_2"],
     "ownersID": ["Id_1", "id_2"]
 }
 ```
