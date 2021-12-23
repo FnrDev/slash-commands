@@ -22,7 +22,7 @@
     "axios": "^0.21.1",
     "colors": "^1.4.0",
     "discord-temp-channels": "^3.0.1",
-    "discord.js": "^13.3.0",
+    "discord.js": "^13.4.0-dev.1640217946.aa7c1b2",
     "fs": "^0.0.1-security",
     "humanize-duration": "^3.27.0"
   }
