@@ -14,7 +14,7 @@ module.exports = {
         const member = interaction.options.getMember('user');
         if (!member.communicationDisabledUntilTimestamp) {
             return interaction.reply({
-                content: ":x: This user is not timeout.",
+                content: ":x: This user is not in timeout.",
                 ephemeral: true
             }).catch(e => {});
         }
