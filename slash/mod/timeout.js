@@ -1,4 +1,5 @@
 const ms = require('ms');
+const humanizeDuration = require("humanize-duration");
 
 module.exports = {
     name: "timeout",
@@ -12,18 +13,24 @@ module.exports = {
         },
         {
             name: "time",
-            description: "Time for user to timeout in minutes.",
-            type: 4,
+            description: "Time for user to timeout. example: (1m, 1d, 1mo).",
+            type: 3,
             required: true
         }
     ],
     permissions: "MODERATE_MEMBERS",
     run: async(interaction) => {
         const member = interaction.options.getMember('user');
-        const time = interaction.options.getInteger('time');
-       await member.disableCommunicationUntil(Date.now() + (time * 60 * 1000), `By: ${interaction.user.tag}`).catch(console.error);
+        const time = interaction.options.getString('time');
+        if (member.permissions.has('ADMINISTRATOR')) {
+            return interaction.reply({
+                content: "You can't timeout member with **Administrator** permission.",
+                ephemeral: true
+            }).catch(e => {});
+        }
+       await member.disableCommunicationUntil(Date.now() + ms(time), `By: ${interaction.user.tag}`).catch(console.error);
        interaction.reply({
-           content: `${member} has been timeout for **${time}** minutes`
+           content: `${member} has been timeout for **${humanizeDuration(ms(time), { round: true })}.**`
        })
     }
 }
