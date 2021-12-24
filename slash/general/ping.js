@@ -9,7 +9,7 @@ module.exports = {
         await interaction.reply('🏓 Pong!')
         const msg = await interaction.fetchReply()
         const embed = new Discord.MessageEmbed()
-        .setAuthor(interaction.user.tag, interaction.user.displayAvatarURL({ dynamic: true }))
+        .setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
         .setColor('RANDOM')
         .setTimestamp()
         .setDescription(`**Time:** ${Math.floor(msg.createdTimestamp - interaction.createdTimestamp)} ms\n**API Ping:** ${client.ws.ping} ms`)
