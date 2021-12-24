@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const humanizeDuration = require("humanize-duration");
 
 module.exports = {
     name: "user",
@@ -19,22 +18,22 @@ module.exports = {
         const joinedTime = Date.now() - member.joinedTimestamp;
         const memberAvatar = member.avatarURL({ dynamic: true }) || member.user.displayAvatarURL({ dynamic: true });
         const embed = new Discord.MessageEmbed()
-        .setAuthor(member.user.tag, member.user.displayAvatarURL({ dynamic: true }))
+        .setAuthor({ name: member.user.tag, iconURL: member.user.displayAvatarURL({ dynamic: true }) })
         .setThumbnail(memberAvatar)
         .setFooter(member.id, member.displayAvatarURL({ dynamic: true }))
         .setColor('RANDOM')
         .addFields(
             {
                 name: "User Created At:",
-                value: `\`${member.user.createdAt.toLocaleString()}\`\n**${humanizeDuration(userCreated, { largest: 1 })} ago**`,
+                value: `\`${member.user.createdAt.toLocaleString()}\`\n**<t:${Math.floor(member.user.createdTimestamp / 1000)}:R>**`,
             },
             {
                 name: "Joined Server",
-                value: `\`${member.joinedAt.toLocaleString()}\`\n**${humanizeDuration(joinedTime, { largest: 1 })} ago**`,
+                value: `\`${member.joinedAt.toLocaleString()}\`\n**<t:${Math.floor(member.joinedTimestamp / 1000)}:R>**`,
             },
             {
                 name: "User Roles:",
-                value: member.roles.cache.filter(r => r.id !== interaction.guild.id).map(r => r.toString()).join(", ")
+                value: member.roles.cache.filter(r => r.id !== interaction.guild.id).map(r => r.toString()).join(", ") || 'No Roles.'
             },
             {
                 name: "User Nickname:",
@@ -45,6 +44,9 @@ module.exports = {
                 value: member.user.bot ? "✅" : ":x:",
             }
         )
+        if (member.communicationDisabledUntilTimestamp) {
+            embed.addField("Timeout Left:", `\`${member.communicationDisabledUntil.toLocaleString()}\`\n**<t:${Math.floor(member.communicationDisabledUntilTimestamp / 1000)}:R>**`)
+        }
         const row = new Discord.MessageActionRow()
         .addComponents(
             new Discord.MessageButton()
