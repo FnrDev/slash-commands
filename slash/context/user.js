@@ -9,7 +9,7 @@ module.exports = {
         const userCreated = Date.now() - message.author.createdTimestamp;
         const joinedTime = Date.now() - message.member.joinedTimestamp;
         const embed = new MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+        .setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
         .setThumbnail(message.author.displayAvatarURL({ dynamic: true }))
         .setColor('RANDOM')
         .addFields(
