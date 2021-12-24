@@ -22,12 +22,6 @@ module.exports = {
     run: async(interaction) => {
         const member = interaction.options.getMember('user');
         const time = interaction.options.getString('time');
-        if (member.communicationDisabledUntilTimestamp) {
-            return interaction.reply({
-                content: ":x: This user is already has been timeout.",
-                ephemeral: true
-            }).catch(e => {});
-        }
         if (member.permissions.has('ADMINISTRATOR')) {
             return interaction.reply({
                 content: "You can't timeout member with **Administrator** permission.",
