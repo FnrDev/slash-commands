@@ -26,5 +26,8 @@
     "fs": "^0.0.1-security",
     "humanize-duration": "^3.27.0",
     "ms": "^2.1.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
