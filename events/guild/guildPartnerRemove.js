@@ -6,7 +6,7 @@ module.exports = async(client, guild) => {
     if (!logChannel) return;
     const embed = new Discord.MessageEmbed()
     .setAuthor({ name: guild.name, iconURL: guild.iconURL() })
-    .setDescription(`**${guild.name} has got partnered!**`)
+    .setDescription(`**${guild.name} is on longer partnered!**`)
     .setTimestamp()
     return logChannel.send({ embeds: [embed] });
 }
