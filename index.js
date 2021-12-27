@@ -15,6 +15,8 @@ const client = new Client({ intents: [
 	"GUILD_MEMBER"
 ]});
 const config = require('./config.json');
+const logs = require('discord-logs');
+logs(client);
 client.commands = new Discord.Collection();
 client.slash = new Discord.Collection();
 client.aliases = new Discord.Collection();
