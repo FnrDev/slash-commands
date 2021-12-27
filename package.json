@@ -21,6 +21,7 @@
     "@discordjs/rest": "^0.1.0-canary.0",
     "axios": "^0.21.1",
     "colors": "^1.4.0",
+    "discord-logs": "^2.0.1",
     "discord-temp-channels": "^3.0.1",
     "discord.js": "^13.4.0",
     "fs": "^0.0.1-security",
