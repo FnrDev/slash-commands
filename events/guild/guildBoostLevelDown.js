@@ -1,7 +1,7 @@
 const config = require('../../config.json');
 const Discord = require('discord.js');
 
-module.exports = async(guild, oldLevel, newLevel) => {
+module.exports = async(client, guild, oldLevel, newLevel) => {
     const logChannel = client.channels.cache.get(config.log_channel_id);
     if (!logChannel) return;
     const embed = new Discord.MessageEmbed()
