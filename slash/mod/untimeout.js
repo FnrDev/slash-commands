@@ -12,7 +12,7 @@ module.exports = {
     permissions: "MODERATE_MEMBERS",
     run: async(interaction) => {
         const member = interaction.options.getMember('user');
-        if (!member.communicationDisabledUntilTimestamp) {
+        if (!member.isCommunicationDisabled()) {
             return interaction.reply({
                 content: ":x: This user is not in timeout.",
                 ephemeral: true

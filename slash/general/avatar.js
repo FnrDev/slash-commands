@@ -20,6 +20,12 @@ module.exports = {
         const member = interaction.options.getMember('user') || interaction.member;
         const isMemberAvatar = interaction.options.getBoolean('server_avatar');
         if (isMemberAvatar) {
+            if (!member.avatar) {
+                return interaction.reply({
+                    content: ":x: This user don't has avatar in this server",
+                    ephemeral: true
+                })
+            }
             const embed = new Discord.MessageEmbed()
             .setAuthor({ name: member.user.tag, iconURL: member.avatarURL({ dynamic: true }) })
             .setDescription(`[Avatar Link](${member.avatarURL({ dynamic: true, size: 4096 })})`)

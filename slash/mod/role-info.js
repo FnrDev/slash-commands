@@ -47,7 +47,7 @@ module.exports = {
             },
             {
                 name: "Role Created At:",
-                value: `\`${role.createdAt.toLocaleString()}\`\n**${humanizeDuration(distece, { largest: 2 })} ago**`,
+                value: `\`${role.createdAt.toLocaleString()}\`\n**${humanizeDuration(distece, { largest: 2, round: true })} ago**`,
             },
         )
         if (role.icon) {
