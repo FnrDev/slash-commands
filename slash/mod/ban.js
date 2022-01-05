@@ -18,23 +18,28 @@ module.exports = {
     run: async(interaction, client) => {
         const member = interaction.options.getMember('user');
         if (member.id === interaction.user.id) {
-            return interaction.reply({ content: ":x: You can\'t ban yourself!" })
+            return interaction.reply({ content: ":x: You can\'t ban yourself!", ephemeral: true })
         }
+        console.log('hello')
         if (member.id === client.user.id) {
-            return interaction.reply({ content: ":x: You can\'t ban me!" })
+            return interaction.reply({ content: ":x: You can\'t ban me!", ephemeral: true })
         }
+        console.log('hello2')
         if (!member.banable) {
-            return interaction.reply({ contnet: "i can\'t ban this user" })
+            return interaction.reply({ content: "i can\'t ban this user", ephemeral: true })
         }
+        console.log('hello3')
         const botRole = interaction.guild.me.roles.highest.position;
         const role = member.roles.highest.position;
         const authorRole = interaction.member.roles.highest.position;
         if (authorRole <= role) {
-            return interaction.reply(`🙄 **You can\'t ban @${member.user.username}**`)
+            return interaction.reply({ content: `🙄 **You can\'t ban @${member.user.username}**`, ephemeral: true })
         }
+        console.log('hello4')
         if (botRole <= role) {
-            return interaction.reply(`🙄 **You can\'t ban @${member.user.username}**`)
+            return interaction.reply({ content: `🙄 **You can\'t ban @${member.user.username}**`, ephemeral: true })
         }
+        console.log('hello5')
         try {
             let reason;
             const row = new Discord.MessageActionRow()
@@ -54,17 +59,20 @@ module.exports = {
                     ])
                 )
                 interaction.reply({ content: "**Select a reason:**", components: [row] });
+                console.log('hello6')
                 const filter = i => i.customId === 'reason' && i.user.id === interaction.user.id;
                 const collector = interaction.channel.createMessageComponentCollector({ filter: filter })
                 collector.on('collect', async i => {
                     if (i.customId === 'reason') {
                         reason = i.values[0] // Get first option from select menu
                         await member.ban({ reason: `By: ${interaction.user.tag} | Reason: ${reason}`, days: 7 })
-                        return interaction.editReply({ content: `✅ **${member} has been banned**`, components: [] })
+                        console.log('hello7')
+                        return interaction.editReply({ content: `✅ **${member} has been banned**`, components: [] })      
                     }
                 })
         } catch (e) {
-            return interaction.reply({ content: "Please check my permissions and role position" })
+            console.error(e)
+            // return interaction.reply({ content: "Please check my permissions and role position" })
         }
     }
 }
