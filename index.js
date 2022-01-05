@@ -15,16 +15,22 @@ const client = new Client({ intents: [
 	"GUILD_MEMBER"
 ]});
 const config = require('./config.json');
-const logs = require('discord-logs');
-logs(client);
 client.commands = new Discord.Collection();
 client.slash = new Discord.Collection();
 client.aliases = new Discord.Collection();
-
+require('discord-logs')(client);
+require('colors');
 
 ["handlers", "events", "slash"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
 });
 
+process.on('unhandledRejection', (err) => {
+	console.error(`Unhandled Rejection: ${err}`);
+  });
+  
+  process.on('uncaughtException', (err) => {
+	console.error(`Uncaught Exception: ${err}`);
+  });
   
 client.login(config.token);
