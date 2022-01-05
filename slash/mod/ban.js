@@ -20,26 +20,21 @@ module.exports = {
         if (member.id === interaction.user.id) {
             return interaction.reply({ content: ":x: You can\'t ban yourself!", ephemeral: true })
         }
-        console.log('hello')
         if (member.id === client.user.id) {
             return interaction.reply({ content: ":x: You can\'t ban me!", ephemeral: true })
         }
-        console.log('hello2')
         if (!member.banable) {
             return interaction.reply({ content: "i can\'t ban this user", ephemeral: true })
         }
-        console.log('hello3')
         const botRole = interaction.guild.me.roles.highest.position;
         const role = member.roles.highest.position;
         const authorRole = interaction.member.roles.highest.position;
         if (authorRole <= role) {
             return interaction.reply({ content: `🙄 **You can\'t ban @${member.user.username}**`, ephemeral: true })
         }
-        console.log('hello4')
         if (botRole <= role) {
             return interaction.reply({ content: `🙄 **You can\'t ban @${member.user.username}**`, ephemeral: true })
         }
-        console.log('hello5')
         try {
             let reason;
             const row = new Discord.MessageActionRow()
@@ -59,7 +54,6 @@ module.exports = {
                     ])
                 )
                 interaction.reply({ content: "**Select a reason:**", components: [row] });
-                console.log('hello6')
                 const filter = i => i.customId === 'reason' && i.user.id === interaction.user.id;
                 const collector = interaction.channel.createMessageComponentCollector({ filter: filter })
                 collector.on('collect', async i => {
@@ -72,7 +66,7 @@ module.exports = {
                 })
         } catch (e) {
             console.error(e)
-            // return interaction.reply({ content: "Please check my permissions and role position" })
+            return interaction.reply({ content: "Please check my permissions and role position" })
         }
     }
 }
