@@ -64,7 +64,7 @@ module.exports = {
                     }
                 })
         } catch (e) {
-            return interaction.reply({ content: e })
+            return interaction.reply({ content: "Please check my permissions and role position" })
         }
     }
 }
