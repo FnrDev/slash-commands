@@ -7,10 +7,10 @@ module.exports = async(client, message) => {
     const allLogs = await message.guild.fetchAuditLogs({ type: "MESSAGE_DELETE" });
     const fetchModerator = allLogs.entries.first();
     const embed = new Discord.MessageEmbed()
-    .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
+    .setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
     .setDescription(`🗑 **Message sent by ${message.author} deleted in ${message.channel}.**\n${message.content}`)
     .addField('Responsible Moderator:', `<@${fetchModerator.executor.id}>`)
     .setTimestamp()
-    .setFooter(fetchModerator.executor.tag, fetchModerator.executor.displayAvatarURL({ dynamic: true }))
+    .setFooter({ text: fetchModerator.executor.tag, iconURL: fetchModerator.executor.displayAvatarURL({ dynamic: true }) })
     return logChannel.send({ embeds: [embed] })
 }

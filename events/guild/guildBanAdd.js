@@ -7,11 +7,11 @@ module.exports = async(client, ban) => {
     const allLogs = await ban.guild.fetchAuditLogs({ type: "MEMBER_BAN_ADD" });
     const fetchModerator = allLogs.entries.first();
     const embed = new Discord.MessageEmbed()
-    .setAuthor(ban.user.tag, ban.user.displayAvatarURL({ dynamic: true }))
+    .setAuthor({ name: ban.user.tag, iconURL: ban.user.displayAvatarURL({ dynamic: true }) })
     .setDescription(`**🔨 <@${ban.user.id}> banned from the server.**`)
     .setThumbnail(ban.user.displayAvatarURL({ dynamic: true }))
     .setTimestamp()
-    .setFooter(ban.guild.name, ban.guild.iconURL({ dynamic: true }))
+    .setFooter({ text: ban.guild.name, iconURL: ban.guild.iconURL({ dynamic: true }) })
     .addFields(
         {
             name: "Responsible Moderator:",

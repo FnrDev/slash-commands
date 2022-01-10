@@ -7,11 +7,11 @@ module.exports = async(client, invite) => {
     const allLogs = await invite.guild.fetchAuditLogs({ type: "INVITE_DELETE" });
     const fetchModerator = allLogs.entries.first();
     const embed = new Discord.MessageEmbed()
-    .setAuthor(invite.guild.name, invite.guild.iconURL({ dynamic: true }))
+    .setAuthor({ name: invite.guild.name, iconURL: invite.guild.iconURL({ dynamic: true }) })
     .setTitle('👩‍👧‍👦 Invite Deleted')
     .setDescription(`**<@${fetchModerator.executor.id}> has deleted a invite for ${invite.channel} channel**`)
     .setTimestamp()
-    .setFooter(fetchModerator.executor.tag, fetchModerator.executor.displayAvatarURL({ dynamic: true }))
+    .setFooter({ text: fetchModerator.executor.tag, iconURL: fetchModerator.executor.displayAvatarURL({ dynamic: true }) })
     .addFields(
         {
             name: "Invite link:",

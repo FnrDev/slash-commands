@@ -6,11 +6,11 @@ module.exports = async(client, emoji) => {
     if (!logChannel) return;
     const fetchEmojiAuthor = await emoji.fetchAuthor();
     const embed = new Discord.MessageEmbed()
-    .setAuthor(emoji.guild.name, emoji.guild.iconURL({ dynamic: true }))
+    .setAuthor({ name: emoji.guild.name, iconURL: emoji.guild.iconURL() })
     .setTitle('🥳 Emoji Created')
     .setDescription(`**${fetchEmojiAuthor} has created <:${emoji.name}:${emoji.id}> emoji!**`)
     .setThumbnail(emoji.url)
-    .setFooter(fetchEmojiAuthor.tag, fetchEmojiAuthor.displayAvatarURL({ dynamic: true }))
+    .setFooter({ text: fetchEmojiAuthor.tag, iconURL: fetchEmojiAuthor.displayAvatarURL({ dynamic: true }) })
     .setTimestamp()
     .addFields(
         {

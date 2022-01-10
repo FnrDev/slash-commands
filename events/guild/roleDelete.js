@@ -7,11 +7,11 @@ module.exports = async(client, role) => {
     const allLogs = await role.guild.fetchAuditLogs({ type: "ROLE_DELETE" });
     const fetchModerator = allLogs.entries.first();
     const embed = new Discord.MessageEmbed()
-    .setAuthor(role.guild.name, role.guild.iconURL({ dynamic: true }))
+    .setAuthor({ name: role.guild.name, iconURL: role.guild.iconURL({ dynamic: true }) })
     .setTitle('♾️ Role Deleted')
     .setDescription(`👨‍👨‍👧 **\`${role.name}\` role has been deleted.**`)
     .setColor(role.hexColor)
-    .setFooter(fetchModerator.executor.tag, fetchModerator.executor.displayAvatarURL({ dynamic: true }))
+    .setFooter({ text: fetchModerator.executor.tag, iconURL: fetchModerator.executor.displayAvatarURL({ dynamic: true }) })
     .setTimestamp()
     .addFields(
         {

@@ -10,11 +10,11 @@ module.exports = async(client, invite) => {
     const inviteCreated = Date.now() - invite.createdTimestamp;
     const endInvite = Date.now() - invite.expiresTimestamp
     const embed = new Discord.MessageEmbed()
-    .setAuthor(invite.guild.name, invite.guild.iconURL({ dynamic: true }))
+    .setAuthor({ name: invite.guild.name, iconURL: invite.guild.iconURL({ dynamic: true }) })
     .setTitle('👩‍👧‍👦 Invite Created')
     .setDescription(`**<@${fetchModerator.executor.id}> has created a new invite for ${invite.channel} channel**`)
     .setTimestamp()
-    .setFooter(invite.inviter.tag, invite.inviter.displayAvatarURL({ dynamic: true }))
+    .setFooter({ text: invite.inviter.tag, iconURL: invite.inviter.displayAvatarURL({ dynamic: true }) })
     .addFields(
         {
             name: "Invite link:",
