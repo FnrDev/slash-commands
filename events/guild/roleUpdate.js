@@ -6,21 +6,20 @@ module.exports = async(client, oldRole, newRole) => {
     if (!logChannel) return;
     const allLogs = await newRole.guild.fetchAuditLogs({ type: "ROLE_UPDATE" });
     const fetchModerator = await allLogs.entries.first();
-    const changes = fetchModerator.changes;
-    if (changes.find(r => r.key === 'color')) {
+    if (oldRole.color !== newRole.color) {
         const embed = new Discord.MessageEmbed()
-        .setAuthor(newRole.guild.name, newRole.guild.iconURL({ dynamic: true }))
+        .setAuthor({ name: newRole.guild.name, iconURL: newRole.guild.iconURL({ dynamic: true }) })
         .setDescription(`😛 **\`${newRole.name}\` has been updated.**`)
-        .setFooter(fetchModerator.executor.tag, fetchModerator.executor.displayAvatarURL({ dynamic: true }))
+        .setFooter({ text: fetchModerator.executor.tag, iconURL: fetchModerator.executor.displayAvatarURL({ dynamic: true }) })
         .setTimestamp()
         .addFields(
             {
                 name: "Old Color:",
-                value: changes.find(r => r.key === 'color').old.toString()
+                value: oldRole.hexColor
             },
             {
                 name: "New Color:",
-                value: changes.find(r => r.key === 'color').new.toString()
+                value: newRole.hexColor
             },
             {
                 name: "Responsible Moderator:",
@@ -29,20 +28,20 @@ module.exports = async(client, oldRole, newRole) => {
         )
         return logChannel.send({ embeds: [embed] })
     }
-    if (changes.find(r => r.key === 'name')) {
+    if (oldRole.name !== newRole.name) {
         const embed = new Discord.MessageEmbed()
-        .setAuthor(newRole.guild.name, newRole.guild.iconURL({ dynamic: true }))
+        .setAuthor({ name: newRole.guild.name, iconURL: newRole.guild.iconURL({ dynamic: true }) })
         .setDescription(`😛 **\`${newRole.name}\` has been updated.**`)
-        .setFooter(fetchModerator.executor.tag, fetchModerator.executor.displayAvatarURL({ dynamic: true }))
+        .setFooter({ text: fetchModerator.executor.tag, iconURL: fetchModerator.executor.displayAvatarURL({ dynamic: true }) })
         .setTimestamp()
         .addFields(
             {
                 name: "Old name:",
-                value: changes.find(r => r.key === 'name').old
+                value: oldRole.name
             },
             {
                 name: "New name:",
-                value: changes.find(r => r.key === 'name').new
+                value: newRole.name
             },
             {
                 name: "Responsible Moderator:",
