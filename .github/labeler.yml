@@ -1,0 +1,9 @@
+repo:
+- '*'
+
+@ci:
+- .github/*
+
+@chore:
+- package.json
+- README.md
