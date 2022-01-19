@@ -1,9 +1,9 @@
-repo:
-- '*'
+chore:
+  - 'README.md'
+  - '.gitignore'
+  - 'package.json'
+  - 'LICENSE'
 
-@ci:
-- .github/*
-
-@chore:
-- package.json
-- README.md
+ci:
+  - '.github/*'
+  - '.github/workflows/*'
