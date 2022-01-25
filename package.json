@@ -24,7 +24,7 @@
     "colors": "^1.4.0",
     "discord-logs": "^2.0.1",
     "discord-temp-channels": "^3.0.1",
-    "discord.js": "^13.5.0",
+    "discord.js": "^14.0.0-dev.1643069184.31768fc",
     "fs": "^0.0.1-security",
     "humanize-duration": "^3.27.0",
     "ms": "^2.1.3",
