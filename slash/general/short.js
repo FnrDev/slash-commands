@@ -22,7 +22,7 @@ module.exports = {
     run: async(interaction) => {
         const url = interaction.options.getString('url');
         const pass = interaction.options.getString('pass') || ''
-        const apiToken = 'qEAVjX9WYOTWDrwhXrQb'; // Get your api key from <https://i8.ae/user/tools#api>
+        const apiToken = ''; // Get your api key from <https://i8.ae/user/tools#api>
         if (!apiToken) {
             return interaction.reply({ content: ":x: Missing api token" })
         }
@@ -43,7 +43,7 @@ module.exports = {
             .addComponents(
                 new Discord.MessageButton()
                 .setStyle('LINK')
-                .setURL(data.short)
+                .setURL(data.shorturl)
                 .setLabel('URL')
             )
             interaction.reply({ content: "**Short URL:**", components: [row] })
