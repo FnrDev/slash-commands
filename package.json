@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "slash commands handler to make your bot support slash commands.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "format": "prettier --write '**/*.{js,json,md}'"
+  },
   "keywords": [
     "bot",
     "discord",
