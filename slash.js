@@ -7,13 +7,13 @@ const config = require('./config.json');
 
 // setup slash commands
 
-const commands = []
-readdirSync("./slash/").map(async dir => {
+const commands = [];
+readdirSync('./slash/').map(async (dir) => {
 	readdirSync(`./slash/${dir}/`).map(async (cmd) => {
-	commands.push(require(path.join(__dirname, `./slash/${dir}/${cmd}`)))
-    })
-})
-const rest = new REST({ version: "9" }).setToken(config.token);
+		commands.push(require(path.join(__dirname, `./slash/${dir}/${cmd}`)));
+	});
+});
+const rest = new REST({ version: '9' }).setToken(config.token);
 
 (async () => {
 	try {
