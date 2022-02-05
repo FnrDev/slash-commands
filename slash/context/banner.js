@@ -1,7 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-    name: "get-banner",
+    name: "banner",
     type: 3,
     run: async(interaction, client) => {
         const message = interaction.options.getMessage('message');
