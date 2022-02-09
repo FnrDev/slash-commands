@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { Embed, ActionRow, ButtonComponent } = require('discord.js');
 
 module.exports = {
     name: "user",
@@ -14,13 +14,11 @@ module.exports = {
     category: "general",
     run: async(interaction) => {
         const member = interaction.options.getMember('user') || interaction.member;
-        const userCreated = Date.now() - member.user.createdTimestamp;
-        const joinedTime = Date.now() - member.joinedTimestamp;
         const memberAvatar = member.avatarURL({ dynamic: true }) || member.user.displayAvatarURL({ dynamic: true });
-        const embed = new Discord.MessageEmbed()
+        const embed = new Embed()
         .setAuthor({ name: member.user.tag, iconURL: member.user.displayAvatarURL({ dynamic: true }) })
         .setThumbnail(memberAvatar)
-        .setFooter(member.id, member.displayAvatarURL({ dynamic: true }))
+        .setFooter({ text: member.id, iconURL: member.displayAvatarURL({ dynamic: true }) })
         .setColor('RANDOM')
         .addFields(
             {
@@ -45,15 +43,15 @@ module.exports = {
             }
         )
         if (member.communicationDisabledUntilTimestamp) {
-            embed.addField("Timeout Left:", `\`${member.communicationDisabledUntil.toLocaleString()}\`\n**<t:${Math.floor(member.communicationDisabledUntilTimestamp / 1000)}:R>**`)
+            embed.addField({ name: "Timeout Left:", value: `\`${member.communicationDisabledUntil.toLocaleString()}\`\n**<t:${Math.floor(member.communicationDisabledUntilTimestamp / 1000)}:R>**` })
         }
-        const row = new Discord.MessageActionRow()
-        .addComponents(
-            new Discord.MessageButton()
-            .setStyle('LINK')
-            .setURL(member.user.displayAvatarURL({ dynamic: true }))
-            .setLabel('User Avatar')
-        )
-        interaction.reply({ embeds: [embed], components: [row] })
+        // const row = new ActionRow()
+        // .addComponents(
+        //     new ButtonComponent()
+        //     .setStyle('LINK')
+        //     .setURL(member.user.displayAvatarURL({ dynamic: true }))
+        //     .setLabel('User Avatar')
+        // )
+        interaction.reply({ embeds: [embed] })
     }
 }
