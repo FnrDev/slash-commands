@@ -12,7 +12,7 @@ module.exports = {
         }
     ],
     category: "general",
-    run: async(interaction, client) => {
+    run: async(interaction) => {
         const query = interaction.options.getString('query');
         try {
             const req = await axios.get(`https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(query)}`);

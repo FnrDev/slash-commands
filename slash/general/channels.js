@@ -1,5 +1,3 @@
-const Discord = require('discord.js');
-
 module.exports = {
     name: "channels",
     description: "Shows specific type of channels in this server.",

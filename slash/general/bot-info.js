@@ -1,4 +1,4 @@
-const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js')
+const { ActionRow, ButtonComponent, Embed, Util, ButtonStyle } = require('discord.js')
 
 module.exports = {
     name: "bot",
@@ -6,9 +6,9 @@ module.exports = {
     timeout: 3000,
     category: "general",
     run: async(interaction, client) => {
-        const embed = new MessageEmbed()
-        .setAuthor(client.user.username, client.user.displayAvatarURL({ dynamic: true }))
-        .setColor('RANDOM')
+        const embed = new Embed()
+        .setAuthor({ name: client.user.username, iconURL: client.user.displayAvatarURL({ dynamic: true }) })
+        .setColor(Util.resolveColor('Random'))
         .setURL('https://github.com/FnrDev/slash-commands')
         .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
         .addFields(
@@ -33,10 +33,10 @@ module.exports = {
                 inline: true
             }
         )
-        const row = new MessageActionRow()
+        const row = new ActionRow()
         .addComponents(
-            new MessageButton()
-            .setStyle('LINK')
+            new ButtonComponent()
+            .setStyle(ButtonStyle.Link)
             .setURL('https://github.com/FnrDev/slash-commands')
             .setLabel('Click Me')
         )

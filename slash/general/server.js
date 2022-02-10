@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { Util, Embed } = require('discord.js');
 
 module.exports = {
     name: "server",
@@ -6,9 +6,9 @@ module.exports = {
     timeout: 3000,
     category: "general",
     run: async(interaction) => {
-        const embed = new Discord.MessageEmbed()
-        .setAuthor(interaction.guild.name, interaction.guild.iconURL({ dynamic: true }))
-        .setColor('RANDOM')
+        const embed = new Embed()
+        .setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
+        .setColor(Util.resolveColor('Random'))
         .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
         .addFields(
             {

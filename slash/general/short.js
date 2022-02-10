@@ -1,5 +1,5 @@
 const { default: axios } = require("axios");
-const Discord = require('discord.js');
+const { ActionRow, ButtonComponent, ButtonStyle } = require('discord.js');
 
 module.exports = {
     name: "short",
@@ -27,7 +27,7 @@ module.exports = {
             return interaction.reply({ content: ":x: Missing api token" })
         }
         try {
-            const req = await axios({
+            const data = (await axios({
                 url: "https://i8.ae/api/url/add",
                 method: "POST",
                 headers: {
@@ -37,12 +37,11 @@ module.exports = {
                     url: url,
                     password: pass
                 }
-            })
-            const data = req.data;
-            const row = new Discord.MessageActionRow()
+            })).data;
+            const row = new ActionRow()
             .addComponents(
-                new Discord.MessageButton()
-                .setStyle('LINK')
+                new ButtonComponent()
+                .setStyle(ButtonStyle.Link)
                 .setURL(data.shorturl)
                 .setLabel('URL')
             )

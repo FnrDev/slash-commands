@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { ActionRow, ButtonComponent } = require('discord.js')
+const { ActionRow, ButtonComponent, ButtonStyle } = require('discord.js')
 
 module.exports = {
     name: "meme",
@@ -14,7 +14,7 @@ module.exports = {
         .addComponents(
             new ButtonComponent()
             .setLabel('Meme Link')
-            .setStyle('LINK')
+            .setStyle(ButtonStyle.Link)
             .setURL(data.postLink)
         )
         interaction.editReply({ files: [data.url], components: [row] })

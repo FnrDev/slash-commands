@@ -1,7 +1,7 @@
-const { MessageEmbed } = require('discord.js');
+const { Embed, Util } = require('discord.js');
 
 module.exports = {
-    name: "banner",
+    name: "get-banner",
     type: 3,
     run: async(interaction, client) => {
         const message = interaction.options.getMessage('message');
@@ -10,11 +10,11 @@ module.exports = {
         if (!user.banner) {
             return interaction.reply({ content: ":x: This user doesn't have a banner", ephemeral: true })
         }
-        const embed = new MessageEmbed()
+        const embed = new Embed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
         .setDescription(`[Banner URL](${message.author.bannerURL({ dynamic: true, format: "png", size: 4096 })})`)
         .setImage(message.author.bannerURL({ dynamic: true, format: "png", size: 4096 }))
-        .setColor(interaction.guild.me.displayColor)
+        .setColor(Util.resolveColor(interaction.guild.me.displayColor))
         interaction.reply({ embeds: [embed], ephemeral: true })
     }
 }
