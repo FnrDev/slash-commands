@@ -20,7 +20,7 @@
   "author": "FnrDev",
   "license": "MIT",
   "dependencies": {
-    "@discordjs/builders": "^0.12.0",
+    "@discordjs/builders": "^0.13.0-dev.1644408664.fe11ff5",
     "@discordjs/rest": "^0.1.0-canary.0",
     "axios": "^0.21.1",
     "bufferutil": "^4.0.6",
