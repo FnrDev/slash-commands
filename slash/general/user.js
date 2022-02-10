@@ -1,4 +1,4 @@
-const { Embed, ActionRow, ButtonComponent } = require('discord.js');
+const { Embed, ActionRow, ButtonComponent, ButtonStyle, Util } = require('discord.js');
 
 module.exports = {
     name: "user",
@@ -19,7 +19,7 @@ module.exports = {
         .setAuthor({ name: member.user.tag, iconURL: member.user.displayAvatarURL({ dynamic: true }) })
         .setThumbnail(memberAvatar)
         .setFooter({ text: member.id, iconURL: member.displayAvatarURL({ dynamic: true }) })
-        .setColor('RANDOM')
+        .setColor(Util.resolveColor('Random'))
         .addFields(
             {
                 name: "User Created At:",
@@ -45,13 +45,13 @@ module.exports = {
         if (member.communicationDisabledUntilTimestamp) {
             embed.addField({ name: "Timeout Left:", value: `\`${member.communicationDisabledUntil.toLocaleString()}\`\n**<t:${Math.floor(member.communicationDisabledUntilTimestamp / 1000)}:R>**` })
         }
-        // const row = new ActionRow()
-        // .addComponents(
-        //     new ButtonComponent()
-        //     .setStyle('LINK')
-        //     .setURL(member.user.displayAvatarURL({ dynamic: true }))
-        //     .setLabel('User Avatar')
-        // )
-        interaction.reply({ embeds: [embed] })
+        const row = new ActionRow()
+        .addComponents(
+            new ButtonComponent()
+            .setStyle(ButtonStyle.Link)
+            .setURL(member.user.displayAvatarURL({ dynamic: true }))
+            .setLabel('User Avatar')
+        )
+        interaction.reply({ embeds: [embed], components: [row] })
     }
 }

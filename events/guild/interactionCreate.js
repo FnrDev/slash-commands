@@ -4,7 +4,7 @@ const humanizeDuration = require("humanize-duration");
 const config = require('../../config.json');
 
 module.exports = async(client, interaction) => {
-    if (interaction.isCommand() || interaction.isContextMenu()) {
+    if (interaction.isChatInputCommand() || interaction.isContextMenuCommand()) {
 		if (!client.slash.has(interaction.commandName)) return;
 		if (!interaction.guild) return;
 		const command = client.slash.get(interaction.commandName)

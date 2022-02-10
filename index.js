@@ -8,10 +8,6 @@ const client = new Discord.Client({ intents: [
 	'GuildBans',
 	'GuildEmojisAndStickers',
 	'GuildVoiceStates'
-], partials: [
-	"MESSAGE",
-	"CHANNEL",
-	"REACTION"
 ]});
 const config = require('./config.json');
 client.commands = new Discord.Collection();
