@@ -1,52 +1,9 @@
 {
-<<<<<<< HEAD
-	"name": "slash-commands",
-	"version": "1.0.0",
-	"description": "slash commands handler to make your bot support slash commands.",
-	"main": "index.js",
-	"scripts": {},
-	"keywords": [
-		"bot",
-		"discord",
-		"discordjs",
-		"discord-bot",
-		"discord-api",
-		"context-menu",
-		"slash-commands",
-		"discord-js",
-		"discord-slash"
-	],
-	"author": "FnrDev",
-	"license": "MIT",
-	"dependencies": {
-		"@commitlint/config-angular": "^16.0.0",
-		"@discordjs/builders": "^0.13.0-dev.1644408664.fe11ff5",
-		"@discordjs/rest": "^0.1.0-canary.0",
-		"axios": "^0.21.1",
-		"bufferutil": "^4.0.6",
-		"colors": "^1.4.0",
-		"discord-api-types": "^0.27.0",
-		"discord-temp-channels": "^3.0.1",
-		"discord.js": "^14.0.0-dev.1644408625.fe11ff5",
-		"fs": "^0.0.1-security",
-		"humanize-duration": "^3.27.0",
-		"ms": "^2.1.3",
-		"randomcolor": "^0.6.2"
-	},
-	"devDependencies": {
-		"@commitlint/cli": "^16.1.0",
-		"@commitlint/config-conventional": "^16.0.0",
-		"nodemon": "^2.0.15"
-	}
-}
-=======
   "name": "slash-commands",
   "version": "1.0.0",
   "description": "slash commands handler to make your bot support slash commands.",
   "main": "index.js",
-  "scripts": {
-    "format": "prettier --write '**/*.{js,json,md}'"
-  },
+  "scripts": {},
   "keywords": [
     "bot",
     "discord",
@@ -61,23 +18,19 @@
   "author": "FnrDev",
   "license": "MIT",
   "dependencies": {
-    "@discordjs/builders": "^0.13.0-dev.1644408664.fe11ff5",
+    "@discordjs/builders": "^0.12.0",
     "@discordjs/rest": "^0.1.0-canary.0",
-    "axios": "^0.21.1",
-    "bufferutil": "^4.0.6",
+    "axios": "^0.21.2",
     "colors": "^1.4.0",
-    "discord-api-types": "^0.27.0",
+    "discord-logs": "^2.0.1",
     "discord-temp-channels": "^3.0.1",
-    "discord.js": "^14.0.0-dev.1644408625.fe11ff5",
+    "discord.js": "^13.6.0",
     "fs": "^0.0.1-security",
     "humanize-duration": "^3.27.0",
     "ms": "^2.1.3",
     "randomcolor": "^0.6.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.1.0",
-    "@commitlint/config-conventional": "^16.0.0",
     "nodemon": "^2.0.15"
   }
 }
->>>>>>> parent of 1335860 (chore: add analysis workflow)
