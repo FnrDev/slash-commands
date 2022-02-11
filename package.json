@@ -3,9 +3,7 @@
 	"version": "1.0.0",
 	"description": "slash commands handler to make your bot support slash commands.",
 	"main": "index.js",
-	"scripts": {
-		"format": "npx prettier --write ."
-	},
+	"scripts": {},
 	"keywords": [
 		"bot",
 		"discord",
