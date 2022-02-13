@@ -56,7 +56,7 @@ module.exports = {
                 collector.on('collect', async i => {
                     if (i.customId === 'reason') {
                         reason = i.values[0] // Get first option from select menu
-                        await member.ban({ reason: `By: ${interaction.user.tag} | Reason: ${reason}`, days: 7 })
+                        await member.ban({ reason: `By: ${interaction.user.tag} | Reason: ${reason}`, deleteMessageDays: 7 })
                         console.log('hello7')
                         return interaction.editReply({ content: `✅ **${member} has been banned**`, components: [] })      
                     }
