@@ -8,8 +8,7 @@ module.exports = {
    run: async(interaction) => {
         await interaction.deferReply()
         const url = 'https://some-random-api.ml/joke';
-        const req = await axios.get(url);
-        const data = req.data;
+        const data = (await axios.get(url)).data;
         interaction.editReply(data.joke)
    }
 }

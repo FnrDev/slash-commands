@@ -26,18 +26,18 @@ module.exports = {
                     ephemeral: true
                 })
             }
-            const embed = new Discord.MessageEmbed()
+            const embed = new Discord.Embed()
             .setAuthor({ name: member.user.tag, iconURL: member.avatarURL({ dynamic: true }) })
             .setDescription(`[Avatar Link](${member.avatarURL({ dynamic: true, size: 4096 })})`)
             .setImage(member.avatarURL({ dynamic: true, size: 4096 }))
-            .setFooter(`Requested By ${interaction.user.tag}`, interaction.user.displayAvatarURL({ dynamic: true }))
+            .setFooter({ text: `Requested By ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
             return interaction.reply({ embeds: [embed] })
         }
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.Embed()
         .setAuthor({ name: member.user.tag, iconURL: member.user.displayAvatarURL({ dynamic: true }) })
         .setDescription(`[Avatar Link](${member.user.displayAvatarURL({ dynamic: true, size: 4096 })})`)
         .setImage(member.user.displayAvatarURL({ dynamic: true, size: 4096 }))
-        .setFooter(`Requested By ${interaction.user.tag}`, interaction.user.displayAvatarURL({ dynamic: true }))
+        .setFooter({ text: `Requested By ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
         interaction.reply({ embeds: [embed] })
     }
 }

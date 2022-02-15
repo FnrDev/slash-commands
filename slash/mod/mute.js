@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { Embed, Util } = require('discord.js');
 
 module.exports = {
     name: "mute",
@@ -29,15 +29,15 @@ module.exports = {
         const role = member.roles.highest.position;
         const authorRole = interaction.member.roles.highest.position;
         if (authorRole <= role) {
-            const embed = new Discord.MessageEmbed()
+            const embed = new Embed()
             .setTitle("I can't mute this member because that member has role position is higher than my role or same as you!")
-            .setColor('#ff0000')
+            .setColor(Util.resolveColor('#ff0000'))
             return interaction.reply({ embeds: [embed] })
         }
         if (botRole <= role) {
-            const embed = new Discord.MessageEmbed()
+            const embed = new Embed()
             .setTitle("I can't mute this member because that member has role position is higher than my role or same as you!")
-            .setColor('#ff0000')
+            .setColor(Util.resolveColor('#ff0000'))
             return interaction.reply({ embeds: [embed] })
         }
         try {

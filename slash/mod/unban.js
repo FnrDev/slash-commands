@@ -19,8 +19,7 @@ module.exports = {
             if (!fetchBans) {
                 return interaction.reply('There are no banned users.')
             }
-            const usersBanned = fetchBans.map(r => r.user.id);
-            usersBanned.forEach(user => {
+            fetchBans.map(r => r.user.id).forEach(user => {
                 interaction.guild.bans.remove(user, `By: ${interaction.user.tag} unban all`)
             })
             return interaction.reply(`✅ **${fetchBans.size}** members being unbanned`)

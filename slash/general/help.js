@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageSelectMenu } = require('discord.js');
+const { Embed, ActionRow, SelectMenuComponent, Util } = require('discord.js');
 const humanizeDuration = require("humanize-duration");
 
 module.exports = {
@@ -21,8 +21,8 @@ module.exports = {
             if (!cmd) {
                 return interaction.reply({ content: `I can\'t find \`${command}\` command`, ephemeral: true })
             }
-            const embed = new MessageEmbed()
-            .setColor(interaction.guild.me.displayHexColor)
+            const embed = new Embed()
+            .setColor(Util.resolveColor(interaction.guild.me.displayHexColor))
             if (cmd.name) {
                 embed.setTitle(`Command: ${cmd.name}`)
             }
@@ -30,21 +30,21 @@ module.exports = {
                 embed.setDescription(cmd.description)
             }
             if (cmd.usage) {
-                embed.addField('Usage:', cmd.usage)
+                embed.addField({ name: 'Usage:', value: cmd.usage })
             }
             if (cmd.timeout) {
-                embed.addField('Timeout:', humanizeDuration(cmd.timeout, { round: true }))
+                embed.addField({ name: 'Timeout:', value: humanizeDuration(cmd.timeout, { round: true }) })
             }
             return interaction.reply({ embeds: [embed] })
         }
-        const row = new MessageActionRow()
+        const row = new ActionRow()
         .addComponents(
-            new MessageSelectMenu()
+            new SelectMenuComponent()
             .setCustomId('help_menu')
             .setPlaceholder('Select Command Category.')
             .setMinValues(1)
             .setMaxValues(1)
-            .addOptions([
+            .addOptions(
                 {
                     label: "Fun",
                     description: "Show all commands in fun category.",
@@ -63,7 +63,7 @@ module.exports = {
                     emoji: "🔨",
                     value: "mod"
                 }
-            ])
+            )
         )
         interaction.reply({ content: "**👋 Select Category You Need Help For**", components: [row] });
         const filter = i => i.customId === 'help_menu' || 'selected_command' && i.user.id === interaction.user.id;
@@ -85,7 +85,7 @@ module.exports = {
                     });
                 })
                 const commandRow = row.setComponents(
-                    new MessageSelectMenu()
+                    new SelectMenuComponent()
                     .setCustomId('fun_cmd')
                     .setPlaceholder('Info Commands')
                     .setMinValues(1)
@@ -113,7 +113,7 @@ module.exports = {
                     });
                 });
                 const commandRow = row.setComponents(
-                    new MessageSelectMenu()
+                    new SelectMenuComponent()
                     .setCustomId('general_cmd')
                     .setPlaceholder('General Commands')
                     .setMinValues(1)
@@ -141,7 +141,7 @@ module.exports = {
                     });
                 });
                 const commandRow = row.setComponents(
-                    new MessageSelectMenu()
+                    new SelectMenuComponent()
                     .setCustomId('mod_cmd')
                     .setPlaceholder('Mod Commands')
                     .setMinValues(1)

@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { Embed, Util } = require("discord.js");
 
 module.exports = {
   name: "role",
@@ -94,19 +94,19 @@ module.exports = {
       const roleToGet = user.roles.highest.position;
       const authorRole = interaction.member.roles.highest.position;
       if (authorRole <= roleToGet) {
-        const embed = new MessageEmbed()
+        const embed = new Embed()
           .setTitle(
             "I can't role this member because that member has role position is higher than my role or same as you!"
           )
-          .setColor("#ff0000");
+          .setColor(Util.resolveColor('#ff0000'));
         return interaction.reply({ embeds: [embed] });
       }
       if (botRole <= roleToGet) {
-        const embed = new MessageEmbed()
+        const embed = new Embed()
           .setTitle(
             "I can't role this member because that member has role position is higher than my role or same as you!"
           )
-          .setColor("#ff0000");
+          .setColor(Util.resolveColor('#ff0000'));
         return interaction.reply({ embeds: [embed] });
       }
       let addRoles;

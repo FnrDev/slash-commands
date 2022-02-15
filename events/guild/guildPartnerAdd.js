@@ -1,10 +1,10 @@
 const config = require('../../config.json');
-const Discord = require('discord.js');
+const { Embed } = require('discord.js');
 
 module.exports = async(client, guild) => {
     const logChannel = client.channels.cache.get(config.log_channel_id);
     if (!logChannel) return;
-    const embed = new Discord.MessageEmbed()
+    const embed = new Embed()
     .setAuthor({ name: guild.name, iconURL: guild.iconURL() })
     .setDescription(`**${guild.name} has got partnered!**`)
     .setTimestamp()
