@@ -13,7 +13,7 @@ readdirSync("./slash/").map(async dir => {
 	commands.push(require(path.join(__dirname, `./slash/${dir}/${cmd}`)))
     })
 })
-const rest = new REST({ version: "9" }).setToken(config.token);
+const rest = new REST({ version: "10" }).setToken(config.token);
 
 (async () => {
 	try {
