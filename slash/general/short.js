@@ -15,17 +15,25 @@ module.exports = {
             name: "pass",
             description: "Password for url",
             type: 3
+        },
+        {
+            name: "attachment",
+            description: "Short an a image attachment",
+            type: 11
         }
     ],
     timeout: 5000,
     category: "general",
     run: async(interaction) => {
+        await interaction.deferReply();
         const url = interaction.options.getString('url');
-        const pass = interaction.options.getString('pass') || ''
-        const apiToken = ''; // Get your api key from <https://i8.ae/user/tools#api>
+        const pass = interaction.options.getString('pass') || null;
+        const attachment = interaction.options.getAttachment('attachment');
+        const apiToken = 'FpUKcPXsHerxsLUl'; // Get your api key from <https://i8.ae/developers>
         if (!apiToken) {
-            return interaction.reply({ content: ":x: Missing api token" })
+            return interaction.editReply({ content: ":x: Missing api token, check https://i8.ae/developers to get key." })
         }
+        attachment ? attachment.contentType !== 'image/png' : null
         try {
             const data = (await axios({
                 url: "https://i8.ae/api/url/add",
@@ -34,7 +42,7 @@ module.exports = {
                     Authorization: apiToken
                 },
                 data: {
-                    url: url,
+                    url: attachment ? attachment.url : url,
                     password: pass
                 }
             })).data;
@@ -45,10 +53,10 @@ module.exports = {
                 .setURL(data.shorturl)
                 .setLabel('URL')
             )
-            interaction.reply({ content: "**Short URL:**", components: [row] })
+            interaction.editReply({ content: "**Short URL:**", components: [row] })
         } catch (e) {
             console.error(e);
-            return interaction.reply({ content: `:x: ${e}` })
+            return interaction.editReply({ content: `:x: ${e}` })
         }
     }
 }
