@@ -26,6 +26,7 @@
     "discord-logs": "^2.0.1",
     "discord-temp-channels": "^3.0.1",
     "discord.js": "^14.0.0-dev.1645142857.f7257f0",
+    "dotenv": "^16.0.0",
     "fs": "^0.0.1-security",
     "humanize-duration": "^3.27.0",
     "ms": "^2.1.3",

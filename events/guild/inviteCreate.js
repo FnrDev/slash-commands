@@ -1,9 +1,8 @@
-const config = require('../../config.json');
 const { Embed } = require('discord.js');
 const humanizeDuration = require("humanize-duration");
 
 module.exports = async(client, invite) => {
-    const logChannel = await client.channels.cache.get(config.log_channel_id);
+    const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
     if (!logChannel) return;
     const allLogs = await invite.guild.fetchAuditLogs({ type: "INVITE_CREATE" });
     const fetchModerator = allLogs.entries.first();

@@ -1,14 +1,13 @@
-const config = require('../../config.json');
 const { Embed } = require('discord.js');
 
 module.exports = async (client, oldMember, newMember) => {
     if (oldMember.pending && !newMember.pending) {
-        const role = newMember.guild.roles.cache.get(config.autoRoleId);
+        const role = newMember.guild.roles.cache.get(process.env.AUTOROLEID);
         if (!role) return;
         newMember.roles.add(role, `AutoRole`)
     }
     if (!oldMember.isCommunicationDisabled() && newMember.isCommunicationDisabled()) {
-        const logChannel = client.channels.cache.get(config.log_channel_id);
+        const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
         if (!logChannel) return;
         const allLogs = await newMember.guild.fetchAuditLogs({ type: "MEMBER_UPDATE" });
         const fetchModerator = allLogs.entries.first();
@@ -21,7 +20,7 @@ module.exports = async (client, oldMember, newMember) => {
         return logChannel.send({ embeds: [embed] })
     }
     if (oldMember.isCommunicationDisabled() && !newMember.isCommunicationDisabled()) {
-        const logChannel = client.channels.cache.get(config.log_channel_id);
+        const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
         if (!logChannel) return;
         const embed = new Embed()
         .setAuthor({ name: newMember.user.tag, iconURL: newMember.user.displayAvatarURL({ dynamic: true }) })

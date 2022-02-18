@@ -10,43 +10,51 @@ module.exports = {
       choices: [
         {
           name: "Discord Staff",
-          value: "staff",
+          value: "STAFF",
         },
         {
           name: "Discord Partnerd",
-          value: "partnerd",
+          value: "PARTNER",
         },
         {
           name: "Hypesquad Events",
-          value: "HYPESQUAD_EVENTS",
+          value: "HYPESQUAD",
         },
         {
           name: "Bug Hunter Level 1",
-          value: "BUGHUNTER_LEVEL_1",
+          value: "BUG_HUNTER_LEVEL_1",
         },
         {
           name: "House Bravery",
-          value: "HOUSE_BRAVERY",
+          value: "HYPESQUAD_ONLINE_HOUSE_1",
+        },
+        {
+          name: "House Brilliance",
+          value: "HYPESQUAD_ONLINE_HOUSE_2"
+        },
+        {
+          name: "House Balance",
+          value: "HYPESQUAD_ONLINE_HOUSE_3"
         },
         {
           name: "Early Supporter",
-          value: "EARLY_SUPPORTER",
+          value: "PREMIUM_EARLY_SUPPORTER",
         },
         {
           name: "Bug Hunter Level 2",
-          value: "BUGHUNTER_LEVEL_2",
+          value: "BUG_HUNTER_LEVEL_2",
         },
         {
           name: "Verified Bot",
           value: "VERIFIED_BOT",
         },
         {
-          name: "Early Verified Bot Developer",
-          value: "EARLY_VERIFIED_BOT_DEVELOPER",
+          name: "Verified Bot Developer",
+          value: "VERIFIED_DEVELOPER",
         },
         {
-          name: "Discord Certified Moderator",
-          value: "DISCORD_CERTIFIED_MODERATOR",
+          name: "Certified Moderator",
+          value: "CERTIFIED_MODERATOR",
         },
       ],
     },
@@ -60,300 +68,25 @@ module.exports = {
   run: async (interaction) => {
     const badges = interaction.options.getString("badge");
     const role = interaction.options.getRole("role");
-    if (badges === "staff") {
-      const getMemberWithRole = role?.members.filter((r) =>
-        r.user.flags?.has("DISCORD_EMPLOYEE")
-      );
-      const staffBadges = (await interaction.guild.members.fetch()).filter(
-        (r) => r.user.flags?.has("DISCORD_EMPLOYEE")
-      );
-      if (staffBadges.size === 0) {
-        return interaction.reply({
-          content: ":x: No one in this server has `Discord Staff`",
-        });
-      }
-      if (role) {
-        const getFilterdBadges = getMemberWithRole
-          .map((r) => r.user)
-          .join("\n");
-        return interaction.reply({
-          content: `Total Members with role **${role.name}** has \`Discord Staff\` is **${getMemberWithRole.size}**\n\n${getFilterdBadges}`,
-        });
-      }
-      if (staffBadges) {
-        const filterBadges = staffBadges.map((r) => r.user).join("\n");
-        interaction.reply({
-          content: `There are **${staffBadges.size}** members with this badge\n\n${filterBadges}`,
-        });
-      }
+    const getMembersWithRole = role?.members.filter(r => r.user.flags?.has(badges));
+    const allMembersWithBadge = (await interaction.guild.members.fetch()).filter(
+      (r) => r.user.flags?.has(badges)
+    )
+    if (!allMembersWithBadge.size) {
+      return interaction.reply({
+        content: `:x: No one has \`${badges}\` badge.`,
+        ephemeral: true
+      })
     }
-    if (badges === "partnerd") {
-      const getMemberWithRole = role?.members.filter((r) =>
-        r.user.flags?.has("PARTNERED_SERVER_OWNER")
-      );
-      const partnerdBadge = (await interaction.guild.members.fetch()).filter(
-        (r) => r.user.flags?.has("PARTNERED_SERVER_OWNER")
-      );
-      if (partnerdBadge.size === 0) {
-        return interaction.reply({
-          content: ":x: No one in this server has `Partnerd Badge`",
-        });
-      }
-      if (role) {
-        const getFilterdBadges = getMemberWithRole
-          .map((r) => r.user)
-          .join("\n");
-        return interaction.reply({
-          content: `Total Members with role **${role.name}** has \`Partnerd Badge\` is **${getMemberWithRole.size}**\n\n${getFilterdBadges}`,
-        });
-      }
-      if (partnerdBadge) {
-        const filterBadges = partnerdBadge.map((r) => r.user).join("\n");
-        interaction.reply({
-          content: `There are **${partnerdBadge.size}** members with this badge\n\n${filterBadges}`,
-        });
-      }
+    if (role) {
+      const getMembersWithBadges = getMembersWithRole.map(r => r.user).join("\n");
+      return interaction.reply({
+        content: `Total members with role **${role.name}** has \`${badges.toLowerCase()}\` is **${getMembersWithRole.size}**\n\n${getMembersWithBadges}`
+      })
     }
-    if (badges === "HYPESQUAD_EVENTS") {
-      const getMemberWithRole = role?.members.filter((r) =>
-        r.user.flags?.has("HYPESQUAD_EVENTS")
-      );
-      const hypeSquadBadge = (await interaction.guild.members.fetch()).filter(
-        (r) => r.user.flags?.has("HYPESQUAD_EVENTS")
-      );
-      if (hypeSquadBadge.size === 0) {
-        return interaction.reply({
-          content: ":x: No one in this server has `HypeSquad Events`",
-        });
-      }
-      if (role) {
-        const getFilterdBadges = getMemberWithRole
-          .map((r) => r.user)
-          .join("\n");
-        return interaction.reply({
-          content: `Total Members with role **${
-            role.name
-          }** has \`${badges.replaceAll("_", " ")}\` is **${
-            getMemberWithRole.size
-          }**\n\n${getFilterdBadges}`,
-        });
-      }
-      if (hypeSquadBadge) {
-        const filterBadges = hypeSquadBadge.map((r) => r.user).join("\n");
-        interaction.reply({
-          content: `There are **${hypeSquadBadge.size}** members with this badge\n\n${filterBadges}`,
-        });
-      }
-    }
-    if (badges === "BUGHUNTER_LEVEL_1") {
-      const getMemberWithRole = role?.members.filter((r) =>
-        r.user.flags?.has("BUGHUNTER_LEVEL_1")
-      );
-      const bughunter1 = (await interaction.guild.members.fetch()).filter((r) =>
-        r.user.flags?.has("BUGHUNTER_LEVEL_1")
-      );
-      if (bughunter1.size === 0) {
-        return interaction.reply({
-          content: ":x: No one in this server has `Bug Hunter Level 1`",
-        });
-      }
-      if (role) {
-        const getFilterdBadges = getMemberWithRole
-          .map((r) => r.user)
-          .join("\n");
-        return interaction.reply({
-          content: `Total Members with role **${
-            role.name
-          }** has \`${badges.replaceAll("_", " ")}\` is **${
-            getMemberWithRole.size
-          }**\n\n${getFilterdBadges}`,
-        });
-      }
-      if (bughunter1) {
-        const filterBadges = bughunter1.map((r) => r.user).join("\n");
-        interaction.reply({
-          content: `There are **${bughunter1.size}** members with this badge\n\n${filterBadges}`,
-        });
-      }
-    }
-    if (badges === "HOUSE_BRAVERY") {
-      const houseBravery = (await interaction.guild.members.fetch()).filter(
-        (r) => r.user.flags?.has("HOUSE_BRAVERY")
-      );
-      if (houseBravery.size === 0) {
-        return interaction.reply({
-          content: ":x: No one in this server has `House Bravery`",
-        });
-      }
-      if (role) {
-        const getFilterdBadges = getMemberWithRole
-          .map((r) => r.user)
-          .join("\n");
-        return interaction.reply({
-          content: `Total Members with role **${
-            role.name
-          }** has \`${badges.replaceAll("_", " ")}\` is **${
-            getMemberWithRole.size
-          }**\n\n${getFilterdBadges}`,
-        });
-      }
-      if (houseBravery) {
-        const filterBadges = houseBravery.map((r) => r.user).join("\n");
-        interaction.reply({
-          content: `There are **${hypeSquadBadge.size}** members with this badge\n\n${filterBadges}`,
-        });
-      }
-    }
-    if (badges === "EARLY_SUPPORTER") {
-      const earlyBadge = (await interaction.guild.members.fetch()).filter((r) =>
-        r.user.flags?.has("EARLY_SUPPORTER")
-      );
-      if (earlyBadge.size === 0) {
-        return interaction.reply({
-          content: ":x: No one in this server has `Early Supporter`",
-        });
-      }
-      if (role) {
-        const getFilterdBadges = getMemberWithRole
-          .map((r) => r.user)
-          .join("\n");
-        return interaction.reply({
-          content: `Total Members with role **${
-            role.name
-          }** has \`${badges.replaceAll("_", " ")}\` is **${
-            getMemberWithRole.size
-          }**\n\n${getFilterdBadges}`,
-        });
-      }
-      if (earlyBadge) {
-        const filterBadges = earlyBadge.map((r) => r.user).join("\n");
-        interaction.reply({
-          content: `There are **${earlyBadge.size}** members with this badge\n\n${filterBadges}`,
-        });
-      }
-    }
-    if (badges === "BUGHUNTER_LEVEL_2") {
-      const bughunter2 = (await interaction.guild.members.fetch()).filter((r) =>
-        r.user.flags?.has("BUGHUNTER_LEVEL_2")
-      );
-      if (bughunter2.size === 0) {
-        return interaction.reply({
-          content: ":x: No one in this server has `Bug Hunter Level 2`",
-        });
-      }
-      if (role) {
-        const getFilterdBadges = getMemberWithRole
-          .map((r) => r.user)
-          .join("\n");
-        return interaction.reply({
-          content: `Total Members with role **${
-            role.name
-          }** has \`${badges.replaceAll("_", " ")}\` is **${
-            getMemberWithRole.size
-          }**\n\n${getFilterdBadges}`,
-        });
-      }
-      if (bughunter2) {
-        const filterBadges = (await interaction.guild.members.fetch())
-          .filter((r) => r.user.flags?.has("BUGHUNTER_LEVEL_2"))
-          .map((r) => r.user)
-          .join("\n");
-        interaction.reply({
-          content: `There are **${bughunter2.size}** members with this badge\n\n${filterBadges}`,
-        });
-      }
-    }
-    if (badges === "VERIFIED_BOT") {
-      const verifiedBotBadge = (await interaction.guild.members.fetch()).filter(
-        (r) => r.user.flags?.has("VERIFIED_BOT")
-      );
-      if (verifiedBotBadge.size === 0) {
-        return interaction.reply({
-          content: ":x: No one in this server has `Verified Bot`",
-        });
-      }
-      if (role) {
-        const getFilterdBadges = getMemberWithRole
-          .map((r) => r.user)
-          .join("\n");
-        return interaction.reply({
-          content: `Total Members with role **${
-            role.name
-          }** has \`${badges.replaceAll("_", " ")}\` is **${
-            getMemberWithRole.size
-          }**\n\n${getFilterdBadges}`,
-        });
-      }
-      if (verifiedBotBadge) {
-        const filterBadges = verifiedBotBadge.map((r) => r.user).join("\n");
-        interaction.reply({
-          content: `There are **${verifiedBotBadge.size}** members with this badge\n\n${filterBadges}`,
-        });
-      }
-    }
-    if (badges === "EARLY_VERIFIED_BOT_DEVELOPER") {
-      const getMemberWithRole = role?.members.filter((r) =>
-        r.user.flags?.has("EARLY_VERIFIED_BOT_DEVELOPER")
-      );
-      const devsBadges = (await interaction.guild.members.fetch()).filter((r) =>
-        r.user.flags?.has("EARLY_VERIFIED_BOT_DEVELOPER")
-      );
-      if (devsBadges.size === 0) {
-        return interaction.reply({
-          content:
-            ":x: No one in this server has `Early Verified Bot Developer`",
-        });
-      }
-      if (role) {
-        const getFilterdBadges = getMemberWithRole
-          .map((r) => r.user)
-          .join("\n");
-        return interaction.reply({
-          content: `Total Members with role **${
-            role.name
-          }** has \`${badges.replaceAll("_", " ")}\` is **${
-            getMemberWithRole.size
-          }**\n\n${getFilterdBadges}`,
-        });
-      }
-      if (devsBadges) {
-        const filterBadges = devsBadges.map((r) => r.user).join("\n");
-        interaction.reply({
-          content: `There are **${devsBadges.size}** members with this badge\n\n${filterBadges}`,
-        });
-      }
-    }
-    if (badges === "DISCORD_CERTIFIED_MODERATOR") {
-      const getMemberWithRole = role?.members.filter((r) =>
-        r.user.flags?.has("DISCORD_CERTIFIED_MODERATOR")
-      );
-      const moderatorBadge = (await interaction.guild.members.fetch()).filter(
-        (r) => r.user.flags?.has("DISCORD_CERTIFIED_MODERATOR")
-      );
-      if (moderatorBadge.size === 0) {
-        return interaction.reply({
-          content:
-            ":x: No one in this server has `Discord Certified Moderator`",
-        });
-      }
-      if (role) {
-        const getFilterdBadges = getMemberWithRole
-          .map((r) => r.user)
-          .join("\n");
-        return interaction.reply({
-          content: `Total Members with role **${
-            role.name
-          }** has \`${badges.replaceAll("_", " ")}\` is **${
-            getMemberWithRole.size
-          }**\n\n${getFilterdBadges}`,
-        });
-      }
-      if (moderatorBadge) {
-        const filterBadges = moderatorBadge.map((r) => r.user).join("\n");
-        interaction.reply({
-          content: `There are **${moderatorBadge.size}** members with this badge\n\n${filterBadges}`,
-        });
-      }
-    }
+    const filterMembers = allMembersWithBadge.map(r => r.user).join("\n");
+    interaction.reply({
+      content: `There are **${allMembersWithBadge.size}** members with ${badges.toLowerCase()} badge.\n\n${filterMembers}`
+    })
   },
 };

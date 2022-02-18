@@ -1,8 +1,7 @@
-const config = require('../../config.json');
 const { Embed } = require('discord.js');
 
 module.exports = async(client, oldRole, newRole) => {
-    const logChannel = client.channels.cache.get(config.log_channel_id);
+    const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
     if (!logChannel) return;
     const allLogs = await newRole.guild.fetchAuditLogs({ type: "ROLE_UPDATE" });
     const fetchModerator = await allLogs.entries.first();

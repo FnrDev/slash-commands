@@ -1,9 +1,8 @@
-const config = require('../../config.json');
 const { Embed } = require('discord.js');
 const humanizeDuration = require("humanize-duration");
 
 module.exports = async(client, member) => {
-    const logChannel = client.channels.cache.get(config.log_channel_id);
+    const logChannel = client.channels.cache.get(process.env.LOG_CHANNEL);
     if (!logChannel) return;
     const distense = Date.now() - member.user.createdTimestamp;
     const embed = new Embed()
