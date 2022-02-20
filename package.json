@@ -24,7 +24,6 @@
     "colors": "^1.4.0",
     "discord-api-types": "^0.27.0",
     "discord-logs": "^2.0.1",
-    "discord-temp-channels": "^3.0.1",
     "discord.js": "^14.0.0-dev.1645142857.f7257f0",
     "dotenv": "^16.0.0",
     "fs": "^0.0.1-security",
