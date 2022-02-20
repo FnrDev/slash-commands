@@ -4,7 +4,9 @@
 
 <!--
 Please move lines that apply to you out of the comment:
-- Code changes have been tested against the Discord API, or there are no code changes
-- This PR includes breaking changes (methods removed or renamed, parameters moved or removed)
+- Code changes have been tested
+- This PR includes breaking changes (commands removed or renamed, parameters moved or removed)
+- This PR includes a new feature, and the new changes have been tested
+- This PR includes commands deletion or refactor
 - This PR **only** includes non-code changes, like changes to documentation, README, etc.
 -->

@@ -1,8 +1,7 @@
-const config = require('../../config.json');
 const { Embed } = require('discord.js');
 
 module.exports = async(client, ban) => {
-    const logChannel = await client.channels.cache.get(config.log_channel_id);
+    const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
     if (!logChannel) return;
     const allLogs = await ban.guild.fetchAuditLogs({ type: "MEMBER_BAN_ADD" });
     const fetchModerator = allLogs.entries.first();

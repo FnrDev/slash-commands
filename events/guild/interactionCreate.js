@@ -1,7 +1,6 @@
 const Timeout = new Set()
-const { MessageEmbed } = require('discord.js');
+const { Embed, Util } = require('discord.js');
 const humanizeDuration = require("humanize-duration");
-const config = require('../../config.json');
 
 module.exports = async(client, interaction) => {
     if (interaction.isChatInputCommand() || interaction.isContextMenuCommand()) {
@@ -30,7 +29,7 @@ module.exports = async(client, interaction) => {
 				}
 			}
 			if (command.devs) {
-				if (!config.ownersID.includes(interaction.user.id)) {
+				if (!process.env.OWNERS.includes(interaction.user.id)) {
 					return interaction.reply({ content: ":x: Only devs can use this command", ephemeral: true });
 				}
 			}
@@ -59,8 +58,8 @@ module.exports = async(client, interaction) => {
 			const selectedValues = interaction.values;
 			const command = client.slash.find(r => r.name === selectedValues[0]);
 			if (selectedValues.includes(command.name)) {
-				const embed = new MessageEmbed()
-				.setColor(interaction.guild.me.displayHexColor)
+				const embed = new Embed()
+				.setColor(Util.resolveColor(interaction.guild.me.displayHexColor))
 				.setFooter(`Requested by ${interaction.user.tag}`, interaction.user.displayAvatarURL({ dynamic: true }))
 				if (command.name) {
 					embed.setTitle(`Command: ${command.name}`)
@@ -69,15 +68,15 @@ module.exports = async(client, interaction) => {
 					embed.setDescription(command.description)
 				}
 				if (command.example) {
-					embed.addField('Examples:', command.example.replaceAll('<@>', `<@${interaction.user.id}>`))
+					embed.addField({ name: "Example", value: command.example.replaceAll('<@>', interaction.user) })
 				}
 				if (command.usage) {
-					embed.addField('Usage:', command.usage)
+					embed.addField({ name: 'Usage:', value: command.usage })
 				}
 				if (command.timeout) {
-					embed.addField('Timeout:', humanizeDuration(command.timeout, { round: true }))
+					embed.addField({ name: 'Timeout:', value: humanizeDuration(command.timeout, { round: true }) })
 				}
-				interaction.reply({
+				interaction.message.edit({
 					embeds: [embed],
 					ephemeral: true
 				});

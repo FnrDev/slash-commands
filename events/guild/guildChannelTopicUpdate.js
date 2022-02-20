@@ -1,8 +1,7 @@
-const config = require('../../config.json');
 const { Embed } = require('discord.js');
 
 module.exports = async(client, channel, oldTopic, newTopic) => {
-    const logChannel = client.channels.cache.get(config.log_channel_id);
+    const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
     if (!logChannel) return;
     const embed = new Embed()
     .setAuthor({ name: channel.guild.name, iconURL: channel.guild.iconURL({ dynamic: true }) })

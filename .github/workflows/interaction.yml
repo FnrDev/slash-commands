@@ -1,0 +1,12 @@
+name: 'Welcome New Contributors'
+on:
+- pull_request_target
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+    with:
+      repo-token: ${{ secrets.GITHUB_TOKEN }}
+      pr-message: '👋 Hey, thank you for your first contributing\nMake sure to check our [contributing](https://github.com/FnrDev/slash-commands/blob/main/.github/CONTRIBUTING.md) guide to aviod closing this PR.'

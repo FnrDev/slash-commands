@@ -9,11 +9,11 @@ const client = new Discord.Client({ intents: [
 	'GuildEmojisAndStickers',
 	'GuildVoiceStates'
 ]});
-const config = require('./config.json');
 client.commands = new Discord.Collection();
 client.slash = new Discord.Collection();
 client.aliases = new Discord.Collection();
 require('colors');
+require('dotenv').config();
 
 ["handlers", "events", "slash"].forEach(handler => {
     require(`./handlers/${handler}`)(client);
@@ -27,4 +27,4 @@ require('colors');
 // 	console.error(`Uncaught Exception: ${err}`);
 //   });
   
-client.login(config.token);
+client.login(process.env.TOKEN);
