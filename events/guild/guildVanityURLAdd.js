@@ -1,10 +1,9 @@
-const config = require('../../config.json');
-const Discord = require('discord.js');
+const { Embed } = require('discord.js');
 
 module.exports = async(client, guild, vanityURL) => {
-    const logChannel = client.channels.cache.get(config.log_channel_id);
+    const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
     if (!logChannel) return;
-    const embed = new Discord.MessageEmbed()
+    const embed = new Embed()
     .setAuthor({ name: guild.name, iconURL: guild.iconURL() })
     .setDescription(`**${guild.name} has added a vanity url** [URL](${vanityURL})`)
     .setTimestamp()

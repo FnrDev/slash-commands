@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { MessageActionRow, MessageButton } = require('discord.js')
+const { ActionRow, ButtonComponent, ButtonStyle } = require('discord.js')
 
 module.exports = {
     name: "meme",
@@ -9,13 +9,12 @@ module.exports = {
     run: async(interaction) => {
         await interaction.deferReply()
         const url = 'https://meme-api.herokuapp.com/gimme';
-        const req = await axios.get(url);
-        const data = req.data;
-        const row = new MessageActionRow()
+        const data = (await axios.get(url)).data;
+        const row = new ActionRow()
         .addComponents(
-            new MessageButton()
+            new ButtonComponent()
             .setLabel('Meme Link')
-            .setStyle('LINK')
+            .setStyle(ButtonStyle.Link)
             .setURL(data.postLink)
         )
         interaction.editReply({ files: [data.url], components: [row] })

@@ -1,14 +1,13 @@
-const config = require('../../config.json');
-const Discord = require('discord.js');
+const { Embed } = require('discord.js');
 
 module.exports = async(client, guild, oldLevel, newLevel) => {
-    const logChannel = client.channels.cache.get(config.log_channel_id);
+    const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
     if (!logChannel) return;
-    const embed = new Discord.MessageEmbed()
+    const embed = new Embed()
     .setAuthor({ name: guild.name, iconURL: guild.iconURL({ dynamic: true }) })
     .setDescription(`**↖ ${guild.name} reaches new boost level.**`)
-    .addField("Old Level:", oldLevel.toString())
-    .addField("New Level:", newLevel.toString())
+    .addField({ name: "Old Level:", value: oldLevel.toString() })
+    .addField({ name: "New Level:", value: newLevel.toString() })
     .setTimestamp()
     return logChannel.send({ embeds: [embed] })
 }

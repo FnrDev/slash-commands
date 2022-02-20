@@ -1,5 +1,3 @@
-const Discord = require('discord.js');
-
 module.exports = {
     name: "setnick",
     description: "Change nickname for user",
@@ -19,7 +17,7 @@ module.exports = {
     ],
     timeout: 3000,
     category: "mod",
-    run: async(interaction, client) => {
+    run: async(interaction) => {
         const member = interaction.options.getMember('user');
         const nickname = interaction.options.getString('nickname');
         if (!nickname) {

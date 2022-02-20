@@ -1,11 +1,10 @@
-const config = require('../../config.json');
-const Discord = require('discord.js');
+const { Embed } = require('discord.js');
 
 module.exports = async(client, oldState, newState) => {
-    const logChannel = client.channels.cache.get(config.log_channel_id);
+    const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
     if (!logChannel) return;
     if (oldState.channel && newState.channel && oldState.channel.id !== newState.channel.id) {
-        const embed = new Discord.MessageEmbed()
+        const embed = new Embed()
         .setAuthor({ name: newState.member.user.tag, iconURL: newState.member.user.displayAvatarURL({ dynamic: true }) })
         .setTimestamp()
         .setFooter({ text: newState.guild.name, iconURL: newState.guild.iconURL({ dynamic: true }) })
@@ -13,7 +12,7 @@ module.exports = async(client, oldState, newState) => {
         return logChannel.send({ embeds: [embed] })
     }
     if (!oldState.channel.id && newState.channel.id) {
-        const embed = new Discord.MessageEmbed()
+        const embed = new Embed()
         .setAuthor({ name: newState.member.user.tag, iconURL: newState.member.user.displayAvatarURL({ dynamic: true }) })
         .setTimestamp()
         .setFooter({ text: newState.guild.name, iconURL: newState.guild.iconURL({ dynamic: true }) })

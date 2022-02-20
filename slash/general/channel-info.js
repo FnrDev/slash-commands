@@ -12,28 +12,12 @@ module.exports = {
         }
     ],
     category: "general",
-    /**
-     * 
-     * @param {*} interaction 
-     */
     run: async(interaction) => {
         const channel = interaction.options.getChannel('channel');
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.Embed()
         .setTitle(`${channel.name} Info`)
-        if (channel.isText && channel.topic) {
+        if (channel.isTextBased && channel.topic) {
             embed.setDescription(channel.topic)
-        }
-        if (channel.rateLimitPerUser) {
-            embed.addField("Slow Mode:", `${channel.rateLimitPerUser} Secounds`, true)
-        }
-        if (channel.parent) {
-            embed.addField("Catgory Name:", channel.parent.name)
-        }
-        if (channel.lastPinTimestamp) {
-            embed.addField("Last Pin Message At:", `<t:${Math.floor(channel.lastPinTimestamp / 1000)}:R>`, true)
-        }
-        if (channel.nsfw) {
-            embed.addField("Channel NSFW?", "Yes", true)
         }
         let channelTypes;
         switch(channel.type) {
@@ -49,9 +33,6 @@ module.exports = {
             case "GUILD_NEWS":
                 channelTypes = 'News Channel';
                 break;
-            case "GUILD_STORE":
-                channelTypes = 'Store Channel';
-                break;
             case "GUILD_NEWS_THREAD":
                 channelTypes = 'News Thread Channel';
                 break;
@@ -65,17 +46,29 @@ module.exports = {
                 channelTypes = 'Stage Channel';
                 break;
         }
-        embed.addField("Channel Type:", channelTypes, true)
-        embed.addField("Channel Created At:", `<t:${Math.floor(channel.createdTimestamp / 1000)}:R>`, true)
-        embed.setColor(interaction.guild.me.displayHexColor)
-        embed.setFooter(channel.id)
-        const row = new Discord.MessageActionRow()
+        if (channel.rateLimitPerUser) {
+            embed.addField({ name: "Slow Mode:", value: `${channel.rateLimitPerUser} Secounds`, inline: true })
+        }
+        if (channel.parent) {
+            embed.addField({ name: "Catgory Name:", value: channel.parent.name })
+        }
+        if (channel.lastPinTimestamp) {
+            embed.addField({ name: "Last Pin Message At:", value: `<t:${Math.floor(channel.lastPinTimestamp / 1000)}:R>`, inline: true })
+        }
+        if (channel.nsfw) {
+            embed.addField({ name: "Channel NSFW?", value: "Yes", inline: true })
+        }
+        embed.addField({ name: "Channel Type:", value: channelTypes, inline: true })
+        embed.addField({ name: "Channel Created At:", value: `<t:${Math.floor(channel.createdTimestamp / 1000)}:R>`, inline: true })
+        embed.setColor(Discord.Util.resolveColor(interaction.guild.me.displayHexColor))
+        embed.setFooter({ text: channel.id })
+        const row = new Discord.ActionRow()
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonComponent()
             .setCustomId('members')
-            .setStyle('PRIMARY')
+            .setStyle(Discord.ButtonStyle.Primary)
             .setLabel('Members With Access To Channel')
-            .setEmoji('👩‍👧‍👦')
+            .setEmoji({ name: "👩‍👧‍👦" })
         )
         interaction.reply({
             embeds: [embed],

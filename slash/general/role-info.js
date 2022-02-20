@@ -1,4 +1,4 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { Embed, ActionRow, ButtonComponent, ButtonStyle } = require('discord.js');
 const humanizeDuration = require("humanize-duration");
 
 module.exports = {
@@ -17,9 +17,9 @@ module.exports = {
     run: async(interaction) => {
         const role = interaction.options.getRole('role');
         const distece = Date.now() - role.createdTimestamp
-        const embed = new MessageEmbed()
-        .setColor(role.hexColor)
-        .setFooter(interaction.guild.name, interaction.guild.iconURL({ dynamic: true }))
+        const embed = new Embed()
+        .setColor(role.color)
+        .setFooter({ text: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
         .addFields(
             {
                 name: "Role Name:",
@@ -35,7 +35,7 @@ module.exports = {
             },
             {
                 name: "Hosted?",
-                value: role.hoist.toString(),
+                value: role.hoist ? "Yes" : "No",
             },
             {
                 name: "Role Position:",
@@ -43,7 +43,7 @@ module.exports = {
             },
             {
                 name: "Role Managed?",
-                value: role.managed.toString()
+                value: role.managed ? "Yes" : "No"
             },
             {
                 name: "Role Created At:",
@@ -51,24 +51,24 @@ module.exports = {
             },
         )
         if (role.icon) {
-            embed.addField('Role Icon:', `[Icon URL](${role.iconURL({ size: 4096, format: "png" })})`)
+            embed.addField({ name: 'Role Icon:', value: `[Icon URL](${role.iconURL({ size: 4096, format: "png" })})` })
             embed.setThumbnail(role.iconURL({ size: 4096, format: "png" }))
-            embed.setAuthor(role.name, role.iconURL({ size: 4096, format: "png" }))
+            embed.setAuthor({ name: role.name, iconURL: role.iconURL({ size: 4096, format: "png" }) })
         }
-        const row = new MessageActionRow()
+        const row = new ActionRow()
         .addComponents(
-            new MessageButton()
+            new ButtonComponent()
             .setCustomId('perms')
             .setLabel('Role Permission')
-            .setEmoji('🔑')
-            .setStyle('PRIMARY')
+            .setEmoji({ name: '🔑' })
+            .setStyle(ButtonStyle.Primary)
         )
         .addComponents(
-            new MessageButton()
+            new ButtonComponent()
             .setCustomId('members')
             .setLabel('Members With This Role')
-            .setEmoji('👨‍👩‍👦')
-            .setStyle('SECONDARY')
+            .setEmoji({ name: "👨‍👩‍👦" })
+            .setStyle(ButtonStyle.Secondary)
         )
         interaction.reply({ embeds: [embed], components: [row] })
         const filter = i => i.customId === 'perms' || 'members' && i.user.id === interaction.user.id;

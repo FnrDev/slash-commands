@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+const { Util, Embed } = require('discord.js')
 
 module.exports = {
     name: "ping",
@@ -8,11 +8,11 @@ module.exports = {
     run: async(interaction, client) => {
         await interaction.reply('🏓 Pong!')
         const msg = await interaction.fetchReply()
-        const embed = new Discord.MessageEmbed()
+        const embed = new Embed()
         .setAuthor({ name: interaction.user.tag, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
-        .setColor('RANDOM')
+        .setColor(Util.resolveColor('Random'))
         .setTimestamp()
         .setDescription(`**Time:** ${Math.floor(msg.createdTimestamp - interaction.createdTimestamp)} ms\n**API Ping:** ${client.ws.ping} ms`)
-        interaction.editReply({ embeds: [embed], content: `<@${interaction.user.id}>` })
+        interaction.editReply({ embeds: [embed], content: null })
     }
 }

@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { ActionRow, SelectMenuComponent } = require('discord.js');
 
 module.exports = {
     name: "ban",
@@ -23,9 +23,6 @@ module.exports = {
         if (member.id === client.user.id) {
             return interaction.reply({ content: ":x: You can\'t ban me!", ephemeral: true })
         }
-        if (!member.banable) {
-            return interaction.reply({ content: "i can\'t ban this user", ephemeral: true })
-        }
         const botRole = interaction.guild.me.roles.highest.position;
         const role = member.roles.highest.position;
         const authorRole = interaction.member.roles.highest.position;
@@ -37,12 +34,12 @@ module.exports = {
         }
         try {
             let reason;
-            const row = new Discord.MessageActionRow()
+            const row = new ActionRow()
                 .addComponents(
-                    new Discord.MessageSelectMenu()
+                    new SelectMenuComponent()
                     .setCustomId('reason')
                     .setPlaceholder('Select a reason')
-                    .addOptions([
+                    .addOptions(
                         {
                             label: 'Spaming',
                             value: "spaming"
@@ -51,7 +48,7 @@ module.exports = {
                             label: "Adv",
                             value: "adv"
                         }
-                    ])
+                    )
                 )
                 interaction.reply({ content: "**Select a reason:**", components: [row] });
                 const filter = i => i.customId === 'reason' && i.user.id === interaction.user.id;
@@ -59,7 +56,7 @@ module.exports = {
                 collector.on('collect', async i => {
                     if (i.customId === 'reason') {
                         reason = i.values[0] // Get first option from select menu
-                        await member.ban({ reason: `By: ${interaction.user.tag} | Reason: ${reason}`, days: 7 })
+                        await member.ban({ reason: `By: ${interaction.user.tag} | Reason: ${reason}`, deleteMessageDays: 7 })
                         console.log('hello7')
                         return interaction.editReply({ content: `✅ **${member} has been banned**`, components: [] })      
                     }

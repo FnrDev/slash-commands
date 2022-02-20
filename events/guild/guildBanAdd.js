@@ -1,12 +1,11 @@
-const config = require('../../config.json');
-const Discord = require('discord.js');
+const { Embed } = require('discord.js');
 
 module.exports = async(client, ban) => {
-    const logChannel = await client.channels.cache.get(config.log_channel_id);
+    const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
     if (!logChannel) return;
     const allLogs = await ban.guild.fetchAuditLogs({ type: "MEMBER_BAN_ADD" });
     const fetchModerator = allLogs.entries.first();
-    const embed = new Discord.MessageEmbed()
+    const embed = new Embed()
     .setAuthor({ name: ban.user.tag, iconURL: ban.user.displayAvatarURL({ dynamic: true }) })
     .setDescription(`**🔨 <@${ban.user.id}> banned from the server.**`)
     .setThumbnail(ban.user.displayAvatarURL({ dynamic: true }))

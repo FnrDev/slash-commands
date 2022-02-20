@@ -1,11 +1,10 @@
-const config = require('../../config.json');
-const Discord = require('discord.js');
+const { Embed } = require('discord.js');
 
 module.exports = async(client, emoji) => {
-    const logChannel = client.channels.cache.get(config.log_channel_id);
+    const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
     if (!logChannel) return;
     const fetchEmojiAuthor = await emoji.fetchAuthor();
-    const embed = new Discord.MessageEmbed()
+    const embed = new Embed()
     .setAuthor({ name: emoji.guild.name, iconURL: emoji.guild.iconURL() })
     .setTitle('🥳 Emoji Deleted')
     .setDescription(`**${fetchEmojiAuthor} has deleted <:${emoji.name}:${emoji.id}> emoji!**`)

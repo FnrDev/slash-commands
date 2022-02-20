@@ -1,8 +1,6 @@
 # slash-command by Fnr#0017
 
 ## slash commands handler to make your bot support slash commands features.
----
-## Need help? join discord server [Invite Link](https://discord.gg/hHweGgGqXa)
 
 ---
 ### Note: Node.js 16.6.0 or newer is required.

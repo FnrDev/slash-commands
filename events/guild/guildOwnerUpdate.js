@@ -1,14 +1,13 @@
-const config = require('../../config.json');
-const Discord = require('discord.js');
+const { Embed } = require('discord.js');
 
 module.exports = async(client, oldGuild, newGuild) => {
-    const logChannel = client.channels.cache.get(config.log_channel_id);
+    const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
     if (!logChannel) return;
-    const embed = new Discord.MessageEmbed()
+    const embed = new Embed()
     .setAuthor({ name: guild.name, iconURL: guild.iconURL() })
     .setDescription(`**${newGuild.name} updated ownership**`)
-    .addField("Old Owner:", oldGuild.owner.user.tag)
-    .addField("New Owner:", newGuild.owner.user.tag)
+    .addField({ name: "Old Owner:", value: oldGuild.owner.user.tag })
+    .addField({ name: "New Owner:", value: newGuild.owner.user.tag })
     .setTimestamp()
     return logChannel.send({ embeds: [embed] })
 }

@@ -1,5 +1,5 @@
 const axios = require('axios');
-const Discord = require('discord.js');
+const { Embed, Util } = require('discord.js');
 
 module.exports = {
     name: "npm",
@@ -16,17 +16,15 @@ module.exports = {
     run: async(interaction) => {
         const name = interaction.options.getString('name');
         try {
-            const req = await axios.get(`https://registry.npmjs.org/${name}`)
-            const data = req.data;
+            const data = (await axios.get(`https://registry.npmjs.org/${name}`)).data;
             let getLastVersion = Object.keys(data.versions);
             getLastVersion[Object.keys(data.versions)[Object.keys(data.versions).length - 1]];
             const createtime = new Date(data.time.created).getTime();
             const modifiedTime = new Date(data.time.modified).getTime();
-            console.log(createtime)
-            const embed = new Discord.MessageEmbed()
-            .setAuthor(`NPM (${name})`, 'https://cdn.freebiesupply.com/logos/thumbs/2x/npm-logo.png', `https://npmjs.com/${name}`)
+            const embed = new Embed()
+            .setAuthor({ name: `NPM (${name})`, iconURL: 'https://cdn.freebiesupply.com/logos/thumbs/2x/npm-logo.png', url: `https://npmjs.com/${name}` })
             .setDescription(data.description)
-            .setColor('#ff0000')
+            .setColor(Util.resolveColor('#ff0000'))
             .addFields(
                 { name: "Latest Version", value: getLastVersion.pop(), inline: true },
                 { name: "License", value: data.license, inline: true },
