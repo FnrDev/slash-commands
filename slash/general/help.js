@@ -64,8 +64,7 @@ module.exports = {
 					),
 			);
 			interaction.reply({ content: "**👋 Select Category You Need Help For**", components: [row] });
-			const filter = (i) =>
-				i.customId === "help_menu" || ("selected_command" && i.user.id === interaction.user.id);
+			const filter = (i) => i.customId === "help_menu" || ("selected_command" && i.user.id === interaction.user.id);
 			const collector = interaction.channel.createMessageComponentCollector({
 				filter: filter,
 				max: 2,

@@ -35,13 +35,9 @@ module.exports = {
 				},
 				{
 					name: `:speech_balloon: Channels (${interaction.guild.channels.cache.size})`,
-					value: `**${
-						interaction.guild.channels.cache.filter((r) => r.type == "GUILD_TEXT").size
-					}** Text | **${
+					value: `**${interaction.guild.channels.cache.filter((r) => r.type == "GUILD_TEXT").size}** Text | **${
 						interaction.guild.channels.cache.filter((r) => r.type == "GUILD_VOICE").size
-					}** Voice | **${
-						interaction.guild.channels.cache.filter((r) => r.type === "GUILD_CATEGORY").size
-					}** Category`,
+					}** Voice | **${interaction.guild.channels.cache.filter((r) => r.type === "GUILD_CATEGORY").size}** Category`,
 					inline: true,
 				},
 				{

@@ -29,9 +29,7 @@ module.exports = {
 				},
 				{
 					name: "Joined Server",
-					value: `\`${member.joinedAt.toLocaleString()}\`\n**<t:${Math.floor(
-						member.joinedTimestamp / 1000,
-					)}:R>**`,
+					value: `\`${member.joinedAt.toLocaleString()}\`\n**<t:${Math.floor(member.joinedTimestamp / 1000)}:R>**`,
 				},
 				{
 					name: "User Roles:",
