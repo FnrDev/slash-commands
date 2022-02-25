@@ -1,82 +1,82 @@
-const { Embed, Util } = require('discord.js');
+const { Embed, Util } = require("discord.js");
 
 module.exports = {
-	name: 'role',
-	description: 'role someone.',
-	permissions: 'MANAGE_ROLES',
+	name: "role",
+	description: "role someone.",
+	permissions: "MANAGE_ROLES",
 	options: [
 		{
-			name: 'bots',
-			description: 'Gives a role to all bots in this server.',
+			name: "bots",
+			description: "Gives a role to all bots in this server.",
 			type: 1,
 			options: [
 				{
-					name: 'type',
-					description: 'pick a type',
+					name: "type",
+					description: "pick a type",
 					type: 3,
 					required: true,
 					choices: [
 						{
-							name: 'Give',
-							value: 'give',
+							name: "Give",
+							value: "give",
 						},
 						{
-							name: 'Remove',
-							value: 'remove',
+							name: "Remove",
+							value: "remove",
 						},
 					],
 				},
 				{
-					name: 'role',
-					description: 'Role to give all bots.',
+					name: "role",
+					description: "Role to give all bots.",
 					type: 8,
 					required: true,
 				},
 			],
 		},
 		{
-			name: 'user',
-			description: 'Gives a user role.',
+			name: "user",
+			description: "Gives a user role.",
 			type: 1,
 			options: [
 				{
-					name: 'user',
-					description: 'user to give a role.',
+					name: "user",
+					description: "user to give a role.",
 					type: 6,
 					required: true,
 				},
 				{
-					name: 'role',
-					description: 'Role to give a user.',
+					name: "role",
+					description: "Role to give a user.",
 					type: 8,
 					required: true,
 				},
 			],
 		},
 		{
-			name: 'all',
-			description: 'Role all members',
+			name: "all",
+			description: "Role all members",
 			type: 1,
 			options: [
 				{
-					name: 'type',
-					description: 'Pick a type',
+					name: "type",
+					description: "Pick a type",
 					type: 3,
 					required: true,
 					choices: [
 						{
-							name: 'Give',
-							value: 'give',
+							name: "Give",
+							value: "give",
 						},
 						{
-							name: 'Remove',
-							value: 'remove',
+							name: "Remove",
+							value: "remove",
 						},
 					],
 				},
 				{
-					name: 'role',
-					description: 'role to give',
+					name: "role",
+					description: "role to give",
 					type: 8,
 					required: true,
 				},
@@ -84,12 +84,12 @@ module.exports = {
 		},
 	],
 	timeout: 3000,
-	category: 'mod',
+	category: "mod",
 	run: async (interaction) => {
-		const user = interaction.options.getMember('user'); // access to guild member obj <https://discord.js.org/#/docs/main/stable/class/GuildMember>
-		const role = interaction.options.getRole('role'); // access to role obj <https://discord.js.org/#/docs/main/stable/class/Role>
+		const user = interaction.options.getMember("user"); // access to guild member obj <https://discord.js.org/#/docs/main/stable/class/GuildMember>
+		const role = interaction.options.getRole("role"); // access to role obj <https://discord.js.org/#/docs/main/stable/class/Role>
 		// User Sub Command
-		if (interaction.options.getSubcommand() === 'user') {
+		if (interaction.options.getSubcommand() === "user") {
 			const botRole = interaction.guild.me.roles.highest.position;
 			const roleToGet = user.roles.highest.position;
 			const authorRole = interaction.member.roles.highest.position;
@@ -98,7 +98,7 @@ module.exports = {
 					.setTitle(
 						"I can't role this member because that member has role position is higher than my role or same as you!",
 					)
-					.setColor(Util.resolveColor('#ff0000'));
+					.setColor(Util.resolveColor("#ff0000"));
 				return interaction.reply({ embeds: [embed] });
 			}
 			if (botRole <= roleToGet) {
@@ -106,18 +106,18 @@ module.exports = {
 					.setTitle(
 						"I can't role this member because that member has role position is higher than my role or same as you!",
 					)
-					.setColor(Util.resolveColor('#ff0000'));
+					.setColor(Util.resolveColor("#ff0000"));
 				return interaction.reply({ embeds: [embed] });
 			}
 			let addRoles;
 			if (user._roles.includes(role.id)) {
-				addRoles = '-';
+				addRoles = "-";
 				user.roles.remove(role, `By: ${interaction.user.tag}`);
 				interaction.reply({
 					content: `✅ Changed role for ${user}, **${addRoles}${role.name}**`,
 				});
 			} else {
-				addRoles = '+';
+				addRoles = "+";
 				user.roles.add(role, `By: ${interaction.user.tag}`);
 				interaction.reply({
 					content: `✅ Changed role for ${user}, **${addRoles}${role.name}**`,
@@ -125,8 +125,8 @@ module.exports = {
 			}
 		}
 		// Bots Sub Command
-		if (interaction.options.getSubcommand() === 'bots') {
-			if (interaction.options._hoistedOptions.find((r) => r.value === 'give')) {
+		if (interaction.options.getSubcommand() === "bots") {
+			if (interaction.options._hoistedOptions.find((r) => r.value === "give")) {
 				(await interaction.guild.members.fetch())
 					.filter((r) => r.user.bot)
 					.forEach((bot) => {
@@ -137,7 +137,7 @@ module.exports = {
 					content: `✅ Changed role for **${totalBots}** bots, **+${role.name}**`,
 				});
 			}
-			if (interaction.options._hoistedOptions.find((r) => r.value == 'remove')) {
+			if (interaction.options._hoistedOptions.find((r) => r.value == "remove")) {
 				(await interaction.guild.members.fetch())
 					.filter((r) => r.user.bot)
 					.forEach((bot) => {
@@ -150,8 +150,8 @@ module.exports = {
 			}
 		}
 		// role all sub command
-		if (interaction.options.getSubcommand() === 'all') {
-			if (interaction.options._hoistedOptions.find((r) => r.value === 'give')) {
+		if (interaction.options.getSubcommand() === "all") {
+			if (interaction.options._hoistedOptions.find((r) => r.value === "give")) {
 				(await interaction.guild.members.fetch()).forEach((member) => {
 					member.roles.add(role, `By: ${interaction.user.tag}`);
 				});
@@ -160,7 +160,7 @@ module.exports = {
 					content: `✅ Changed role for ${memberSize} members, **+${role.name}**`,
 				});
 			}
-			if (interaction.options._hoistedOptions.find((r) => r.value === 'remove')) {
+			if (interaction.options._hoistedOptions.find((r) => r.value === "remove")) {
 				(await interaction.guild.members.fetch()).forEach((member) => {
 					member.roles.remove(role, `By: ${interaction.user.tag}`);
 				});

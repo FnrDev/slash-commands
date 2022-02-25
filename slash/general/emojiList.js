@@ -1,11 +1,11 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
 module.exports = {
-	name: 'emojis',
-	description: 'Get a list of emojis',
-	category: 'general',
+	name: "emojis",
+	description: "Get a list of emojis",
+	category: "general",
 	run: async (interaction) => {
-		const emojis = interaction.guild.emojis.cache.map((r) => r).join(' ');
+		const emojis = interaction.guild.emojis.cache.map((r) => r).join(" ");
 		const embed = new Discord.Embed()
 			.setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
 			.setTitle(
@@ -14,7 +14,7 @@ module.exports = {
 				} Animated (${interaction.guild.emojis.cache.size} Total)`,
 			)
 			.setDescription(emojis.toString())
-			.setColor(Discord.Util.resolveColor('Random'))
+			.setColor(Discord.Util.resolveColor("Random"))
 			.setFooter({
 				text: `Requested by ${interaction.user.tag}`,
 				iconURL: interaction.user.displayAvatarURL({ dynamic: true }),

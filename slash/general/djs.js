@@ -1,19 +1,19 @@
-const axios = require('axios');
+const axios = require("axios");
 
 module.exports = {
-	name: 'djs',
-	description: 'Searches in discord.js documentation',
+	name: "djs",
+	description: "Searches in discord.js documentation",
 	options: [
 		{
-			name: 'query',
-			description: 'Search query',
+			name: "query",
+			description: "Search query",
 			type: 3,
 			required: true,
 		},
 	],
-	category: 'general',
+	category: "general",
 	run: async (interaction) => {
-		const query = interaction.options.getString('query');
+		const query = interaction.options.getString("query");
 		try {
 			const req = await axios.get(`https://djsdocs.sorta.moe/v2/embed?src=stable&q=${encodeURIComponent(query)}`);
 			const data = req.data;

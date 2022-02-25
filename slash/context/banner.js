@@ -1,10 +1,10 @@
-const { Embed, Util } = require('discord.js');
+const { Embed, Util } = require("discord.js");
 
 module.exports = {
-	name: 'get-banner',
+	name: "get-banner",
 	type: 3,
 	run: async (interaction, client) => {
-		const message = interaction.options.getMessage('message');
+		const message = interaction.options.getMessage("message");
 		const user = await client.users.cache.get(message.author.id);
 		await user.fetch();
 		if (!user.banner) {
@@ -12,8 +12,8 @@ module.exports = {
 		}
 		const embed = new Embed()
 			.setAuthor(message.author.tag, message.author.displayAvatarURL({ dynamic: true }))
-			.setDescription(`[Banner URL](${message.author.bannerURL({ dynamic: true, format: 'png', size: 4096 })})`)
-			.setImage(message.author.bannerURL({ dynamic: true, format: 'png', size: 4096 }))
+			.setDescription(`[Banner URL](${message.author.bannerURL({ dynamic: true, format: "png", size: 4096 })})`)
+			.setImage(message.author.bannerURL({ dynamic: true, format: "png", size: 4096 }))
 			.setColor(Util.resolveColor(interaction.guild.me.displayColor));
 		interaction.reply({ embeds: [embed], ephemeral: true });
 	},

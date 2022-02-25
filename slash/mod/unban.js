@@ -1,23 +1,23 @@
 module.exports = {
-	name: 'unban',
-	permissions: 'BAN_MEMBERS',
-	description: 'Unban user from this server',
+	name: "unban",
+	permissions: "BAN_MEMBERS",
+	description: "Unban user from this server",
 	options: [
 		{
-			name: 'input',
-			description: 'user to unban',
+			name: "input",
+			description: "user to unban",
 			type: 3,
 			required: true,
 		},
 	],
 	timeout: 3000,
-	category: 'mod',
+	category: "mod",
 	run: async (interaction) => {
-		const input = interaction.options.getString('input');
-		if (input === 'all') {
+		const input = interaction.options.getString("input");
+		if (input === "all") {
 			const fetchBans = await interaction.guild.bans.fetch();
 			if (!fetchBans) {
-				return interaction.reply('There are no banned users.');
+				return interaction.reply("There are no banned users.");
 			}
 			fetchBans
 				.map((r) => r.user.id)

@@ -1,36 +1,36 @@
 module.exports = {
-	name: 'channels',
-	description: 'Shows specific type of channels in this server.',
+	name: "channels",
+	description: "Shows specific type of channels in this server.",
 	options: [
 		{
-			name: 'type',
-			description: 'Type of channel to show.',
+			name: "type",
+			description: "Type of channel to show.",
 			type: 3,
 			required: true,
 			choices: [
 				{
-					name: 'Text',
-					value: 'text',
+					name: "Text",
+					value: "text",
 				},
 				{
-					name: 'Voice',
-					value: 'voice',
+					name: "Voice",
+					value: "voice",
 				},
 				{
-					name: 'Category',
-					value: 'category',
+					name: "Category",
+					value: "category",
 				},
 			],
 		},
 	],
-	category: 'general',
+	category: "general",
 	run: async (interaction) => {
-		const type = interaction.options.getString('type');
-		if (type === 'text') {
+		const type = interaction.options.getString("type");
+		if (type === "text") {
 			let num = 0;
-			let loop = '';
+			let loop = "";
 			interaction.guild.channels.cache
-				.filter((r) => r.type === 'GUILD_TEXT')
+				.filter((r) => r.type === "GUILD_TEXT")
 				.forEach((channel) => {
 					num++;
 					loop += `**#${num}** - ${channel}\n`;
@@ -39,11 +39,11 @@ module.exports = {
 				content: `**\`💬\` ${interaction.guild.name}** Text Channels :\n${loop}`,
 			});
 		}
-		if (type === 'voice') {
+		if (type === "voice") {
 			let num = 0;
-			let loop = '';
+			let loop = "";
 			interaction.guild.channels.cache
-				.filter((r) => r.type === 'GUILD_VOICE')
+				.filter((r) => r.type === "GUILD_VOICE")
 				.forEach((channel) => {
 					num++;
 					loop += `**#${num}** - ${channel}\n`;
@@ -52,11 +52,11 @@ module.exports = {
 				content: `**\`🔊\` ${interaction.guild.name}** Voice Channels :\n${loop}`,
 			});
 		}
-		if (type === 'category') {
+		if (type === "category") {
 			let num = 0;
-			let loop = '';
+			let loop = "";
 			interaction.guild.channels.cache
-				.filter((r) => r.type === 'GUILD_CATEGORY')
+				.filter((r) => r.type === "GUILD_CATEGORY")
 				.forEach((channel) => {
 					num++;
 					loop += `**#${num}** - ${channel.name}\n`;

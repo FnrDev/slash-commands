@@ -1,24 +1,24 @@
-const Discord = require('discord.js');
+const Discord = require("discord.js");
 
 module.exports = {
-	name: 'avatar',
-	description: 'Get user avatar',
+	name: "avatar",
+	description: "Get user avatar",
 	options: [
 		{
-			name: 'user',
-			description: 'User to get avatar',
+			name: "user",
+			description: "User to get avatar",
 			type: 6,
 		},
 		{
-			name: 'server_avatar',
-			description: 'Get member avatar in this server',
+			name: "server_avatar",
+			description: "Get member avatar in this server",
 			type: 5,
 		},
 	],
-	category: 'general',
+	category: "general",
 	run: async (interaction) => {
-		const member = interaction.options.getMember('user') || interaction.member;
-		const isMemberAvatar = interaction.options.getBoolean('server_avatar');
+		const member = interaction.options.getMember("user") || interaction.member;
+		const isMemberAvatar = interaction.options.getBoolean("server_avatar");
 		if (isMemberAvatar) {
 			if (!member.avatar) {
 				return interaction.reply({

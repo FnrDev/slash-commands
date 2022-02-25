@@ -1,27 +1,27 @@
 module.exports = {
-	name: 'move',
-	description: 'Move user from channel to another channel',
-	permissions: 'MOVE_MEMBERS',
+	name: "move",
+	description: "Move user from channel to another channel",
+	permissions: "MOVE_MEMBERS",
 	options: [
 		{
-			name: 'user',
-			description: 'User to move to another channel.',
+			name: "user",
+			description: "User to move to another channel.",
 			type: 6,
 			required: true,
 		},
 		{
-			name: 'channel',
-			description: 'Channel to move the user to.',
+			name: "channel",
+			description: "Channel to move the user to.",
 			type: 7,
 			channel_types: [2],
 		},
 	],
-	category: 'mod',
+	category: "mod",
 	run: async (interaction) => {
-		const member = interaction.options.getMember('user');
-		const channel = interaction.options.getChannel('channel');
+		const member = interaction.options.getMember("user");
+		const channel = interaction.options.getChannel("channel");
 		if (!member.voice.channel) {
-			return interaction.reply({ content: ':x: Member must be in voice channel' });
+			return interaction.reply({ content: ":x: Member must be in voice channel" });
 		}
 		if (interaction.user.id === member.user.id) {
 			return interaction.reply({ content: `✅ **${member.user.username} already in the voice channel!**` });

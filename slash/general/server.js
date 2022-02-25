@@ -1,30 +1,30 @@
-const { Util, Embed } = require('discord.js');
+const { Util, Embed } = require("discord.js");
 
 module.exports = {
-	name: 'server',
-	description: 'Get info about server',
+	name: "server",
+	description: "Get info about server",
 	timeout: 3000,
-	category: 'general',
+	category: "general",
 	run: async (interaction) => {
 		const embed = new Embed()
 			.setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL({ dynamic: true }) })
-			.setColor(Util.resolveColor('Random'))
+			.setColor(Util.resolveColor("Random"))
 			.setThumbnail(interaction.guild.iconURL({ dynamic: true }))
 			.addFields(
 				{
-					name: ':id: Server ID:',
+					name: ":id: Server ID:",
 					value: interaction.guild.id,
 					inline: true,
 				},
 				{
-					name: ':calendar: Created On:',
+					name: ":calendar: Created On:",
 					value: `<t:${Math.floor(interaction.guild.createdTimestamp / 1000)}:f> | <t:${Math.floor(
 						interaction.guild.createdTimestamp / 1000,
 					)}:R>`,
 					inline: true,
 				},
 				{
-					name: ':crown: Owned By:',
+					name: ":crown: Owned By:",
 					value: `<@${interaction.guild.ownerId}>`,
 					inline: true,
 				},
@@ -36,16 +36,16 @@ module.exports = {
 				{
 					name: `:speech_balloon: Channels (${interaction.guild.channels.cache.size})`,
 					value: `**${
-						interaction.guild.channels.cache.filter((r) => r.type == 'GUILD_TEXT').size
+						interaction.guild.channels.cache.filter((r) => r.type == "GUILD_TEXT").size
 					}** Text | **${
-						interaction.guild.channels.cache.filter((r) => r.type == 'GUILD_VOICE').size
+						interaction.guild.channels.cache.filter((r) => r.type == "GUILD_VOICE").size
 					}** Voice | **${
-						interaction.guild.channels.cache.filter((r) => r.type === 'GUILD_CATEGORY').size
+						interaction.guild.channels.cache.filter((r) => r.type === "GUILD_CATEGORY").size
 					}** Category`,
 					inline: true,
 				},
 				{
-					name: ':earth_africa: Others',
+					name: ":earth_africa: Others",
 					value: `**Verification Level:** ${interaction.guild.verificationLevel}`,
 					inline: true,
 				},

@@ -1,22 +1,22 @@
 module.exports = {
-	name: 'unlock',
-	permissions: 'MANAGE_CHANNELS',
-	description: '🔒 Remove denied sending messages from @everyone in specific channel',
+	name: "unlock",
+	permissions: "MANAGE_CHANNELS",
+	description: "🔒 Remove denied sending messages from @everyone in specific channel",
 	options: [
 		{
-			name: 'channel',
-			description: 'Channel to unlock.',
+			name: "channel",
+			description: "Channel to unlock.",
 			type: 7,
 			channel_types: [0],
 		},
 	],
 	timeout: 3000,
-	category: 'mod',
+	category: "mod",
 	run: async (interaction) => {
-		const channel = interaction.options.getChannel('channel') || interaction.channel;
+		const channel = interaction.options.getChannel("channel") || interaction.channel;
 		const isUnlocked = channel.permissionOverwrites.cache
 			.find((r) => r.id === interaction.guild.id)
-			.deny.has('SEND_MESSAGES');
+			.deny.has("SEND_MESSAGES");
 		if (!isUnlocked) {
 			return interaction.reply({ content: `**:x: #${channel.name} already unlocked.**` });
 		}

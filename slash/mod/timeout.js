@@ -1,27 +1,27 @@
-const ms = require('ms');
-const humanizeDuration = require('humanize-duration');
+const ms = require("ms");
+const humanizeDuration = require("humanize-duration");
 
 module.exports = {
-	name: 'timeout',
-	description: 'Timeout user from typing or joining voice channel or react to messages',
+	name: "timeout",
+	description: "Timeout user from typing or joining voice channel or react to messages",
 	options: [
 		{
-			name: 'user',
-			description: 'User to timeout.',
+			name: "user",
+			description: "User to timeout.",
 			type: 6,
 			required: true,
 		},
 		{
-			name: 'time',
-			description: 'Time for user to timeout. example: (1m, 1d, 1mo).',
+			name: "time",
+			description: "Time for user to timeout. example: (1m, 1d, 1mo).",
 			type: 3,
 			required: true,
 		},
 	],
-	permissions: 'MODERATE_MEMBERS',
+	permissions: "MODERATE_MEMBERS",
 	run: async (interaction) => {
-		const member = interaction.options.getMember('user');
-		const time = interaction.options.getString('time');
+		const member = interaction.options.getMember("user");
+		const time = interaction.options.getString("time");
 		if (!member.moderatable) {
 			return interaction
 				.reply({

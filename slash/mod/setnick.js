@@ -1,27 +1,27 @@
 module.exports = {
-	name: 'setnick',
-	description: 'Change nickname for user',
-	permissions: 'MANAGE_NICKNAMES',
+	name: "setnick",
+	description: "Change nickname for user",
+	permissions: "MANAGE_NICKNAMES",
 	options: [
 		{
-			name: 'user',
-			description: 'User to change nickname for',
+			name: "user",
+			description: "User to change nickname for",
 			type: 6,
 			required: true,
 		},
 		{
-			name: 'nickname',
-			description: 'Nickname to change to',
+			name: "nickname",
+			description: "Nickname to change to",
 			type: 3,
 		},
 	],
 	timeout: 3000,
-	category: 'mod',
+	category: "mod",
 	run: async (interaction) => {
-		const member = interaction.options.getMember('user');
-		const nickname = interaction.options.getString('nickname');
+		const member = interaction.options.getMember("user");
+		const nickname = interaction.options.getString("nickname");
 		if (!nickname) {
-			await member.setNickname('', `By: ${interaction.user.tag}`);
+			await member.setNickname("", `By: ${interaction.user.tag}`);
 			return interaction.reply({ content: `✅ **${member.user.username} nick has been reset!**` });
 		}
 		try {
