@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "slash commands handler to make your bot support slash commands.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "lint": "prettier --check commands/**/*.js && prettier --check slash/**/*.js"
+  },
   "keywords": [
     "bot",
     "discord",
@@ -32,6 +34,7 @@
     "randomcolor": "^0.6.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "turbo": "^1.1.3"
   }
 }

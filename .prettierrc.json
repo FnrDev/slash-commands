@@ -4,5 +4,6 @@
 	"singleQuote": true,
 	"quoteProps": "as-needed",
 	"trailingComma": "all",
-	"endOfLine": "lf"
+	"tabWidth": 4,
+	"embeddedLanguageFormatting": "auto"
 }
