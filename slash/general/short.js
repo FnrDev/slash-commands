@@ -50,8 +50,7 @@ module.exports = {
 					},
 				})
 			).data;
-			const row = new ActionRow()
-			.addComponents(
+			const row = new ActionRow().addComponents(
 				new ButtonComponent().setStyle(ButtonStyle.Link).setURL(data.shorturl).setLabel('URL'),
 			);
 			interaction.editReply({ content: '**Short URL:**', components: [row] });
