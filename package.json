@@ -34,8 +34,6 @@
     "randomcolor": "^0.6.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^16.1.0",
-    "@commitlint/config-conventional": "^16.0.0",
     "nodemon": "^2.0.15",
     "prettier": "^2.5.1"
   }
