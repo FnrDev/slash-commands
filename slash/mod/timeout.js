@@ -22,13 +22,13 @@ module.exports = {
     run: async(interaction) => {
         const member = interaction.options.getMember('user');
         const time = interaction.options.getString('time');
-        if (member.permissions.has('ADMINISTRATOR')) {
+        if (!member.moderatable) {
             return interaction.reply({
-                content: "You can't timeout member with **Administrator** permission.",
+                content: "You can't timeout this member.",
                 ephemeral: true
             }).catch(e => {});
         }
-       await member.disableCommunicationUntil(Date.now() + ms(time), `By: ${interaction.user.tag}`).catch(console.error);
+       await member.timeout(ms(time), `By: ${interaction.user.tag}`).catch(console.error);
        interaction.reply({
            content: `${member} has been timeout for **${humanizeDuration(ms(time), { round: true })}.**`
        })

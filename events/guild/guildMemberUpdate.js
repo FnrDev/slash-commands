@@ -9,7 +9,7 @@ module.exports = async (client, oldMember, newMember) => {
     if (!oldMember.isCommunicationDisabled() && newMember.isCommunicationDisabled()) {
         const logChannel = await client.channels.cache.get(process.env.LOG_CHANNEL);
         if (!logChannel) return;
-        const allLogs = await newMember.guild.fetchAuditLogs({ type: "MEMBER_UPDATE" });
+        const allLogs = await newMember.guild.fetchAuditLogs({ type: 24 });
         const fetchModerator = allLogs.entries.first();
         const embed = new Embed()
         .setAuthor({ name: newMember.user.tag, iconURL: newMember.user.displayAvatarURL({ dynamic: true }) })
