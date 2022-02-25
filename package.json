@@ -4,7 +4,8 @@
   "description": "slash commands handler to make your bot support slash commands.",
   "main": "index.js",
   "scripts": {
-    "lint": "prettier --check commands/**/*.js && prettier --check slash/**/*.js"
+    "lint": "prettier --check commands/**/*.js && prettier --check slash/**/*.js",
+    "format": "prettier --write commands/**/*.js && prettier --write slash/**/*.js"
   },
   "keywords": [
     "bot",
