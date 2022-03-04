@@ -83,4 +83,15 @@ module.exports = async(client, interaction) => {
 			}
 		}
 	}
+	if (interaction.isModalSubmit()) {
+		if (interaction.customId === 'bug_form') {
+			const bugTitle = interaction.fields.getTextInputValue('bug_title');
+			const bugDescription = interaction.fields.getTextInputValue('bug_description');
+			const bugChannel = client.channels.cache.get('879056423751934033');
+			bugChannel.send({
+				content: `New bug:\n**Bug Title:** ${bugTitle}\n**Bug Description:** ${bugDescription}`
+			})
+			interaction.reply(`👋 Thanks for reporting for this bug, our staff will check this bug and will reply to you as soon as posiable.`)
+		}
+	}
 } 
