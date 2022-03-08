@@ -9,14 +9,21 @@ module.exports = {
 		const bugTitle = new TextInputComponent()
 			.setCustomId("bug_title")
 			.setLabel("Bug Title")
-			.setStyle(TextInputStyle.Short);
+			.setStyle(TextInputStyle.Short)
 
 		const bugDescription = new TextInputComponent()
 			.setCustomId("bug_description")
 			.setLabel("Bug description")
-			.setStyle(TextInputStyle.Paragraph);
+			.setStyle(TextInputStyle.Paragraph)
+			.setMinLength(25)
+			.setMaxLength(200)
 
-		const rows = [bugTitle, bugDescription].map((component) => new ActionRow().addComponents(component));
+		const bugIn = new TextInputComponent()
+		.setCustomId('bug_in')
+		.setLabel('Where bug has been found?')
+		.setStyle(TextInputStyle.Short)
+
+		const rows = [bugTitle, bugDescription, bugIn].map((component) => new ActionRow().addComponents(component));
 
 		modal.addComponents(...rows);
 		await interaction.showModal(modal);
