@@ -77,7 +77,7 @@ module.exports = {
 				await i.deferReply();
 				const rolePerms = role.permissions.toArray().join('\n');
 				return await i.editReply({
-					content: `**${role.name} Role Permissions:**\`\`\`\n${rolePerms}\`\`\``,
+					content: `\`${role.name}\` **Role Permissions:**\`\`\`\n${rolePerms}\`\`\``,
 					embeds: [],
 					components: [],
 				});
@@ -89,7 +89,7 @@ module.exports = {
 				}
 				const roleMembers = role.members.map((r) => r.user.tag).join('\n');
 				return await i.editReply({
-					content: `**${role.name} Members ( ${role.members.size} )** :\n\`\`\`${roleMembers}\`\`\``,
+					content: `\`${role.name}\` **Members ( ${role.members.size} )** :\n\`\`\`${roleMembers}\`\`\``,
 					embeds: [],
 					components: [],
 				});
