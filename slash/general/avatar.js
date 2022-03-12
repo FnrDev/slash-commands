@@ -22,7 +22,7 @@ module.exports = {
 		if (isMemberAvatar) {
 			if (!member.avatar) {
 				return interaction.reply({
-					content: ":x: This user don't has avatar in this server",
+					content: ":x: this user does not have an avatar in this server, this is because this user has not set an avatar in this server or does not have nitro sorry. please use /avatar {user} to get the users profile",
 					ephemeral: true,
 				});
 			}
